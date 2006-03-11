@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<popupmenu name="popupmenu">
+    <menuitem textKey="popupmenu.new"
+              mnemonicKey="popupmenu.new.mnemonic"
+              acceleratorKey="popupmenu.new.accelerator"
+              iconKey="popupmenu.new.icon">
+    	<action name="new" class="tk.tomby.tedit.actions.NewAction"/>
+    </menuitem>
+    <menuitem textKey="popupmenu.open"
+              mnemonicKey="popupmenu.open.mnemonic"
+              acceleratorKey="popupmenu.open.accelerator"
+              iconKey="popupmenu.open.icon">
+    	<action name="open" class="tk.tomby.tedit.actions.OpenAction"/>
+    </menuitem>
+    <menuitem textKey="popupmenu.save"
+              mnemonicKey="popupmenu.save.mnemonic"
+              acceleratorKey="popupmenu.save.accelerator"
+              iconKey="popupmenu.save.icon">
+    	<action name="save" class="tk.tomby.tedit.actions.SaveAction"/>
+    </menuitem>
+    <menuseparator/>
+    <menuitem textKey="popupmenu.close"
+              mnemonicKey="popupmenu.close.mnemonic"
+              acceleratorKey="popupmenu.close.accelerator"
+              iconKey="popupmenu.close.icon">
+    	<action name="close" class="tk.tomby.tedit.actions.CloseAction"/>
+    </menuitem>
+    <menuseparator/>
+    <menuitem textKey="popupmenu.undo"
+              mnemonicKey="popupmenu.undo.mnemonic"
+              acceleratorKey="popupmenu.undo.accelerator"
+              iconKey="popupmenu.undo.icon">
+    	<action name="undo" class="tk.tomby.tedit.actions.UndoAction"/>
+    </menuitem>
+    <menuitem textKey="popupmenu.redo"
+              mnemonicKey="popupmenu.redo.mnemonic"
+              acceleratorKey="popupmenu.redo.accelerator"
+              iconKey="popupmenu.redo.icon">
+    	<action name="redo" class="tk.tomby.tedit.actions.RedoAction"/>
+    </menuitem>
+    <menuseparator/>
+    <menuitem textKey="menubar.edit.cut"
+              mnemonicKey="menubar.edit.cut.mnemonic"
+              acceleratorKey="menubar.edit.cut.accelerator"
+              iconKey="menubar.edit.cut.icon">
+    	<action name="cut" class="tk.tomby.tedit.actions.CutAction"/>
+    </menuitem>
+    <menuitem textKey="menubar.edit.copy"
+              mnemonicKey="menubar.edit.copy.mnemonic"
+              acceleratorKey="menubar.edit.copy.accelerator"
+              iconKey="menubar.edit.copy.icon">
+    	<action name="copy" class="tk.tomby.tedit.actions.CopyAction"/>
+    </menuitem>
+    <menuitem textKey="menubar.edit.paste"
+              mnemonicKey="menubar.edit.paste.mnemonic"
+              acceleratorKey="menubar.edit.paste.accelerator"
+              iconKey="menubar.edit.paste.icon">
+    	<action name="paste" class="tk.tomby.tedit.actions.PasteAction"/>
+    </menuitem>
+    <menuseparator/>
+    <menuitem textKey="menubar.edit.selectall"
+              mnemonicKey="menubar.edit.selectall.mnemonic"
+              acceleratorKey="menubar.edit.selectall.accelerator"
+              iconKey="menubar.edit.selectall.icon">
+    	<action name="select-all" class="tk.tomby.tedit.actions.SelectAllAction"/>
+    </menuitem>/>
+</popupmenu>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<digester-rules>
+    <pattern value="menu">
+        <object-create-rule classname="tk.tomby.tedit.gui.Menu"/>
+        <set-properties-rule/>
+        <pattern value="menuitem">
+            <object-create-rule classname="tk.tomby.tedit.gui.MenuItem"/>
+            <set-properties-rule/>
+            <pattern value="scriptlet">
+	            <factory-create-rule classname="tk.tomby.tedit.actions.ScriptletActionFactory"/>
+	            <set-next-rule methodname="setAction"/>
+	        </pattern>
+	        <pattern value="action">
+	            <factory-create-rule classname="tk.tomby.tedit.actions.ActionFactory"/>
+	            <set-next-rule methodname="setAction"/>
+	        </pattern>
+            <set-next-rule methodname="addMenuItem"/>
+        </pattern>
+        <pattern value="menuseparator">
+            <object-create-rule classname="tk.tomby.tedit.gui.MenuSeparator"/>
+            <set-next-rule methodname="addMenuSeparator"/>
+        </pattern>
+    </pattern>
+</digester-rules>

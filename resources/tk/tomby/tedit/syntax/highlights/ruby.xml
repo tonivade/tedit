@@ -1,0 +1,148 @@
+<?xml version="1.0" ?>
+
+<syntax name="ruby" contentType="text/ruby">
+
+    <state name="main">
+        <comment1>
+        	<singleLine>
+        		<![CDATA[#[^\n]*]]>
+        	</singleLine>
+        </comment1>
+        <comment2>
+        	<multiLine state="comment">
+        		<start><![CDATA[\=begin]]></start>
+        		<end><![CDATA[\=end]]></end>
+        	</multiLine>
+        </comment2>
+
+    	<literal1>
+        	<singleLine>
+        		<![CDATA["(?:\\.|[^"\\])*"]]>
+        	</singleLine>
+        </literal1>
+        <literal1>
+        	<singleLine>
+        		<![CDATA['(?:\\.|[^'\\])*']]>
+        	</singleLine>
+        </literal1>
+        <literal2>
+        	<singleLine>
+        		<![CDATA[\/(?:\\.|[^\/\\])*\/]]>
+        	</singleLine>
+        </literal2>
+        <literal3>
+        	<singleLine>
+        		<![CDATA[%w\((?:\\.|[^\/\\])*\)]]>
+        	</singleLine>
+        </literal3>
+
+        <identifier1><![CDATA[[a-z]\w*]]></identifier1>
+        <identifier2><![CDATA[@[a-z]\w*]]></identifier2>
+        <identifier3><![CDATA[\$[a-z]\w*]]></identifier3>
+        <identifier4><![CDATA[[A-Z]\w*]]></identifier4>
+
+        <keyword1><keyword>abstract</keyword></keyword1>
+        <keyword1><keyword>alias</keyword></keyword1>
+        <keyword1><keyword>begin</keyword></keyword1>
+        <keyword1><keyword>break</keyword></keyword1>
+        <keyword1><keyword>case</keyword></keyword1>
+        <keyword1><keyword>class</keyword></keyword1>
+        <keyword1><keyword>def</keyword></keyword1>
+        <keyword1><keyword>defined</keyword></keyword1>
+        <keyword1><keyword>do</keyword></keyword1>
+        <keyword1><keyword>else</keyword></keyword1>
+        <keyword1><keyword>elsif</keyword></keyword1>
+        <keyword1><keyword>end</keyword></keyword1>
+        <keyword1><keyword>ensure</keyword></keyword1>
+        <keyword1><keyword>for</keyword></keyword1>
+        <keyword1><keyword>if</keyword></keyword1>
+        <keyword1><keyword>in</keyword></keyword1>
+        <keyword1><keyword>module</keyword></keyword1>
+        <keyword1><keyword>next</keyword></keyword1>
+        <keyword1><keyword>redo</keyword></keyword1>
+        <keyword1><keyword>require</keyword></keyword1>
+        <keyword1><keyword>raise</keyword></keyword1>
+        <keyword1><keyword>rescue</keyword></keyword1>
+        <keyword1><keyword>retry</keyword></keyword1>
+        <keyword1><keyword>return</keyword></keyword1>
+        <keyword1><keyword>then</keyword></keyword1>
+        <keyword1><keyword>undef</keyword></keyword1>
+        <keyword1><keyword>unless</keyword></keyword1>
+        <keyword1><keyword>until</keyword></keyword1>
+        <keyword1><keyword>when</keyword></keyword1>
+        <keyword1><keyword>while</keyword></keyword1>
+        <keyword1><keyword>yield</keyword></keyword1>
+        <keyword1><keyword>public</keyword></keyword1>
+        <keyword1><keyword>private</keyword></keyword1>
+        <keyword1><keyword>protected</keyword></keyword1>
+
+        <keyword2><keyword>BEGIN</keyword></keyword2>
+        <keyword2><keyword>END</keyword></keyword2>
+        <keyword2><keyword>self</keyword></keyword2>
+        <keyword2><keyword>super</keyword></keyword2>
+        <keyword2><keyword>nil</keyword></keyword2>
+        <keyword2><keyword>and</keyword></keyword2>
+        <keyword2><keyword>or</keyword></keyword2>
+        <keyword2><keyword>not</keyword></keyword2>
+        <keyword2><keyword>true</keyword></keyword2>
+        <keyword2><keyword>false</keyword></keyword2>
+        <keyword2><keyword>__FILE__</keyword></keyword2>
+        <keyword2><keyword>__LINE__</keyword></keyword2>
+        
+        <digit>
+        	<![CDATA[\b[0-9]+(?:\.[0-9]+)?\b]]>
+        </digit>
+ 
+        <separator><![CDATA[\(]]></separator>
+        <separator><![CDATA[\)]]></separator>
+        <separator><![CDATA[\{]]></separator>
+        <separator><![CDATA[\}]]></separator>
+        <separator><![CDATA[\[]]></separator>
+        <separator><![CDATA[\]]]></separator>
+        <separator><![CDATA[;]]></separator>
+        <separator><![CDATA[,]]></separator>
+        <separator><![CDATA[\.]]></separator>
+        <separator><![CDATA[:]]></separator>
+ 
+        <operator><![CDATA[=]]></operator>
+        <operator><![CDATA[>]]></operator>
+        <operator><![CDATA[<]]></operator>
+        <operator><![CDATA[!]]></operator>
+        <operator><![CDATA[~]]></operator>
+        <operator><![CDATA[\?]]></operator>
+        <operator><![CDATA[\:]]></operator>
+        <operator><![CDATA[==]]></operator>
+        <operator><![CDATA[>=]]></operator>
+        <operator><![CDATA[<=]]></operator>
+        <operator><![CDATA[\!=]]></operator>
+        <operator><![CDATA[\|\|]]></operator>
+        <operator><![CDATA[&&]]></operator>
+        <operator><![CDATA[\+\+]]></operator>
+        <operator><![CDATA[--]]></operator>
+        <operator><![CDATA[\+]]></operator>
+        <operator><![CDATA[-]]></operator>
+        <operator><![CDATA[\*]]></operator>
+        <operator><![CDATA[/]]></operator>
+        <operator><![CDATA[&]]></operator>
+        <operator><![CDATA[\|]]></operator>
+        <operator><![CDATA[\^]]></operator>
+        <operator><![CDATA[%]]></operator>
+        <operator><![CDATA[>>]]></operator>
+        <operator><![CDATA[<<]]></operator>
+        <operator><![CDATA[>>>]]></operator>
+        <operator><![CDATA[\+=]]></operator>
+        <operator><![CDATA[-=]]></operator>
+        <operator><![CDATA[\*=]]></operator>
+        <operator><![CDATA[/=]]></operator>
+        <operator><![CDATA[&=]]></operator>
+        <operator><![CDATA[\|=]]></operator>
+        <operator><![CDATA[\^=]]></operator>
+        <operator><![CDATA[%=]]></operator>
+        <operator><![CDATA[>>=]]></operator>
+        <operator><![CDATA[<<=]]></operator>
+        <operator><![CDATA[>>>=]]></operator>
+    </state>
+    
+    <state name="comment" default="comment2"/>
+
+</syntax>

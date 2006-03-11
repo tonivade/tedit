@@ -1,0 +1,203 @@
+<?xml version="1.0" ?>
+
+<syntax name="c" contentType="text/c">
+
+    <state name="main">
+        <comment1>
+        	<singleLine>
+	        	<![CDATA[//[^\n]*]]>
+	        </singleLine>
+        </comment1>
+       	<comment2>
+			<multiLine state="comment">
+	        	<start><![CDATA[/\*]]></start>
+    	    	<end><![CDATA[\*/]]></end>
+        	</multiLine>
+        </comment2>
+
+        <literal1>
+        	<singleLine>
+        		<![CDATA["(?:\\.|[^"\\])*"]]>
+        	</singleLine>
+        </literal1>
+        <literal2>
+        	<singleLine>
+        		<![CDATA['(?:\\[^']+|[^'])']]>
+        	</singleLine>
+        </literal2>
+        <literal3>
+        	<multiLine state="preprocess">
+	        	<start><![CDATA[\#]]></start>
+    	    	<end><![CDATA[\n]]></end>
+        	</multiLine>
+        </literal3>
+
+        <keyword1><keyword>auto</keyword></keyword1>
+        <keyword1><keyword>break</keyword></keyword1>
+        <keyword1><keyword>case</keyword></keyword1>
+        <keyword1><keyword>const</keyword></keyword1>
+        <keyword1><keyword>continue</keyword></keyword1>
+        <keyword1><keyword>default</keyword></keyword1>
+        <keyword1><keyword>do</keyword></keyword1>
+        <keyword1><keyword>else</keyword></keyword1>
+        <keyword1><keyword>enum</keyword></keyword1>
+        <keyword1><keyword>extern</keyword></keyword1>
+        <keyword1><keyword>false</keyword></keyword1>
+        <keyword1><keyword>for</keyword></keyword1>
+        <keyword1><keyword>goto</keyword></keyword1>
+        <keyword1><keyword>if</keyword></keyword1>
+        <keyword1><keyword>register</keyword></keyword1>
+        <keyword1><keyword>return</keyword></keyword1>
+        <keyword1><keyword>sizeof</keyword></keyword1>
+        <keyword1><keyword>static</keyword></keyword1>
+		<keyword1><keyword>struct</keyword></keyword1>
+        <keyword1><keyword>switch</keyword></keyword1>
+        <keyword1><keyword>typedef</keyword></keyword1>
+        <keyword1><keyword>union</keyword></keyword1>
+        <keyword1><keyword>true</keyword></keyword1>
+        <keyword1><keyword>void</keyword></keyword1>
+        <keyword1><keyword>volatile</keyword></keyword1>
+        <keyword1><keyword>while</keyword></keyword1>
+        <keyword1><keyword>NULL</keyword></keyword1>
+
+        <keyword2><keyword>byte</keyword></keyword2>
+        <keyword2><keyword>char</keyword></keyword2>
+        <keyword2><keyword>double</keyword></keyword2>
+        <keyword2><keyword>float</keyword></keyword2>
+        <keyword2><keyword>int</keyword></keyword2>
+        <keyword2><keyword>long</keyword></keyword2>
+        <keyword2><keyword>short</keyword></keyword2>
+        <keyword2><keyword>signed</keyword></keyword2>
+        <keyword2><keyword>unsigned</keyword></keyword2>
+        
+        <digit>
+        	<![CDATA[\b(?:0x[0-9A-Fa-f]+[lL]?|[0-9]+(?:\.[0-9]+)?(?:e[0-9]*)?(?:[dDfFlL])?)\b]]>
+        </digit>
+        
+        <separator><![CDATA[\(]]></separator>
+        <separator><![CDATA[\)]]></separator>
+        <separator><![CDATA[\{]]></separator>
+        <separator><![CDATA[\}]]></separator>
+        <separator><![CDATA[\[]]></separator>
+        <separator><![CDATA[\]]]></separator>
+        <separator><![CDATA[;]]></separator>
+        <separator><![CDATA[,]]></separator>
+        <separator><![CDATA[\.]]></separator>
+
+        <operator><![CDATA[=]]></operator>
+        <operator><![CDATA[>]]></operator>
+        <operator><![CDATA[<]]></operator>
+        <operator><![CDATA[!]]></operator>
+        <operator><![CDATA[~]]></operator>
+        <operator><![CDATA[\?]]></operator>
+        <operator><![CDATA[\:]]></operator>
+        <operator><![CDATA[==]]></operator>
+        <operator><![CDATA[>=]]></operator>
+        <operator><![CDATA[<=]]></operator>
+        <operator><![CDATA[\!=]]></operator>
+        <operator><![CDATA[\|\|]]></operator>
+        <operator><![CDATA[&&]]></operator>
+        <operator><![CDATA[\+\+]]></operator>
+        <operator><![CDATA[--]]></operator>
+        <operator><![CDATA[\+]]></operator>
+        <operator><![CDATA[-]]></operator>
+        <operator><![CDATA[\*]]></operator>
+        <operator><![CDATA[/]]></operator>
+        <operator><![CDATA[&]]></operator>
+        <operator><![CDATA[\|]]></operator>
+        <operator><![CDATA[\^]]></operator>
+        <operator><![CDATA[%]]></operator>
+        <operator><![CDATA[>>]]></operator>
+        <operator><![CDATA[<<]]></operator>
+        <operator><![CDATA[\+=]]></operator>
+        <operator><![CDATA[-=]]></operator>
+        <operator><![CDATA[\*=]]></operator>
+        <operator><![CDATA[/=]]></operator>
+        <operator><![CDATA[&=]]></operator>
+        <operator><![CDATA[\|=]]></operator>
+        <operator><![CDATA[\^=]]></operator>
+        <operator><![CDATA[%=]]></operator>
+        <operator><![CDATA[>>=]]></operator>
+        <operator><![CDATA[<<=]]></operator>
+        
+    </state>
+    
+    <state name="comment" default="comment2"/>
+    
+    <state name="preprocess" default="literal3">
+    
+    	<comment1>
+        	<singleLine>
+	        	<![CDATA[//[^\n]*]]>
+	        </singleLine>
+        </comment1>
+       	<comment2>
+       		<singleLine>
+				<![CDATA[/\*(?:[^/*][^*]*\*+)*/]]>
+			</singleLine>
+        </comment2>
+    
+    	<literal1>
+        	<singleLine>
+        		<![CDATA["(?:\\.|[^"\\])*"]]>
+        	</singleLine>
+        </literal1>
+        
+        <literal2>
+        	<singleLine>
+        		<![CDATA[<(?:\\.|[^>\\])*>]]>
+        	</singleLine>
+        </literal2>
+        
+        <digit>
+        	<![CDATA[\b(?:0x[0-9A-Fa-f]+[lL]?|[0-9]+(?:\.[0-9]+)?(?:e[0-9]*)?(?:[dDfFlL])?)\b]]>
+        </digit>
+        
+        <separator><![CDATA[\(]]></separator>
+        <separator><![CDATA[\)]]></separator>
+        <separator><![CDATA[\{]]></separator>
+        <separator><![CDATA[\}]]></separator>
+        <separator><![CDATA[\[]]></separator>
+        <separator><![CDATA[\]]]></separator>
+        <separator><![CDATA[;]]></separator>
+        <separator><![CDATA[,]]></separator>
+        <separator><![CDATA[\.]]></separator>
+
+        <operator><![CDATA[=]]></operator>
+        <operator><![CDATA[>]]></operator>
+        <operator><![CDATA[<]]></operator>
+        <operator><![CDATA[!]]></operator>
+        <operator><![CDATA[~]]></operator>
+        <operator><![CDATA[\?]]></operator>
+        <operator><![CDATA[\:]]></operator>
+        <operator><![CDATA[==]]></operator>
+        <operator><![CDATA[>=]]></operator>
+        <operator><![CDATA[<=]]></operator>
+        <operator><![CDATA[\!=]]></operator>
+        <operator><![CDATA[\|\|]]></operator>
+        <operator><![CDATA[&&]]></operator>
+        <operator><![CDATA[\+\+]]></operator>
+        <operator><![CDATA[--]]></operator>
+        <operator><![CDATA[\+]]></operator>
+        <operator><![CDATA[-]]></operator>
+        <operator><![CDATA[\*]]></operator>
+        <operator><![CDATA[/]]></operator>
+        <operator><![CDATA[&]]></operator>
+        <operator><![CDATA[\|]]></operator>
+        <operator><![CDATA[\^]]></operator>
+        <operator><![CDATA[%]]></operator>
+        <operator><![CDATA[>>]]></operator>
+        <operator><![CDATA[<<]]></operator>
+        <operator><![CDATA[\+=]]></operator>
+        <operator><![CDATA[-=]]></operator>
+        <operator><![CDATA[\*=]]></operator>
+        <operator><![CDATA[/=]]></operator>
+        <operator><![CDATA[&=]]></operator>
+        <operator><![CDATA[\|=]]></operator>
+        <operator><![CDATA[\^=]]></operator>
+        <operator><![CDATA[%=]]></operator>
+        <operator><![CDATA[>>=]]></operator>
+        <operator><![CDATA[<<=]]></operator>
+    </state>
+
+</syntax>

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<menubar name="menubar">
+    <menu textKey="menubar.file" mnemonicKey="menubar.file.mnemonic">
+        <menuitem textKey="menubar.file.new"
+                  mnemonicKey="menubar.file.new.mnemonic"
+                  acceleratorKey="menubar.file.new.accelerator"
+                  iconKey="menubar.file.new.icon">
+        	<action name="new" class="tk.tomby.tedit.actions.NewAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.file.open"
+                  mnemonicKey="menubar.file.open.mnemonic"
+                  acceleratorKey="menubar.file.open.accelerator"
+                  iconKey="menubar.file.open.icon">
+        	<action name="open" class="tk.tomby.tedit.actions.OpenAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.file.close"
+                  mnemonicKey="menubar.file.close.mnemonic"
+                  acceleratorKey="menubar.file.close.accelerator"
+                  iconKey="menubar.file.close.icon">
+        	<action name="close" class="tk.tomby.tedit.actions.CloseAction"/>
+        </menuitem>
+        <menuseparator/>
+        <menuitem textKey="menubar.file.save"
+                  mnemonicKey="menubar.file.save.mnemonic"
+                  acceleratorKey="menubar.file.save.accelerator"
+                  iconKey="menubar.file.save.icon">
+        	<action name="save" class="tk.tomby.tedit.actions.SaveAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.file.saveas"
+                  mnemonicKey="menubar.file.saveas.mnemonic"
+                  acceleratorKey="menubar.file.saveas.accelerator"
+                  iconKey="menubar.file.saveas.icon">
+        	<action name="save-as" class="tk.tomby.tedit.actions.SaveAsAction"/>
+        </menuitem>
+        <menuseparator/>
+        <menuitem textKey="menubar.file.exit"
+                  mnemonicKey="menubar.file.exit.mnemonic"
+                  acceleratorKey="menubar.file.exit.accelerator"
+                  iconKey="menubar.file.exit.icon">
+        	<action name="exit" class="tk.tomby.tedit.actions.ExitAction"/>
+        </menuitem>
+    </menu>
+    <menu textKey="menubar.edit" mnemonicKey="menubar.edit.mnemonic">
+        <menuitem textKey="menubar.edit.undo"
+                  mnemonicKey="menubar.edit.undo.mnemonic"
+                  acceleratorKey="menubar.edit.undo.accelerator"
+                  iconKey="menubar.edit.undo.icon">
+        	<action name="undo" class="tk.tomby.tedit.actions.UndoAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.edit.redo"
+                  mnemonicKey="menubar.edit.redo.mnemonic"
+                  acceleratorKey="menubar.edit.redo.accelerator"
+                  iconKey="menubar.edit.redo.icon">
+        	<action name="redo" class="tk.tomby.tedit.actions.RedoAction"/>
+        </menuitem>
+        <menuseparator/>
+        <menuitem textKey="menubar.edit.cut"
+                  mnemonicKey="menubar.edit.cut.mnemonic"
+                  acceleratorKey="menubar.edit.cut.accelerator"
+                  iconKey="menubar.edit.cut.icon">
+        	<action name="cut" class="tk.tomby.tedit.actions.CutAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.edit.copy"
+                  mnemonicKey="menubar.edit.copy.mnemonic"
+                  acceleratorKey="menubar.edit.copy.accelerator"
+                  iconKey="menubar.edit.copy.icon">
+        	<action name="copy" class="tk.tomby.tedit.actions.CopyAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.edit.paste"
+                  mnemonicKey="menubar.edit.paste.mnemonic"
+                  acceleratorKey="menubar.edit.paste.accelerator"
+                  iconKey="menubar.edit.paste.icon">
+        	<action name="paste" class="tk.tomby.tedit.actions.PasteAction"/>
+        </menuitem>
+        <menuseparator/>
+        <menuitem textKey="menubar.edit.selectall"
+                  mnemonicKey="menubar.edit.selectall.mnemonic"
+                  acceleratorKey="menubar.edit.selectall.accelerator"
+                  iconKey="menubar.edit.selectall.icon">
+        	<action name="select-all" class="tk.tomby.tedit.actions.SelectAllAction"/>
+        </menuitem>/>
+        <menuseparator/>
+        <menuitem textKey="menubar.edit.preferences"
+                  mnemonicKey="menubar.edit.preferences.mnemonic"
+                  acceleratorKey="menubar.edit.preferences.accelerator"
+                  iconKey="menubar.edit.preferences.icon">
+        	<action name="preferences" class="tk.tomby.tedit.actions.PreferencesAction"/>
+        </menuitem>
+	</menu>
+	<menu textKey="menubar.search" mnemonicKey="menubar.search.mnemonic">
+        <menuitem textKey="menubar.search.find"
+                  mnemonicKey="menubar.search.find.mnemonic"
+                  acceleratorKey="menubar.search.find.accelerator"
+                  iconKey="menubar.search.find.icon">
+        	<action name="find" class="tk.tomby.tedit.actions.FindAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.search.replace"
+                  mnemonicKey="menubar.search.replace.mnemonic"
+                  acceleratorKey="menubar.search.replace.accelerator"
+                  iconKey="menubar.search.replace.icon">
+        	<action name="replace" class="tk.tomby.tedit.actions.ReplaceAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.search.findnext"
+                  mnemonicKey="menubar.search.findnext.mnemonic"
+                  acceleratorKey="menubar.search.findnext.accelerator"
+                  iconKey="menubar.search.findnext.icon">
+        	<action name="next" class="tk.tomby.tedit.actions.FindNextAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.search.findprevious"
+                  mnemonicKey="menubar.search.findprevious.mnemonic"
+                  acceleratorKey="menubar.search.findprevious.accelerator"
+                  iconKey="menubar.search.findprevious.icon">
+        	<action name="previous" class="tk.tomby.tedit.actions.FindPreviousAction"/>
+        </menuitem>
+        <menuseparator/>
+        <menuitem textKey="menubar.search.gotoline"
+                  mnemonicKey="menubar.search.gotoline.mnemonic"
+                  acceleratorKey="menubar.search.gotoline.accelerator"
+                  iconKey="menubar.search.gotoline.icon">
+        	<action name="goto" class="tk.tomby.tedit.actions.GotoLineAction"/>
+        </menuitem>
+    </menu>
+    <menu textKey="menubar.help" mnemonicKey="menubar.help.mnemonic">
+        <menuitem textKey="menubar.help.content"
+                  mnemonicKey="menubar.help.content.mnemonic"
+                  acceleratorKey="menubar.help.content.accelerator"
+                  iconKey="menubar.help.content.icon">
+        	<scriptlet name="test-groovy" 
+        			   lang="groovy" 
+        			   file="tk/tomby/tedit/test.gy"/>
+        </menuitem>
+        <menuitem textKey="menubar.help.content"
+                  mnemonicKey="menubar.help.content.mnemonic"
+                  acceleratorKey="menubar.help.content.accelerator"
+                  iconKey="menubar.help.content.icon">
+        	<scriptlet name="test-ruby" 
+        			   lang="ruby"
+        			   file="tk/tomby/tedit/test.rb"/>
+        </menuitem>
+        <menuitem textKey="menubar.help.about"
+                  mnemonicKey="menubar.help.about.mnemonic"
+                  acceleratorKey="menubar.help.about.accelerator"
+                  iconKey="menubar.help.about.icon">
+        	<action name="about" class="tk.tomby.tedit.actions.AboutAction"/>
+        </menuitem>/>
+    </menu>
+</menubar>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+
+<digester-rules>
+	<pattern value="plugin">
+	    <factory-create-rule  classname="tk.tomby.tedit.plugins.PluginFactory"/>
+	</pattern>
+</digester-rules>

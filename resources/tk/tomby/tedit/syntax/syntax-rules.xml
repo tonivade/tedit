@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+
+<digester-rules>
+	<pattern value="syntax">
+	    <object-create-rule classname="tk.tomby.tedit.syntax.Syntax"/>
+	    <set-properties-rule/>
+	    
+	    <pattern value="state">
+	    	<object-create-rule classname="tk.tomby.tedit.syntax.Syntax$State"/>
+	    	<set-properties-rule>
+	    		<alias attr-name="name" prop-name="name"/>
+	    		<alias attr-name="default" prop-name="defaultToken"/>
+	    	</set-properties-rule>
+	    	
+	    	<!-- comments -->
+		    <pattern value="comment1">
+		    	<pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addComment1"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addComment1"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="comment2">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addComment2"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addComment2"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="comment3">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addComment3"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addComment3"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="comment4">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addComment4"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addComment4"/>
+		    	</pattern>
+		    </pattern>
+		
+			<!-- literals -->
+		    <pattern value="literal1">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addLiteral1"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addLiteral1"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="literal2">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addLiteral2"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addLiteral2"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="literal3">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addLiteral3"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addLiteral3"/>
+		    	</pattern>
+		    </pattern>
+		    <pattern value="literal4">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addLiteral4"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addLiteral4"/>
+		    	</pattern>
+		    </pattern>
+	
+			<!-- keywords -->
+		    <pattern value="keyword1">
+		    	<pattern value="keyword">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.KeywordRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword1"/>
+			    </pattern>
+			    <pattern value="simple">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword1"/>
+			    </pattern>
+		    </pattern>
+		    <pattern value="keyword2">
+		        <pattern value="keyword">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.KeywordRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword2"/>
+			    </pattern>
+			    <pattern value="simple">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword2"/>
+			    </pattern>
+		    </pattern>
+		    <pattern value="keyword3">
+		        <pattern value="keyword">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.KeywordRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword3"/>
+			    </pattern>
+			    <pattern value="simple">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword3"/>
+			    </pattern>
+		    </pattern>
+		    <pattern value="keyword4">
+		        <pattern value="keyword">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.KeywordRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword4"/>
+			    </pattern>
+			    <pattern value="simple">
+			        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+			        <bean-property-setter-rule propertyname="value"/>
+			        <set-next-rule methodname="addKeyword4"/>
+			    </pattern>
+		    </pattern>
+	
+			<!-- identifiers -->
+		    <pattern value="identifier1">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addIdentifier1"/>
+		    </pattern>
+		    <pattern value="identifier2">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addIdentifier2"/>
+		    </pattern>
+		    <pattern value="identifier3">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addIdentifier3"/>
+		    </pattern>
+		    <pattern value="identifier4">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addIdentifier4"/>
+		    </pattern>
+		    
+		    <!-- digit -->
+		    <pattern value="digit">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addDigit"/>
+		    </pattern>
+		    
+		    <!-- label -->
+		    <pattern value="label">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addLabel"/>
+		    </pattern>
+		    
+		    <!-- marckup -->
+		    <pattern value="markup">
+		        <pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addMarkup"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addMarkup"/>
+		    	</pattern>
+		    </pattern>
+	
+			<!-- separator -->
+	    	<pattern value="separator">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addSeparator"/>
+		    </pattern>
+	    
+	    	<!-- operator -->
+		    <pattern value="operator">
+		        <object-create-rule classname="tk.tomby.tedit.syntax.SimpleRule"/>
+		        <bean-property-setter-rule propertyname="value"/>
+		        <set-next-rule methodname="addOperator"/>
+		    </pattern>
+		    
+		    <pattern value="scriptlet">
+		    	<pattern value="singleLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.SingleLineRule"/>
+			        <bean-property-setter-rule propertyname="start"/>
+			        <set-next-rule methodname="addScriptlet"/>
+		    	</pattern>
+			    <pattern value="multiLine">
+		    		<object-create-rule classname="tk.tomby.tedit.syntax.MultiLineRule"/>
+		    		<set-properties-rule/>
+			        <bean-property-setter-rule pattern="start" propertyname="start"/>
+			        <bean-property-setter-rule pattern="end" propertyname="end"/>
+			        <set-next-rule methodname="addScriptlet"/>
+		    	</pattern>
+		    </pattern>
+	    	
+	        <set-next-rule methodname="addState"/>
+	    </pattern>
+
+	</pattern>
+</digester-rules>

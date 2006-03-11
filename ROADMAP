@@ -1,0 +1,39 @@
+Version 0.0.1
+    X Show actual file name in title
+    X Word Warp
+    X Syntax Highlight
+    X Plugin infraestructure
+    X Sample plugin
+    X Contextual Menu in editor
+    X Keyboard shortcuts
+    X Multiline comments
+
+Version 0.0.2
+    X Multiple Buffers
+    X Find and replace
+    \ Console plugin
+    - Autoident
+    - Ident & unident
+    - Comment uncoment
+    \ File Manager plugin
+    X Goto line number
+	- Recent file list
+	- File backup
+	X Docking plugins
+	X Remember window size/position
+	X Remember divider location position
+	- Buffers menu
+	- Remember open files
+	X Replace tabs with spaces
+	X Tab length configuration
+	X Antialiasing
+
+Version 0.0.3
+    - Delimiter highlight
+    X Line number component
+    - Print support
+    - Checkstyle plugin
+    - Jalopy plugin
+    - Ant plugin
+    X Preferences component
+    - Split Buffer Pane

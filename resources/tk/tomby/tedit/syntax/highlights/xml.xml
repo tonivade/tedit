@@ -1,0 +1,129 @@
+<?xml version="1.0" ?>
+
+<syntax name="xml" contentType="text/xml">
+
+	<state name="main">
+		<comment1>
+	    	<multiLine state="comment">
+	        	<start><![CDATA[<\!--]]></start>
+		    	<end><![CDATA[-->]]></end>
+	    	</multiLine>
+	    </comment1>
+	    
+	    <literal2>
+        	<multiLine state='cdata'>
+	        	<start><![CDATA[<\!\[CDATA\[]]></start>
+    	    	<end><![CDATA[\]\]>]]></end>
+        	</multiLine>
+		</literal2>
+		
+		<literal3>
+	    	<multiLine state="dtd-tags">
+	    		<start><![CDATA[<\!]]></start>
+	    		<end><![CDATA[>]]></end>
+	    	</multiLine>	
+	    </literal3>
+		
+		<markup>
+	    	<multiLine state="tags">
+	    		<start><![CDATA[<]]></start>
+	    		<end><![CDATA[>]]></end>
+	    	</multiLine>	
+	    </markup>
+	    
+	    <label>
+    		<![CDATA[&[a-zA-Z]+;]]>
+	    </label>
+	</state>
+	
+	<state name="comment" default="comment1"/>
+	
+	<state name="cdata" default="literal2"/>
+	
+	<state name="tags" default="markup">
+		<comment1>
+	    	<multiLine state="comment">
+	        	<start><![CDATA[<\!--]]></start>
+		    	<end><![CDATA[-->]]></end>
+	    	</multiLine>
+	    </comment1>
+	    
+		<literal1>
+	    	<singleLine>
+	    		<![CDATA["(?:\\.|[^"\\])*"]]>
+	    	</singleLine>
+	    </literal1>
+	    
+	    <literal2>
+	    	<singleLine>
+	    		<![CDATA['(?:\\[^']+|[^'])']]>
+	    	</singleLine>
+	    </literal2>
+	    
+		<separator><![CDATA[=]]></separator>
+		<separator><![CDATA[:]]></separator>
+	</state>
+	
+	<state name="dtd-tags" default="literal3">
+		<comment1>
+	    	<multiLine state="comment">
+	        	<start><![CDATA[<\!--]]></start>
+		    	<end><![CDATA[-->]]></end>
+	    	</multiLine>
+	    </comment1>
+	    
+		<literal1>
+        	<multiLine state="dtd-literal1">
+	        	<start><![CDATA["]]></start>
+    	    	<end><![CDATA["]]></end>
+        	</multiLine>
+		</literal1>
+		<literal2>
+        	<multiLine state='dtd-literal2'>
+	        	<start><![CDATA[']]></start>
+    	    	<end><![CDATA[']]></end>
+        	</multiLine>
+		</literal2>
+	    
+	    <keyword1><keyword>CDATA</keyword></keyword1>
+	    <keyword1><keyword>EMPTY</keyword></keyword1>
+	    <keyword1><keyword>INCLUDE</keyword></keyword1>
+	    <keyword1><keyword>IGNORE</keyword></keyword1>
+	    <keyword1><keyword>NDATA</keyword></keyword1>
+	    <keyword1><keyword>NMTOKEN</keyword></keyword1>
+	    
+	    <keyword2><keyword>IMPLIED</keyword></keyword2>
+	    <keyword2><keyword>PCDATA</keyword></keyword2>
+	    <keyword2><keyword>REQUIRED</keyword></keyword2>
+	    
+		<separator><![CDATA[=]]></separator>
+		<separator><![CDATA[\(]]></separator>
+		<separator><![CDATA[\)]]></separator>
+		<separator><![CDATA[\,]]></separator>
+
+		<operator><![CDATA[\%]]></operator>		
+		<operator><![CDATA[\|]]></operator>
+		<operator><![CDATA[\?]]></operator>
+		<operator><![CDATA[\*]]></operator>
+		<operator><![CDATA[\+]]></operator>
+	</state>
+	
+	<state name="dtd-literal1" default="literal1">
+    	<separator><![CDATA[\,]]></separator>
+		
+		<operator><![CDATA[\|]]></operator>
+		<operator><![CDATA[\?]]></operator>
+		<operator><![CDATA[\*]]></operator>
+		<operator><![CDATA[\+]]></operator>
+	</state>
+	
+	<state name="dtd-literal2" default="literal2">
+    	<separator><![CDATA[\,]]></separator>
+		
+		<operator><![CDATA[\|]]></operator>
+		<operator><![CDATA[\?]]></operator>
+		<operator><![CDATA[\*]]></operator>
+		<operator><![CDATA[\+]]></operator>
+	</state>
+	
+</syntax>

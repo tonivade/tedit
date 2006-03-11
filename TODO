@@ -1,0 +1,51 @@
+    X Show actual file name in title
+    X Word Warp
+    X Syntax Hightlight
+        X Multi line comments
+        X Color configuration
+        X Dynamically load highlight
+    X Keyboard shortcuts
+    \ Improve statusbar messages
+    X Remember last directory
+    X Save changes dialog on exit
+    X Plugin infraestructure
+        X Dock manager
+        X Plugin loader
+        - Extend toolbar and menus
+    - Floating/Dockable toolbars
+    X Sample plugin
+    X Contextual Menu in editor
+    \ CLI
+    \ Menu Search Implementation
+    X Save/Load preferences
+    X Preference panel
+    - Buffers Menu
+        - Next Buffer
+        - Previous Buffer
+    - Close All Action
+    - Save All Action
+    \ Find and Replace
+        X Search backward
+        - Search in selection
+        - Replace all
+    - Recent files
+    - Charset selection support
+    - EOF character selection support
+    - Edit mode selection support
+    - Bookmarks
+    - Print Support
+    - Autoident
+    - Ident & unident
+    - Comment uncoment
+    - To lower case / To upper case
+    - Capitalize
+    - Toolbar customizable
+    - Scripts
+        - Run script
+    - Macro support
+        - Run macro
+    - More plugins
+        - CVS
+        - SVN
+        - Project
+    

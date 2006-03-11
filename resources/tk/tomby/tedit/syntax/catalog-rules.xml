@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<digester-rules>
+	<object-create-rule pattern="catalog" classname="tk.tomby.tedit.syntax.catalog.Catalog"/>
+	<set-properties-rule/>
+	
+	<pattern value="catalog/syntax">
+		<object-create-rule classname="tk.tomby.tedit.syntax.catalog.Syntax"/>
+        <set-properties-rule/>
+        
+        <pattern value="extension">
+        	<object-create-rule classname="tk.tomby.tedit.syntax.catalog.Extension"/>
+	        <bean-property-setter-rule propertyname="value"/>
+        	<set-next-rule methodname="addExtension"/>
+        </pattern>
+        
+        <set-next-rule methodname="addSyntax"/>
+	</pattern>
+</digester-rules>

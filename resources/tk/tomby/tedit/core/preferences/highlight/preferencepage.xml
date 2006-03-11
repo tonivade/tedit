@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<page label="highlight.name">
+	<highlight label="highlight.keyword1" key="highlight.keyword1"/>
+	<highlight label="highlight.keyword2" key="highlight.keyword2"/>
+	<highlight label="highlight.keyword3" key="highlight.keyword3"/>
+	<highlight label="highlight.keyword4" key="highlight.keyword4"/>
+	
+	<highlight label="highlight.comment1" key="highlight.comment1"/>
+	<highlight label="highlight.comment2" key="highlight.comment2"/>
+	<highlight label="highlight.comment3" key="highlight.comment3"/>
+	<highlight label="highlight.comment4" key="highlight.comment4"/>
+	
+	<highlight label="highlight.identifier1" key="highlight.identifier1"/>
+	<highlight label="highlight.identifier2" key="highlight.identifier2"/>
+	<highlight label="highlight.identifier3" key="highlight.identifier3"/>
+	<highlight label="highlight.identifier4" key="highlight.identifier4"/>
+	
+	<highlight label="highlight.literal1" key="highlight.literal1"/>
+	<highlight label="highlight.literal2" key="highlight.literal2"/>
+	<highlight label="highlight.literal3" key="highlight.literal3"/>
+	<highlight label="highlight.literal4" key="highlight.literal4"/>
+	
+	<highlight label="highlight.digit" key="highlight.digit"/>
+	<highlight label="highlight.label" key="highlight.label"/>
+	<highlight label="highlight.markup" key="highlight.markup"/>
+	<highlight label="highlight.operator" key="highlight.operator"/>
+	<highlight label="highlight.separator" key="highlight.separator"/>
+	
+	<highlight label="highlight.scriptlet" key="highlight.scriptlet"/>
+</page>

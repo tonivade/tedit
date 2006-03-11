@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<digester-rules>
+	<pattern value="multitabPage">
+		<object-create-rule classname="tk.tomby.tedit.core.preferences.MultitabPreferencePage"/>
+		<set-properties-rule/>
+		<pattern value="page">
+			<object-create-rule classname="tk.tomby.tedit.core.preferences.PreferencePage"/>
+			<set-properties-rule/>
+			<pattern value="string">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.StringEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="boolean">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.BooleanEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="int">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.IntEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="highlight">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.HighlightEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="multi">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.MultiEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="color">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.ColorEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<pattern value="font">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FontEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
+			<set-next-rule methodname="addPage"/>
+		</pattern>
+	</pattern>
+	<pattern value="page">
+		<object-create-rule classname="tk.tomby.tedit.core.preferences.PreferencePage"/>
+		<set-properties-rule/>
+		<pattern value="string">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.StringEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="boolean">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.BooleanEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="int">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.IntEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="highlight">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.HighlightEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="multi">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.MultiEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="color">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.ColorEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="font">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FontEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+	</pattern>
+</digester-rules>

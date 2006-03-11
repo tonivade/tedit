@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<plugin name="explorer" 
+		type="workspace" 
+		className="tk.tomby.tedit.plugins.explorer.Explorer"/>

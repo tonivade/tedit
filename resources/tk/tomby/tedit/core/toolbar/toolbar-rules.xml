@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<digester-rules>
+	<pattern value="toolbar">
+    	<object-create-rule classname="tk.tomby.tedit.core.toolbar.ToolBar"/>
+	    <pattern value="toolbarbutton">
+	        <object-create-rule classname="tk.tomby.tedit.gui.ToolBarButton"/>
+	        <set-properties-rule/>
+	        <pattern value="scriptlet">
+	            <factory-create-rule classname="tk.tomby.tedit.actions.ScriptletActionFactory"/>
+	            <set-next-rule methodname="setAction"/>
+	        </pattern>
+	        <pattern value="action">
+	            <factory-create-rule classname="tk.tomby.tedit.actions.ActionFactory"/>
+	            <set-next-rule methodname="setAction"/>
+	        </pattern>
+	        <set-next-rule methodname="addButton"/>
+	    </pattern>
+	    <pattern value="toolbarseparator">
+	        <object-create-rule classname="tk.tomby.tedit.gui.ToolBarSeparator"/>
+	        <set-next-rule methodname="addSeparator"/>
+	    </pattern>
+	</pattern>
+</digester-rules>

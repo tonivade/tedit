@@ -1,0 +1,13 @@
+package groovy.swing
+
+swing = new SwingBuilder()
+
+widget = swing.frame(title:'Test', location:[100,100]) {
+	panel() {
+		button(text:'OK', actionPerformed:{ 
+			println("I've been clicked with event ${it}") 
+		})
+	}
+}
+
+widget.show()

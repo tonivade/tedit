@@ -1,0 +1,569 @@
+<?xml version="1.0" ?>
+
+<syntax name="css" contentType="text/css">
+
+    <state name="main">
+        <comment2>
+            <multiLine state="comment">
+                <start><![CDATA[/\*]]></start>
+                <end><![CDATA[\*/]]></end>
+            </multiLine>
+        </comment2>
+
+        <digit>
+            <![CDATA[-?[0-9]+(?:pt|pc|in|mm|cm|em|ex|px|ms|s|%)]]>
+        </digit>
+
+        <separator><![CDATA[\(]]></separator>
+        <separator><![CDATA[\)]]></separator>
+        <separator><![CDATA[\{]]></separator>
+        <separator><![CDATA[\}]]></separator>
+        <separator><![CDATA[;]]></separator>
+        <separator><![CDATA[:]]></separator>
+        <separator><![CDATA[,]]></separator>
+        <separator><![CDATA[\.]]></separator>
+        <separator><![CDATA[\#]]></separator>
+
+        <operator><![CDATA[\!]]></operator>
+
+        <!-- CSS2 properties -->
+
+        <!-- Color and background properties -->
+        <keyword1><keyword>background\-attachment</keyword></keyword1>
+        <keyword1><keyword>background\-color</keyword></keyword1>
+        <keyword1><keyword>background\-image</keyword></keyword1>
+        <keyword1><keyword>background\-position</keyword></keyword1>
+        <keyword1><keyword>background\-repeat</keyword></keyword1>
+        <keyword1><keyword>background</keyword></keyword1>
+        <keyword1><keyword>color</keyword></keyword1>
+
+        <!-- Font properties -->
+        <keyword1><keyword>font\-family</keyword></keyword1>
+        <keyword1><keyword>font\-size</keyword></keyword1>
+        <keyword1><keyword>font\-size\-adjust</keyword></keyword1>
+        <keyword1><keyword>font\-style</keyword></keyword1>
+        <keyword1><keyword>font\-variant</keyword></keyword1>
+        <keyword1><keyword>font\-weight</keyword></keyword1>
+        <keyword1><keyword>font\-stretch</keyword></keyword1>
+        <keyword1><keyword>font</keyword></keyword1>
+        <keyword1><keyword>src</keyword></keyword1>
+        <keyword1><keyword>definition\-src</keyword></keyword1>
+        <keyword1><keyword>unicode\-range</keyword></keyword1>
+        <keyword1><keyword>panose\-1</keyword></keyword1>
+        <keyword1><keyword>stemv</keyword></keyword1>
+        <keyword1><keyword>stemh</keyword></keyword1>
+        <keyword1><keyword>units\-per\-em</keyword></keyword1>
+        <keyword1><keyword>slope</keyword></keyword1>
+        <keyword1><keyword>cap\-height</keyword></keyword1>
+        <keyword1><keyword>x\-height</keyword></keyword1>
+        <keyword1><keyword>ascent</keyword></keyword1>
+        <keyword1><keyword>descent</keyword></keyword1>
+        <keyword1><keyword>baseline</keyword></keyword1>
+        <keyword1><keyword>centerline</keyword></keyword1>
+        <keyword1><keyword>mathline</keyword></keyword1>
+        <keyword1><keyword>topline</keyword></keyword1>
+
+        <!-- Text properties -->
+        <keyword1><keyword>letter\-spacing</keyword></keyword1>
+        <keyword1><keyword>text\-align</keyword></keyword1>
+        <keyword1><keyword>text\-shadow</keyword></keyword1>
+        <keyword1><keyword>text\-decoration</keyword></keyword1>
+        <keyword1><keyword>text\-indent</keyword></keyword1>
+        <keyword1><keyword>text\-transform</keyword></keyword1>
+        <keyword1><keyword>word\-spacing</keyword></keyword1>
+        <keyword1><keyword>letter\-spacing</keyword></keyword1>
+        <keyword1><keyword>white\-space</keyword></keyword1>
+
+        <!-- Box properties -->
+        
+        <keyword1><keyword>border\-collapse</keyword></keyword1>
+        <keyword1><keyword>border\-spacing</keyword></keyword1>
+        
+        <keyword1><keyword>border\-bottom\-style</keyword></keyword1>
+        <keyword1><keyword>border\-bottom\-width</keyword></keyword1>
+        <keyword1><keyword>border\-bottom\-color</keyword></keyword1>
+        <keyword1><keyword>border\-bottom</keyword></keyword1>
+        
+        <keyword1><keyword>border\-left\-style</keyword></keyword1>
+        <keyword1><keyword>border\-left\-width</keyword></keyword1>
+        <keyword1><keyword>border\-left\-color</keyword></keyword1>
+        <keyword1><keyword>border\-left</keyword></keyword1>
+        
+        <keyword1><keyword>border\-right\-style</keyword></keyword1>
+        <keyword1><keyword>border\-right\-width</keyword></keyword1>
+        <keyword1><keyword>border\-right\-color</keyword></keyword1>
+        <keyword1><keyword>border\-right</keyword></keyword1>
+        
+        <keyword1><keyword>border\-top\-style</keyword></keyword1>
+        <keyword1><keyword>border\-top\-width</keyword></keyword1>
+        <keyword1><keyword>border\-top\-color</keyword></keyword1>
+        <keyword1><keyword>border\-top</keyword></keyword1>
+        
+        <keyword1><keyword>border\-color</keyword></keyword1>
+        <keyword1><keyword>border\-style</keyword></keyword1>
+        <keyword1><keyword>border\-width</keyword></keyword1>
+        <keyword1><keyword>border</keyword></keyword1>
+        
+        <keyword1><keyword>bottom</keyword></keyword1>
+        <keyword1><keyword>clear</keyword></keyword1>
+        <keyword1><keyword>float</keyword></keyword1>
+        <keyword1><keyword>height</keyword></keyword1>
+        
+        <keyword1><keyword>margin\-bottom</keyword></keyword1>
+        <keyword1><keyword>margin\-left</keyword></keyword1>
+        <keyword1><keyword>margin\-right</keyword></keyword1>
+        <keyword1><keyword>margin\-top</keyword></keyword1>
+        <keyword1><keyword>margin</keyword></keyword1>
+        
+        <keyword1><keyword>padding\-bottom</keyword></keyword1>
+        <keyword1><keyword>padding\-left</keyword></keyword1>
+        <keyword1><keyword>padding\-right</keyword></keyword1>
+        <keyword1><keyword>padding\-top</keyword></keyword1>
+        <keyword1><keyword>padding</keyword></keyword1>
+        
+
+        <!-- Visual formatting properties -->
+        <keyword1><keyword>display</keyword></keyword1>
+        <keyword1><keyword>position</keyword></keyword1>
+        <keyword1><keyword>top</keyword></keyword1>
+        <keyword1><keyword>right</keyword></keyword1>
+        <keyword1><keyword>bottom</keyword></keyword1>
+        <keyword1><keyword>left</keyword></keyword1>
+        <keyword1><keyword>float</keyword></keyword1>
+        <keyword1><keyword>z\-index</keyword></keyword1>
+        <keyword1><keyword>direction</keyword></keyword1>
+        <keyword1><keyword>unicode\-bidi</keyword></keyword1>
+        <keyword1><keyword>width</keyword></keyword1>
+        <keyword1><keyword>min\-width</keyword></keyword1>
+        <keyword1><keyword>max\-width</keyword></keyword1>
+        <keyword1><keyword>height</keyword></keyword1>
+        <keyword1><keyword>min\-height</keyword></keyword1>
+        <keyword1><keyword>max\-height</keyword></keyword1>
+        <keyword1><keyword>line\-height</keyword></keyword1>
+        <keyword1><keyword>vertical\-align</keyword></keyword1>
+
+        <!-- Visual effects -->
+        <keyword1><keyword>overflow</keyword></keyword1>
+        <keyword1><keyword>clip</keyword></keyword1>
+        <keyword1><keyword>visibility</keyword></keyword1>
+
+        <!-- Generated content, automatic listing -->
+        <keyword1><keyword>content</keyword></keyword1>
+        <keyword2><keyword>:after</keyword></keyword2>
+        <keyword2><keyword>:before</keyword></keyword2>
+        <keyword1><keyword>quotes</keyword></keyword1>
+        <keyword1><keyword>counter\-reset</keyword></keyword1>
+        <keyword1><keyword>counter\-increment</keyword></keyword1>
+        <keyword1><keyword>marker\-offset</keyword></keyword1>
+        
+        <keyword1><keyword>list\-style\-image</keyword></keyword1>
+        <keyword1><keyword>list\-style\-position</keyword></keyword1>
+        <keyword1><keyword>list\-style\-type</keyword></keyword1>
+        <keyword1><keyword>list\-style</keyword></keyword1>
+
+        <!-- Page properties -->
+        <keyword1><keyword>size</keyword></keyword1>
+        <keyword1><keyword>marks</keyword></keyword1>
+        <keyword1><keyword>page\-break\-before</keyword></keyword1>
+        <keyword1><keyword>page\-break\-after</keyword></keyword1>
+        <keyword1><keyword>page\-break\-inside</keyword></keyword1>
+        <keyword1><keyword>page</keyword></keyword1>
+        <keyword1><keyword>orphans</keyword></keyword1>
+        <keyword1><keyword>widows</keyword></keyword1>
+
+        <!-- Table properties -->
+        <keyword1><keyword>caption\-side</keyword></keyword1>
+        <keyword1><keyword>table\-layout</keyword></keyword1>
+        <keyword1><keyword>border\-collapse</keyword></keyword1>
+        <keyword1><keyword>border\-spacing</keyword></keyword1>
+        <keyword1><keyword>empty\-cells</keyword></keyword1>
+        <keyword1><keyword>speak\-headers</keyword></keyword1>
+
+        <keyword1><keyword>@import</keyword></keyword1>
+        <keyword1><keyword>@media</keyword></keyword1>
+        <keyword1><keyword>@page</keyword></keyword1>
+        <keyword1><keyword>@font\-face</keyword></keyword1>
+
+        <!-- User interface -->
+        <keyword1><keyword>cursor</keyword></keyword1>
+        
+        <keyword1><keyword>outline\-width</keyword></keyword1>
+        <keyword1><keyword>outline\-style</keyword></keyword1>
+        <keyword1><keyword>outline\-color</keyword></keyword1>
+        <keyword1><keyword>outline</keyword></keyword1>
+
+        <!-- Aural properties -->
+        <keyword1><keyword>azimuth</keyword></keyword1>
+        <keyword1><keyword>volume</keyword></keyword1>
+        <keyword1><keyword>speak</keyword></keyword1>
+        
+        <keyword1><keyword>pause\-before</keyword></keyword1>
+        <keyword1><keyword>pause\-after</keyword></keyword1>
+        <keyword1><keyword>pause</keyword></keyword1>
+        
+        <keyword1><keyword>cue\-before</keyword></keyword1>
+        <keyword1><keyword>cue\-after</keyword></keyword1>
+        <keyword1><keyword>cue</keyword></keyword1>
+        
+        <keyword1><keyword>play\-during</keyword></keyword1>
+        <keyword1><keyword>elevation</keyword></keyword1>
+        <keyword1><keyword>speech\-rate</keyword></keyword1>
+        <keyword1><keyword>voice\-family</keyword></keyword1>
+        
+        <keyword1><keyword>pitch\-range</keyword></keyword1>
+        <keyword1><keyword>pitch</keyword></keyword1>
+        
+        <keyword1><keyword>stress</keyword></keyword1>
+        <keyword1><keyword>richness</keyword></keyword1>
+        <keyword1><keyword>speak\-punctuation</keyword></keyword1>
+        <keyword1><keyword>speak\-numeral</keyword></keyword1>
+        <keyword1><keyword>speak\-header-cell</keyword></keyword1>
+
+        <keyword2><keyword>rgb</keyword></keyword2>
+        <keyword2><keyword>url</keyword></keyword2>
+
+        <!-- measurement units -->
+        <keyword2><keyword>left\-side</keyword></keyword2>
+        <keyword2><keyword>far\-left</keyword></keyword2>
+        <keyword2><keyword>far\-right</keyword></keyword2>
+        <keyword2><keyword>center\-left</keyword></keyword2>
+        <keyword2><keyword>center\-right</keyword></keyword2>
+        <keyword2><keyword>center</keyword></keyword2>
+        <keyword2><keyword>right</keyword></keyword2>
+        <keyword2><keyword>right\-side</keyword></keyword2>
+        <keyword2><keyword>behind</keyword></keyword2>
+        <keyword2><keyword>leftwards</keyword></keyword2>
+        <keyword2><keyword>rightwards</keyword></keyword2>
+        <keyword2><keyword>inherit</keyword></keyword2>
+        <keyword2><keyword>scroll</keyword></keyword2>
+        <keyword2><keyword>fixed</keyword></keyword2>
+        <keyword2><keyword>transparent</keyword></keyword2>
+        <keyword2><keyword>none</keyword></keyword2>
+        
+        <keyword2><keyword>repeat\-x</keyword></keyword2>
+        <keyword2><keyword>repeat\-y</keyword></keyword2>
+        <keyword2><keyword>repeat</keyword></keyword2>
+        <keyword2><keyword>no\-repeat</keyword></keyword2>
+        <keyword2><keyword>collapse</keyword></keyword2>
+        <keyword2><keyword>separate</keyword></keyword2>
+        <keyword2><keyword>auto</keyword></keyword2>
+        <keyword2><keyword>open\-quote</keyword></keyword2>
+        <keyword2><keyword>close\-quote</keyword></keyword2>
+        <keyword2><keyword>no\-open\-quote</keyword></keyword2>
+        <keyword2><keyword>no\-close\-quote</keyword></keyword2>
+        <keyword2><keyword>cue\-before</keyword></keyword2>
+        <keyword2><keyword>cue\-after</keyword></keyword2>
+        <keyword2><keyword>crosshair</keyword></keyword2>
+        <keyword2><keyword>default</keyword></keyword2>
+        <keyword2><keyword>pointer</keyword></keyword2>
+        <keyword2><keyword>move</keyword></keyword2>
+        <keyword2><keyword>e\-resize</keyword></keyword2>
+        <keyword2><keyword>ne\-resize</keyword></keyword2>
+        <keyword2><keyword>nw\-resize</keyword></keyword2>
+        <keyword2><keyword>n\-resize</keyword></keyword2>
+        <keyword2><keyword>se\-resize</keyword></keyword2>
+        <keyword2><keyword>sw\-resize</keyword></keyword2>
+        <keyword2><keyword>s\-resize</keyword></keyword2>
+        <keyword2><keyword>w\-resize</keyword></keyword2>
+        <keyword2><keyword>text</keyword></keyword2>
+        <keyword2><keyword>wait</keyword></keyword2>
+        <keyword2><keyword>help</keyword></keyword2>
+        <keyword2><keyword>ltr</keyword></keyword2>
+        <keyword2><keyword>rtl</keyword></keyword2>
+        <keyword2><keyword>inline</keyword></keyword2>
+        <keyword2><keyword>block</keyword></keyword2>
+        <keyword2><keyword>list\-item</keyword></keyword2>
+        <keyword2><keyword>run\-in</keyword></keyword2>
+        <keyword2><keyword>compact</keyword></keyword2>
+        <keyword2><keyword>marker</keyword></keyword2>
+        <keyword2><keyword>inline\-table</keyword></keyword2>
+        <keyword2><keyword>table\-row\-group</keyword></keyword2>
+        <keyword2><keyword>table\-header\-group</keyword></keyword2>
+        <keyword2><keyword>table\-footer\-group</keyword></keyword2>
+        <keyword2><keyword>table\-row</keyword></keyword2>
+        <keyword2><keyword>table\-column\-group</keyword></keyword2>
+        <keyword2><keyword>table\-column</keyword></keyword2>
+        <keyword2><keyword>table\-cell</keyword></keyword2>
+        <keyword2><keyword>table\-caption</keyword></keyword2>
+        <keyword2><keyword>table</keyword></keyword2>
+
+        <keyword2><keyword>below</keyword></keyword2>
+        <keyword2><keyword>level</keyword></keyword2>
+        <keyword2><keyword>above</keyword></keyword2>
+        <keyword2><keyword>higher</keyword></keyword2>
+        <keyword2><keyword>lower</keyword></keyword2>
+        <keyword2><keyword>show</keyword></keyword2>
+        <keyword2><keyword>hide</keyword></keyword2>
+        <keyword2><keyword>normal</keyword></keyword2>
+        <keyword2><keyword>wider</keyword></keyword2>
+        <keyword2><keyword>narrower</keyword></keyword2>
+        <keyword2><keyword>ultra\-condensed</keyword></keyword2>
+        <keyword2><keyword>extra\-condensed</keyword></keyword2>
+        <keyword2><keyword>condensed</keyword></keyword2>
+        <keyword2><keyword>semi\-condensed</keyword></keyword2>
+        <keyword2><keyword>semi\-expanded</keyword></keyword2>
+        <keyword2><keyword>expanded</keyword></keyword2>
+        <keyword2><keyword>extra\-expanded</keyword></keyword2>
+        <keyword2><keyword>ultra\-expanded</keyword></keyword2>
+        <keyword2><keyword>normal</keyword></keyword2>
+        <keyword2><keyword>italic</keyword></keyword2>
+        <keyword2><keyword>oblique</keyword></keyword2>
+        <keyword2><keyword>normal</keyword></keyword2>
+        <keyword2><keyword>xx\-small</keyword></keyword2>
+        <keyword2><keyword>x\-small</keyword></keyword2>
+        <keyword2><keyword>small</keyword></keyword2>
+        <keyword2><keyword>large</keyword></keyword2>
+        <keyword2><keyword>x\-large</keyword></keyword2>
+        <keyword2><keyword>xx\-large</keyword></keyword2>
+        <keyword2><keyword>thin</keyword></keyword2>
+        <keyword2><keyword>thick</keyword></keyword2>
+        <keyword2><keyword>smaller</keyword></keyword2>
+        <keyword2><keyword>larger</keyword></keyword2>
+        <keyword2><keyword>small\-caps</keyword></keyword2>
+        <keyword2><keyword>inherit</keyword></keyword2>
+        <keyword2><keyword>bold</keyword></keyword2>
+        <keyword2><keyword>bolder</keyword></keyword2>
+        <keyword2><keyword>lighter</keyword></keyword2>
+        <keyword2><keyword>inside</keyword></keyword2>
+        <keyword2><keyword>outside</keyword></keyword2>
+        <keyword2><keyword>disc</keyword></keyword2>
+        <keyword2><keyword>circle</keyword></keyword2>
+        <keyword2><keyword>square</keyword></keyword2>
+        <keyword2><keyword>decimal</keyword></keyword2>
+        <keyword2><keyword>decimal\-leading\-zero</keyword></keyword2>
+        <keyword2><keyword>lower\-roman</keyword></keyword2>
+        <keyword2><keyword>upper\-roman</keyword></keyword2>
+        <keyword2><keyword>lower\-greek</keyword></keyword2>
+        <keyword2><keyword>lower\-alpha</keyword></keyword2>
+        <keyword2><keyword>lower\-latin</keyword></keyword2>
+        <keyword2><keyword>upper\-alpha</keyword></keyword2>
+        <keyword2><keyword>upper\-latin</keyword></keyword2>
+        <keyword2><keyword>hebrew</keyword></keyword2>
+        <keyword2><keyword>armenian</keyword></keyword2>
+        <keyword2><keyword>georgian</keyword></keyword2>
+        <keyword2><keyword>cjk\-ideographic</keyword></keyword2>
+        <keyword2><keyword>hiragana</keyword></keyword2>
+        <keyword2><keyword>katakana</keyword></keyword2>
+        <keyword2><keyword>hiragana\-iroha</keyword></keyword2>
+        <keyword2><keyword>katakana\-iroha</keyword></keyword2>
+        <keyword2><keyword>crop</keyword></keyword2>
+        <keyword2><keyword>cross</keyword></keyword2>
+        <keyword2><keyword>invert</keyword></keyword2>
+        <keyword2><keyword>hidden</keyword></keyword2>
+        <keyword2><keyword>always</keyword></keyword2>
+        <keyword2><keyword>avoid</keyword></keyword2>
+        <keyword2><keyword>x\-low</keyword></keyword2>
+        <keyword2><keyword>low</keyword></keyword2>
+        <keyword2><keyword>high</keyword></keyword2>
+        <keyword2><keyword>x\-high</keyword></keyword2>
+        <keyword2><keyword>absolute</keyword></keyword2>
+        <keyword2><keyword>fixed</keyword></keyword2>
+        <keyword2><keyword>relative</keyword></keyword2>
+        <keyword2><keyword>static</keyword></keyword2>
+        <keyword2><keyword>portrait</keyword></keyword2>
+        <keyword2><keyword>landscape</keyword></keyword2>
+        <keyword2><keyword>spell\-out</keyword></keyword2>
+        <keyword2><keyword>digits</keyword></keyword2>
+        <keyword2><keyword>continuous</keyword></keyword2>
+        <keyword2><keyword>x\-slow</keyword></keyword2>
+        <keyword2><keyword>slow</keyword></keyword2>
+        <keyword2><keyword>fast</keyword></keyword2>
+        <keyword2><keyword>x\-fast</keyword></keyword2>
+        <keyword2><keyword>faster</keyword></keyword2>
+        <keyword2><keyword>slower</keyword></keyword2>
+        <keyword2><keyword>underline</keyword></keyword2>
+        <keyword2><keyword>overline</keyword></keyword2>
+        <keyword2><keyword>line\-through</keyword></keyword2>
+        <keyword2><keyword>blink</keyword></keyword2>
+        <keyword2><keyword>capitalize</keyword></keyword2>
+        <keyword2><keyword>uppercase</keyword></keyword2>
+        <keyword2><keyword>lowercase</keyword></keyword2>
+        <keyword2><keyword>embed</keyword></keyword2>
+        <keyword2><keyword>bidi\-override</keyword></keyword2>
+        <keyword2><keyword>baseline</keyword></keyword2>
+        <keyword2><keyword>sub</keyword></keyword2>
+        <keyword2><keyword>super</keyword></keyword2>
+        <keyword2><keyword>top</keyword></keyword2>
+        <keyword2><keyword>text\-top</keyword></keyword2>
+        <keyword2><keyword>middle</keyword></keyword2>
+        <keyword2><keyword>bottom</keyword></keyword2>
+        <keyword2><keyword>text\-bottom</keyword></keyword2>
+        <keyword2><keyword>visible</keyword></keyword2>
+        <keyword2><keyword>hidden</keyword></keyword2>
+        <keyword2><keyword>collapse</keyword></keyword2>
+        <keyword2><keyword>soft</keyword></keyword2>
+        <keyword2><keyword>loud</keyword></keyword2>
+        <keyword2><keyword>x\-loud</keyword></keyword2>
+        <keyword2><keyword>pre</keyword></keyword2>
+        <keyword2><keyword>nowrap</keyword></keyword2>
+        <keyword2><keyword>dotted</keyword></keyword2>
+        <keyword2><keyword>dashed</keyword></keyword2>
+        <keyword2><keyword>solid</keyword></keyword2>
+        <keyword2><keyword>double</keyword></keyword2>
+        <keyword2><keyword>groove</keyword></keyword2>
+        <keyword2><keyword>ridge</keyword></keyword2>
+        <keyword2><keyword>inset</keyword></keyword2>
+        <keyword2><keyword>outset</keyword></keyword2>
+        <keyword2><keyword>once</keyword></keyword2>
+        <keyword2><keyword>both</keyword></keyword2>
+        <keyword2><keyword>silent</keyword></keyword2>
+        <keyword2><keyword>medium</keyword></keyword2>
+        <keyword2><keyword>mix</keyword></keyword2>
+        <keyword2><keyword>male</keyword></keyword2>
+        <keyword2><keyword>female</keyword></keyword2>
+        <keyword2><keyword>child</keyword></keyword2>
+        <keyword2><keyword>code</keyword></keyword2>
+
+        <!-- Colors -->
+        <keyword2><keyword>aliceblue</keyword></keyword2>
+        <keyword2><keyword>antiquewhite</keyword></keyword2>
+        <keyword2><keyword>aqua</keyword></keyword2>
+        <keyword2><keyword>aquamarine</keyword></keyword2>
+        <keyword2><keyword>azure</keyword></keyword2>
+        <keyword2><keyword>beige</keyword></keyword2>
+        <keyword2><keyword>bisque</keyword></keyword2>
+        <keyword2><keyword>black</keyword></keyword2>
+        <keyword2><keyword>blanchedalmond</keyword></keyword2>
+        <keyword2><keyword>blue</keyword></keyword2>
+        <keyword2><keyword>blueviolet</keyword></keyword2>
+        <keyword2><keyword>brown</keyword></keyword2>
+        <keyword2><keyword>burlywood</keyword></keyword2>
+        <keyword2><keyword>cadetblue</keyword></keyword2>
+        <keyword2><keyword>chartreuse</keyword></keyword2>
+        <keyword2><keyword>chocolate</keyword></keyword2>
+        <keyword2><keyword>coral</keyword></keyword2>
+        <keyword2><keyword>cornflowerblue</keyword></keyword2>
+        <keyword2><keyword>cornsilk</keyword></keyword2>
+        <keyword2><keyword>crimson</keyword></keyword2>
+        <keyword2><keyword>cyan</keyword></keyword2>
+        <keyword2><keyword>darkblue</keyword></keyword2>
+        <keyword2><keyword>darkcyan</keyword></keyword2>
+        <keyword2><keyword>darkgoldenrod</keyword></keyword2>
+        <keyword2><keyword>darkgray</keyword></keyword2>
+        <keyword2><keyword>darkgreen</keyword></keyword2>
+        <keyword2><keyword>darkgrey</keyword></keyword2>
+        <keyword2><keyword>darkkhaki</keyword></keyword2>
+        <keyword2><keyword>darkmagenta</keyword></keyword2>
+        <keyword2><keyword>darkolivegreen</keyword></keyword2>
+        <keyword2><keyword>darkorange</keyword></keyword2>
+        <keyword2><keyword>darkorchid</keyword></keyword2>
+        <keyword2><keyword>darkred</keyword></keyword2>
+        <keyword2><keyword>darksalmon</keyword></keyword2>
+        <keyword2><keyword>darkseagreen</keyword></keyword2>
+        <keyword2><keyword>darkslateblue</keyword></keyword2>
+        <keyword2><keyword>darkslategray</keyword></keyword2>
+        <keyword2><keyword>darkslategrey</keyword></keyword2>
+        <keyword2><keyword>darkturquoise</keyword></keyword2>
+        <keyword2><keyword>darkviolet</keyword></keyword2>
+        <keyword2><keyword>darkpink</keyword></keyword2>
+        <keyword2><keyword>deepskyblue</keyword></keyword2>
+        <keyword2><keyword>dimgray</keyword></keyword2>
+        <keyword2><keyword>dimgrey</keyword></keyword2>
+        <keyword2><keyword>dodgerblue</keyword></keyword2>
+        <keyword2><keyword>firebrick</keyword></keyword2>
+        <keyword2><keyword>floralwhite</keyword></keyword2>
+        <keyword2><keyword>forestgreen</keyword></keyword2>
+        <keyword2><keyword>fushia</keyword></keyword2>
+        <keyword2><keyword>gainsboro</keyword></keyword2>
+        <keyword2><keyword>ghostwhite</keyword></keyword2>
+        <keyword2><keyword>gold</keyword></keyword2>
+        <keyword2><keyword>goldenrod</keyword></keyword2>
+        <keyword2><keyword>gray</keyword></keyword2>
+        <keyword2><keyword>green</keyword></keyword2>
+        <keyword2><keyword>greenyellow</keyword></keyword2>
+        <keyword2><keyword>grey</keyword></keyword2>
+        <keyword2><keyword>honeydew</keyword></keyword2>
+        <keyword2><keyword>hotpink</keyword></keyword2>
+        <keyword2><keyword>indianred</keyword></keyword2>
+        <keyword2><keyword>indigo</keyword></keyword2>
+        <keyword2><keyword>ivory</keyword></keyword2>
+        <keyword2><keyword>khaki</keyword></keyword2>
+        <keyword2><keyword>lavender</keyword></keyword2>
+        <keyword2><keyword>lavenderblush</keyword></keyword2>
+        <keyword2><keyword>lawngreen</keyword></keyword2>
+        <keyword2><keyword>lemonchiffon</keyword></keyword2>
+        <keyword2><keyword>lightblue</keyword></keyword2>
+        <keyword2><keyword>lightcoral</keyword></keyword2>
+        <keyword2><keyword>lightcyan</keyword></keyword2>
+        <keyword2><keyword>lightgoldenrodyellow</keyword></keyword2>
+        <keyword2><keyword>lightgray</keyword></keyword2>
+        <keyword2><keyword>lightgreen</keyword></keyword2>
+        <keyword2><keyword>lightgrey</keyword></keyword2>
+        <keyword2><keyword>lightpink</keyword></keyword2>
+        <keyword2><keyword>lightsalmon</keyword></keyword2>
+        <keyword2><keyword>lightseagreen</keyword></keyword2>
+        <keyword2><keyword>lightskyblue</keyword></keyword2>
+        <keyword2><keyword>lightslategray</keyword></keyword2>
+        <keyword2><keyword>lightslategrey</keyword></keyword2>
+        <keyword2><keyword>lightsteelblue</keyword></keyword2>
+        <keyword2><keyword>lightyellow</keyword></keyword2>
+        <keyword2><keyword>lime</keyword></keyword2>
+        <keyword2><keyword>limegreen</keyword></keyword2>
+        <keyword2><keyword>linen</keyword></keyword2>
+        <keyword2><keyword>magenta</keyword></keyword2>
+        <keyword2><keyword>maroon</keyword></keyword2>
+        <keyword2><keyword>mediumaquamarine</keyword></keyword2>
+        <keyword2><keyword>mediumblue</keyword></keyword2>
+        <keyword2><keyword>mediumorchid</keyword></keyword2>
+        <keyword2><keyword>mediumpurple</keyword></keyword2>
+        <keyword2><keyword>mediumseagreen</keyword></keyword2>
+        <keyword2><keyword>mediumslateblue</keyword></keyword2>
+        <keyword2><keyword>mediumspringgreen</keyword></keyword2>
+        <keyword2><keyword>mediumturquoise</keyword></keyword2>
+        <keyword2><keyword>mediumvioletred</keyword></keyword2>
+        <keyword2><keyword>midnightblue</keyword></keyword2>
+        <keyword2><keyword>mintcream</keyword></keyword2>
+        <keyword2><keyword>mistyrose</keyword></keyword2>
+        <keyword2><keyword>mocassin</keyword></keyword2>
+        <keyword2><keyword>navawhite</keyword></keyword2>
+        <keyword2><keyword>navy</keyword></keyword2>
+        <keyword2><keyword>oldlace</keyword></keyword2>
+        <keyword2><keyword>olive</keyword></keyword2>
+        <keyword2><keyword>olidrab</keyword></keyword2>
+        <keyword2><keyword>orange</keyword></keyword2>
+        <keyword2><keyword>orangered</keyword></keyword2>
+        <keyword2><keyword>orchid</keyword></keyword2>
+        <keyword2><keyword>palegoldenrod</keyword></keyword2>
+        <keyword2><keyword>palegreen</keyword></keyword2>
+        <keyword2><keyword>paleturquoise</keyword></keyword2>
+        <keyword2><keyword>paletvioletred</keyword></keyword2>
+        <keyword2><keyword>papayawhip</keyword></keyword2>
+        <keyword2><keyword>peachpuff</keyword></keyword2>
+        <keyword2><keyword>peru</keyword></keyword2>
+        <keyword2><keyword>pink</keyword></keyword2>
+        <keyword2><keyword>plum</keyword></keyword2>
+        <keyword2><keyword>powderblue</keyword></keyword2>
+        <keyword2><keyword>purple</keyword></keyword2>
+        <keyword2><keyword>red</keyword></keyword2>
+        <keyword2><keyword>rosybrown</keyword></keyword2>
+        <keyword2><keyword>royalblue</keyword></keyword2>
+        <keyword2><keyword>saddlebrown</keyword></keyword2>
+        <keyword2><keyword>salmon</keyword></keyword2>
+        <keyword2><keyword>sandybrown</keyword></keyword2>
+        <keyword2><keyword>seagreen</keyword></keyword2>
+        <keyword2><keyword>seashell</keyword></keyword2>
+        <keyword2><keyword>sienna</keyword></keyword2>
+        <keyword2><keyword>silver</keyword></keyword2>
+        <keyword2><keyword>skyblue</keyword></keyword2>
+        <keyword2><keyword>slateblue</keyword></keyword2>
+        <keyword2><keyword>slategray</keyword></keyword2>
+        <keyword2><keyword>slategrey</keyword></keyword2>
+        <keyword2><keyword>snow</keyword></keyword2>
+        <keyword2><keyword>springgreen</keyword></keyword2>
+        <keyword2><keyword>steelblue</keyword></keyword2>
+        <keyword2><keyword>tan</keyword></keyword2>
+        <keyword2><keyword>teal</keyword></keyword2>
+        <keyword2><keyword>thistle</keyword></keyword2>
+        <keyword2><keyword>tomato</keyword></keyword2>
+        <keyword2><keyword>turquoise</keyword></keyword2>
+        <keyword2><keyword>violet</keyword></keyword2>
+        <keyword2><keyword>wheat</keyword></keyword2>
+        <keyword2><keyword>white</keyword></keyword2>
+        <keyword2><keyword>whitesmoke</keyword></keyword2>
+        <keyword2><keyword>yellow</keyword></keyword2>
+        <keyword2><keyword>yellowgreen</keyword></keyword2>
+
+    </state>
+
+    <state name="comment" default="comment2"/>
+</syntax>

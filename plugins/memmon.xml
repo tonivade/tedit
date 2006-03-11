@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+
+<plugin name="memmon" 
+		type="status" 
+		className="tk.tomby.tedit.plugins.memmon.MemoryMonitor"/>

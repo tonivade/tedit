@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<toolbar name="toolbar">
+    <toolbarbutton iconKey="toolbar.new.icon"
+                   toolTipKey="toolbar.new.tooltip">
+    	<action name="new" class="tk.tomby.tedit.actions.NewAction"/>
+    </toolbarbutton>
+    <toolbarbutton iconKey="toolbar.open.icon"
+                   toolTipKey="toolbar.open.tooltip">
+    	<action name="open" class="tk.tomby.tedit.actions.OpenAction"/>
+    </toolbarbutton>
+    <toolbarbutton iconKey="toolbar.save.icon"
+                   toolTipKey="toolbar.save.tooltip">
+    	<action name="save" class="tk.tomby.tedit.actions.SaveAction"/>
+    </toolbarbutton>
+    <toolbarseparator/>
+    <toolbarbutton iconKey="toolbar.undo.icon"
+                   toolTipKey="toolbar.undo.tooltip">
+    	<action name="undo" class="tk.tomby.tedit.actions.UndoAction"/>
+    </toolbarbutton>
+    <toolbarbutton iconKey="toolbar.redo.icon"
+                   toolTipKey="toolbar.redo.tooltip">
+    	<action name="redo" class="tk.tomby.tedit.actions.RedoAction"/>
+    </toolbarbutton>
+    <toolbarseparator/>
+    <toolbarbutton iconKey="toolbar.cut.icon"
+                   toolTipKey="toolbar.cut.tooltip">
+    	<action name="cut" class="tk.tomby.tedit.actions.CutAction"/>
+    </toolbarbutton>
+    <toolbarbutton iconKey="toolbar.copy.icon"
+                   toolTipKey="toolbar.copy.tooltip">
+    	<action name="copy" class="tk.tomby.tedit.actions.CopyAction"/>
+    </toolbarbutton>
+    <toolbarbutton iconKey="toolbar.paste.icon"
+                   toolTipKey="toolbar.paste.tooltip">
+    	<action name="paste" class="tk.tomby.tedit.actions.PasteAction"/>
+    </toolbarbutton>
+</toolbar>

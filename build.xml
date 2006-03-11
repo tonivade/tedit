@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="tEdit" default="all" basedir=".">
+    <property name="sources" value="src" />
+    <property name="tests" value="test" />
+    <property name="classes" value="classes" />
+    <property name="doc" value="doc" />
+    <property name="build" value="build" />
+    <property name="lib" value="lib" />
+    <property name="log" value="log" />
+    <property name="results" value="results" />
+    <property name="resources" value="resources" />
+    <property name="config" value="config" />
+
+    <property name="version" value="0.0.2"/>
+
+    <property name="packages" value="tk.tomby.tedit.*" />
+
+    <property name="project" value="tEdit, a Simple Text Editor" />
+    <property name="copyright" value="Antonio G. Muñoz Conejo Copyright 2004" />
+    
+    <path id="classpath">
+        <pathelement location="${classes}" />
+        <pathelement location="${config}" />
+        <pathelement location="${resources}" />
+        <fileset dir="${lib}" >
+            <include name="*.jar" />
+        </fileset>
+    </path>
+
+    <target name="init">
+        <tstamp/>
+    </target>
+
+    <target name="build" depends="init">
+        <mkdir dir="${classes}" />
+        <javac srcdir="${sources}" destdir="${classes}" debug="on">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <target name="buildtest" depends="build">
+        <mkdir dir="${classes}" />
+        <javac srcdir="${tests}" destdir="${classes}" debug="on">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+
+    <target name="runtest" depends="buildtest">
+        <mkdir dir="${results}" />
+        <mkdir dir="${log}" />
+        <junit printsummary="yes" fork="yes" haltonfailure="no">
+            <classpath refid="classpath"/>
+            <formatter type="plain"/>
+            <batchtest fork="yes" todir="${results}">
+                <fileset dir="${classes}">
+                    <include name="**/*Test.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+
+    <target name="builddoc" depends="init">
+        <delete dir="${doc}" />
+        <mkdir dir="${doc}" />
+        <javadoc packagenames="${packages}"
+                 sourcepath="${sources}"
+                 destdir="${doc}"
+                 author="true"
+                 version="true"
+                 locale="es_ES"
+                 windowtitle="${project} API"
+                 doctitle="${project}"
+                 bottom="${copyright}"
+        />
+    </target>
+
+    <target name="buildjar" depends="build">
+        <mkdir dir="${build}"/>
+        <jar jarfile="${build}/${ant.project.name}-${DSTAMP}.jar"
+             basedir="${classes}"
+             compress="true"
+        />
+    </target>
+
+    <target name="builddist" depends="build">
+        <mkdir dir="${build}"/>
+        <jar jarfile="${build}/${ant.project.name}-${version}.jar"
+             compress="true">
+             <fileset dir="${classes}">
+                <exclude name="**/*Test.class"/>
+             </fileset>
+        </jar>
+        <jar jarfile="${build}/${ant.project.name}-resources-${version}.jar"
+             compress="true">
+             <fileset dir="${resources}">
+                <include name="**/*"/>
+             </fileset>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${classes}" />
+        <delete dir="${doc}" />
+        <delete dir="${results}" />
+        <delete dir="${log}" />
+    </target>
+
+    <target name="all" depends="init, build, builddoc, buildjar" />
+
+</project>

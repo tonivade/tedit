@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<multitabPage label="general.label">
+	<page label="general.appearance">
+		<boolean label="general.appearance.antialiasing" 
+				 key="general.appearance.antialiasing" 
+				 default="false"/>
+		<multi label="general.appearance.tabPosition" 
+		       values="general.appearance.tabPosition.top general.appearance.tabPosition.bottom"
+		       key="general.appearance.tabPosition"
+		       default="1"/>
+		<string label="general.stringTest" key="general.stringTest" />
+	</page>
+	<page label="general.editor">
+		<boolean label="general.editor.lineNumbers" key="general.editor.lineNumbers" default="false"/>
+		<boolean label="general.editor.replaceTabs" key="general.editor.replaceTabs" default="false"/>
+		<int label="general.editor.tabSize" key="general.editor.tabSize" default="8"/>
+		<font label="general.editor.font" key="general.editor.font" default="Monospaced"/>
+		<int label="general.editor.fontSize" key="general.editor.fontSize" default="12"/>
+		<color label="general.editor.background" key="general.editor.background" default="#FFFFFF"/>
+		<color label="general.editor.foreground" key="general.editor.foreground" default="#000000"/>
+		<color label="general.editor.selection" key="general.editor.selection" default="#CCCCCC"/>
+	</page>
+</multitabPage>

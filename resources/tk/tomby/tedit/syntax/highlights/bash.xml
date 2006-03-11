@@ -1,0 +1,267 @@
+<?xml version="1.0" ?>
+
+<syntax name="bash" contentType="text/bash">
+
+	<state name="main">
+        <comment1>
+        	<singleLine>
+        		<![CDATA[\#[^\n]*]]>
+        	</singleLine>
+        </comment1>
+
+        <literal1>
+        	<multiLine state="literal1">
+	        	<start><![CDATA["]]></start>
+    	    	<end><![CDATA["]]></end>
+        	</multiLine>
+		</literal1>
+		<literal2>
+        	<multiLine state='literal2'>
+	        	<start><![CDATA[']]></start>
+    	    	<end><![CDATA[']]></end>
+        	</multiLine>
+		</literal2>
+		<literal3>
+        	<multiLine state='literal3'>
+	        	<start><![CDATA[`]]></start>
+    	    	<end><![CDATA[`]]></end>
+        	</multiLine>
+		</literal3>
+		<literal4>
+        	<multiLine state='literal4'>
+	        	<start><![CDATA[\$\(]]></start>
+    	    	<end><![CDATA[\)]]></end>
+        	</multiLine>
+		</literal4>
+
+    	<identifier1><![CDATA[[a-zA-Z]\w*]]></identifier1>
+    	<identifier2><![CDATA[\$#]]></identifier2>
+    	<identifier2><![CDATA[\$\?]]></identifier2>
+    	<identifier2><![CDATA[\$\*]]></identifier2>
+    	<identifier2><![CDATA[\$#]]></identifier2>
+    	<identifier2><![CDATA[\$@]]></identifier2>
+    	<identifier2><![CDATA[\$#]]></identifier2>
+    	<identifier2><![CDATA[\$\$]]></identifier2>
+    	<identifier2><![CDATA[\$<]]></identifier2>
+    	<identifier2><![CDATA[\$#]]></identifier2>
+        <identifier3><![CDATA[\$(?:[0-9]|[a-zA-Z_][0-9a-zA-Z_]*)]]></identifier3>
+        <identifier3><![CDATA[\$\{(?:[0-9]|[a-zA-Z_][0-9a-zA-Z_/-]*)\}]]></identifier3>
+
+        <keyword1><keyword>if</keyword></keyword1>
+        <keyword1><keyword>then</keyword></keyword1>
+        <keyword1><keyword>else</keyword></keyword1>
+        <keyword1><keyword>elif</keyword></keyword1>
+        <keyword1><keyword>fi</keyword></keyword1>
+        <keyword1><keyword>case</keyword></keyword1>
+        <keyword1><keyword>esac</keyword></keyword1>
+        <keyword1><keyword>while</keyword></keyword1>
+        <keyword1><keyword>until</keyword></keyword1>
+        <keyword1><keyword>for</keyword></keyword1>
+        <keyword1><keyword>do</keyword></keyword1>
+        <keyword1><keyword>in</keyword></keyword1>
+        <keyword1><keyword>done</keyword></keyword1>
+        <keyword1><keyword>break</keyword></keyword1>
+        <keyword1><keyword>continue</keyword></keyword1>
+        <keyword1><keyword>false</keyword></keyword1>
+        <keyword1><keyword>true</keyword></keyword1>
+        <keyword1><keyword>function</keyword></keyword1>
+        <keyword1><keyword>let</keyword></keyword1>
+        <keyword1><keyword>local</keyword></keyword1>
+        <keyword1><keyword>return</keyword></keyword1>
+        <keyword1><keyword>select</keyword></keyword1>
+
+        <keyword2><keyword>alias</keyword></keyword2>
+        <keyword2><keyword>bg</keyword></keyword2>
+        <keyword2><keyword>bind</keyword></keyword2>
+        <keyword2><keyword>builtin</keyword></keyword2>
+        <keyword2><keyword>cd</keyword></keyword2>
+        <keyword2><keyword>command</keyword></keyword2>
+        <keyword2><keyword>compgen</keyword></keyword2>
+        <keyword2><keyword>complete</keyword></keyword2>
+        <keyword2><keyword>declare</keyword></keyword2>
+        <keyword2><keyword>dirs</keyword></keyword2>
+        <keyword2><keyword>disown</keyword></keyword2>
+        <keyword2><keyword>echo</keyword></keyword2>
+        <keyword2><keyword>enable</keyword></keyword2>
+        <keyword2><keyword>eval</keyword></keyword2>
+        <keyword2><keyword>exec</keyword></keyword2>
+        <keyword2><keyword>exit</keyword></keyword2>
+        <keyword2><keyword>export</keyword></keyword2>
+        <keyword2><keyword>fc</keyword></keyword2>
+        <keyword2><keyword>fg</keyword></keyword2>
+        <keyword2><keyword>getopts</keyword></keyword2>
+        <keyword2><keyword>hash</keyword></keyword2>
+        <keyword2><keyword>help</keyword></keyword2>
+        <keyword2><keyword>history</keyword></keyword2>
+        <keyword2><keyword>jobs</keyword></keyword2>
+        <keyword2><keyword>declare</keyword></keyword2>
+        <keyword2><keyword>kill</keyword></keyword2>
+        <keyword2><keyword>logout</keyword></keyword2>
+        <keyword2><keyword>popd</keyword></keyword2>
+        <keyword2><keyword>printf</keyword></keyword2>
+        <keyword2><keyword>pushd</keyword></keyword2>
+        <keyword2><keyword>pwd</keyword></keyword2>
+        <keyword2><keyword>read</keyword></keyword2>
+        <keyword2><keyword>set</keyword></keyword2>
+        <keyword2><keyword>shift</keyword></keyword2>
+        <keyword2><keyword>shopt</keyword></keyword2>
+        <keyword2><keyword>source</keyword></keyword2>
+        <keyword2><keyword>suspend</keyword></keyword2>
+        <keyword2><keyword>test</keyword></keyword2>
+        <keyword2><keyword>time</keyword></keyword2>
+        <keyword2><keyword>times</keyword></keyword2>
+        <keyword2><keyword>trap</keyword></keyword2>
+        <keyword2><keyword>type</keyword></keyword2>
+        <keyword2><keyword>typeset</keyword></keyword2>
+        <keyword2><keyword>shift</keyword></keyword2>
+        <keyword2><keyword>ulimit</keyword></keyword2>
+        <keyword2><keyword>umask</keyword></keyword2>
+        <keyword2><keyword>unalias</keyword></keyword2>
+        <keyword2><keyword>unset</keyword></keyword2>
+        <keyword2><keyword>wait</keyword></keyword2>
+        
+        <keyword3><keyword>dd</keyword></keyword3>
+        <keyword3><keyword>cp</keyword></keyword3>
+        <keyword3><keyword>df</keyword></keyword3>
+        <keyword3><keyword>du</keyword></keyword3>
+        <keyword3><keyword>ln</keyword></keyword3>
+        <keyword3><keyword>ls</keyword></keyword3>
+        <keyword3><keyword>mv</keyword></keyword3>
+        <keyword3><keyword>rm</keyword></keyword3>
+        <keyword3><keyword>cat</keyword></keyword3>
+        <keyword3><keyword>cut</keyword></keyword3>
+        <keyword3><keyword>date</keyword></keyword3>
+        <keyword3><keyword>head</keyword></keyword3>
+        <keyword3><keyword>stty</keyword></keyword3>
+        <keyword3><keyword>sync</keyword></keyword3>
+        <keyword3><keyword>chgrp</keyword></keyword3>
+        <keyword3><keyword>chmod</keyword></keyword3>
+        <keyword3><keyword>chown</keyword></keyword3>
+        <keyword3><keyword>mkdir</keyword></keyword3>
+        <keyword3><keyword>mknod</keyword></keyword3>
+        <keyword3><keyword>rmdir</keyword></keyword3>
+        <keyword3><keyword>shred</keyword></keyword3>
+        <keyword3><keyword>sleep</keyword></keyword3>
+        <keyword3><keyword>touch</keyword></keyword3>
+        <keyword3><keyword>uname</keyword></keyword3>
+        <keyword3><keyword>mkfifo</keyword></keyword3>
+        <keyword3><keyword>dircolors</keyword></keyword3>
+
+		<keyword3><keyword>dir</keyword></keyword3>
+		<keyword3><keyword>env</keyword></keyword3>
+		<keyword3><keyword>tee</keyword></keyword3>
+        <keyword3><keyword>dirname</keyword></keyword3>
+        <keyword3><keyword>basename</keyword></keyword3>
+        <keyword3><keyword>chroot</keyword></keyword3>
+        <keyword3><keyword>expr</keyword></keyword3>
+        <keyword3><keyword>tail</keyword></keyword3>
+        <keyword3><keyword>sort</keyword></keyword3>
+        <keyword3><keyword>uniq</keyword></keyword3>
+        <keyword3><keyword>md5sum</keyword></keyword3>
+        <keyword3><keyword>printenv</keyword></keyword3>
+        <keyword3><keyword>install</keyword></keyword3>
+        <keyword3><keyword>find</keyword></keyword3>
+        <keyword3><keyword>xargs</keyword></keyword3>
+        
+        <digit>
+        	<![CDATA[\b[0-9]+(?:\.[0-9]+)?\b]]>
+        </digit>
+        
+        <separator><![CDATA[\(]]></separator>
+        <separator><![CDATA[\)]]></separator>
+        <separator><![CDATA[\{]]></separator>
+        <separator><![CDATA[\}]]></separator>
+        <separator><![CDATA[\[]]></separator>
+        <separator><![CDATA[\]]]></separator>
+        <separator><![CDATA[;]]></separator>
+        <separator><![CDATA[,]]></separator>
+        <separator><![CDATA[\.]]></separator>
+
+        <operator><![CDATA[=]]></operator>
+        <operator><![CDATA[>]]></operator>
+        <operator><![CDATA[<]]></operator>
+        <operator><![CDATA[!]]></operator>
+        <operator><![CDATA[~]]></operator>
+        <operator><![CDATA[\?]]></operator>
+        <operator><![CDATA[\:]]></operator>
+        <operator><![CDATA[==]]></operator>
+        <operator><![CDATA[>=]]></operator>
+        <operator><![CDATA[<=]]></operator>
+        <operator><![CDATA[\!=]]></operator>
+        <operator><![CDATA[\|\|]]></operator>
+        <operator><![CDATA[&&]]></operator>
+        <operator><![CDATA[\+\+]]></operator>
+        <operator><![CDATA[--]]></operator>
+        <operator><![CDATA[\+]]></operator>
+        <operator><![CDATA[-]]></operator>
+        <operator><![CDATA[\*]]></operator>
+        <operator><![CDATA[/]]></operator>
+        <operator><![CDATA[&]]></operator>
+        <operator><![CDATA[\|]]></operator>
+        <operator><![CDATA[\^]]></operator>
+        <operator><![CDATA[%]]></operator>
+        <operator><![CDATA[>>]]></operator>
+        <operator><![CDATA[<<]]></operator>
+        <operator><![CDATA[>>>]]></operator>
+        <operator><![CDATA[\+=]]></operator>
+        <operator><![CDATA[-=]]></operator>
+        <operator><![CDATA[\*=]]></operator>
+        <operator><![CDATA[/=]]></operator>
+        <operator><![CDATA[&=]]></operator>
+        <operator><![CDATA[\|=]]></operator>
+        <operator><![CDATA[\^=]]></operator>
+        <operator><![CDATA[%=]]></operator>
+        <operator><![CDATA[>>=]]></operator>
+        <operator><![CDATA[<<=]]></operator>
+        <operator><![CDATA[>>>=]]></operator>
+    </state>
+    
+    <state name="literal1" default="literal1">
+    	<literal3>
+        	<multiLine state='literal3'>
+	        	<start><![CDATA[`]]></start>
+    	    	<end><![CDATA[`]]></end>
+        	</multiLine>
+		</literal3>
+	</state>
+    
+    <state name="literal2" default="literal2">
+	    <literal3>
+        	<multiLine state='literal3'>
+	        	<start><![CDATA[`]]></start>
+    	    	<end><![CDATA[`]]></end>
+        	</multiLine>
+		</literal3>
+	</state>
+    
+    <state name="literal3" default="literal3">
+    	<literal1>
+        	<multiLine state="literal1">
+	        	<start><![CDATA["]]></start>
+    	    	<end><![CDATA["]]></end>
+        	</multiLine>
+		</literal1>
+		<literal2>
+        	<multiLine state='literal2'>
+	        	<start><![CDATA[']]></start>
+    	    	<end><![CDATA[']]></end>
+        	</multiLine>
+		</literal2>
+	</state>
+	
+	<state name="literal4" default="literal4">
+    	<literal1>
+        	<multiLine state="literal1">
+	        	<start><![CDATA["]]></start>
+    	    	<end><![CDATA["]]></end>
+        	</multiLine>
+		</literal1>
+		<literal2>
+        	<multiLine state='literal2'>
+	        	<start><![CDATA[']]></start>
+    	    	<end><![CDATA[']]></end>
+        	</multiLine>
+		</literal2>
+	</state>
+
+</syntax>

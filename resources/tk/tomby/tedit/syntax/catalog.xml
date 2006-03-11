@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+
+<catalog>
+    <syntax name="java" file="java.xml">
+        <extension>java</extension>
+        <contentType>text/java</contentType>
+    </syntax>
+    <syntax name="javascript" file="javascript.xml">
+        <extension>js</extension>
+        <contentType>text/javascript</contentType>
+    </syntax>
+    <syntax name="css" file="css.xml">
+        <extension>css</extension>
+        <contentType>text/css</contentType>
+    </syntax>
+    <syntax name="xml" file="xml.xml">
+        <extension>xml</extension>
+        <extension>dtd</extension>
+        <extension>xsl</extension>
+        <extension>xslt</extension>
+        <contentType>text/xml</contentType>
+    </syntax>
+    <syntax name="html" file="html.xml">
+        <extension>htm</extension>
+        <extension>html</extension>
+        <contentType>text/html</contentType>
+    </syntax>
+    <syntax name="c" file="c.xml">
+        <extension>c</extension>
+        <extension>cc</extension>
+        <extension>cpp</extension>
+        <extension>h</extension>
+        <contentType>text/c</contentType>
+    </syntax>
+    <syntax name="ruby" file="ruby.xml">
+        <contentType>text/ruby</contentType>
+        <extension>rb</extension>
+        <extension>ruby</extension>
+        <blob>#!/usr/bin/ruby</blob>
+    </syntax>
+    <syntax name="rhtml" file="rhtml.xml">
+        <contentType>text/html</contentType>
+        <extension>rhtml</extension>
+    </syntax>
+    <syntax name="bash" file="bash.xml">
+        <contentType>text/bash</contentType>
+        <extension>sh</extension>
+        <extension>bash</extension>
+        <extension>build</extension>
+        <blob>#!/bin/sh</blob>
+        <blob>#!/bin/bash</blob>
+    </syntax>
+</catalog>
