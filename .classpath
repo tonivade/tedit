@@ -9,7 +9,7 @@
 	<classpathentry kind="lib" path="lib/commons-digester-1.7.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/docking-0.3.2.jar"/>
-	<classpathentry kind="lib" path="lib/jruby-0.8.2.jar"/>
+	<classpathentry kind="lib" path="lib/jruby-0.8.3.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.0-jsr-05.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry kind="lib" path="lib/bsf-2.3.0.jar"/>
