@@ -47,29 +47,39 @@ public class PluginLoader {
      * DOCUMENT ME!
      */
     public static void load() {
+    	String home = System.getProperty("tedit.home");
+    	if (home == null) {
+    		home = System.getProperty("user.dir");
+    	}
+    	
         String directory =
             PreferenceManager.getString("main.plugins.directory",
-                                        System.getProperty("tedit.home") + "/plugins");
+                                         home + "/plugins");
 
         File fileDir = new File(directory);
+        
+        if (fileDir.exists()) {
 
-        File[] files =
-            fileDir.listFiles(new FileFilter() {
-                    public boolean accept(File pathname) {
-                        return pathname.getName().endsWith(".xml");
-                    }
-                });
-
-        for (int i = 0; i < files.length; i++) {
-            File file = files[i];
-
-            if (log.isDebugEnabled()) {
-                log.debug("loading plugin: " + file.getName());
-            }
-
-            IPlugin plugin = PluginDriver.createPlugin(file);
-
-            plugin.init();
+	        File[] files =
+	            fileDir.listFiles(new FileFilter() {
+	                    public boolean accept(File pathname) {
+	                        return pathname.getName().endsWith(".xml");
+	                    }
+	                });
+	
+	        for (int i = 0; i < files.length; i++) {
+	            File file = files[i];
+	
+	            if (log.isDebugEnabled()) {
+	                log.debug("loading plugin: " + file.getName());
+	            }
+	
+	            IPlugin plugin = PluginDriver.createPlugin(file);
+	
+	            plugin.init();
+	        }
+        } else {
+        	log.warn("plugins directory not exist: " + directory);
         }
     }
 }
