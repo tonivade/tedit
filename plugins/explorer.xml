@@ -2,4 +2,4 @@
 
 <plugin name="explorer" 
 		type="workspace" 
-		className="tk.tomby.tedit.plugins.explorer.Explorer"/>
+		class="tk.tomby.tedit.plugins.explorer.Explorer"/>

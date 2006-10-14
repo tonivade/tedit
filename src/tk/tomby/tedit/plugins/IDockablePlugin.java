@@ -20,7 +20,7 @@
 
 package tk.tomby.tedit.plugins;
 
-import net.eleritec.docking.Dockable;
+import java.awt.Component;
 
 
 /**
@@ -44,11 +44,19 @@ public interface IDockablePlugin extends IPlugin {
      * @return DOCUMENT ME!
      */
     public abstract int getDockLocation();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract String getDockTitle();
+    
 
     /**
      * DOCUMENT ME!
      *
      * @return DOCUMENT ME!
      */
-    public abstract Dockable getDockable();
+    public abstract Component getDockable();
 }

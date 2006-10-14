@@ -27,9 +27,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
-import net.eleritec.docking.Dockable;
-import net.eleritec.docking.DockableAdapter;
-
 import tk.tomby.tedit.core.IWorkspace;
 
 
@@ -41,9 +38,6 @@ import tk.tomby.tedit.core.IWorkspace;
  */
 public abstract class AbstractDockablePlugin extends JPanel implements IDockablePlugin {
     //~ Instance fields ****************************************************************************
-
-    /** DOCUMENT ME! */
-    protected Dockable dockable = null;
 
     /** DOCUMENT ME! */
     protected JLabel title = null;
@@ -69,21 +63,6 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
                                                                                            .getColor("Button.borderColor")),
                                                            BorderFactory.createEmptyBorder(5, 5, 5,
                                                                                            5)));
-
-        dockable =
-            new DockableAdapter() {
-                    public Component getInitiator() {
-                        return title;
-                    }
-
-                    public Component getDockable() {
-                        return AbstractDockablePlugin.this;
-                    }
-
-                    public String getDockableDesc() {
-                        return title.getText();
-                    }
-                };
     }
 
     //~ Methods ************************************************************************************
@@ -111,7 +90,17 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
      *
      * @return DOCUMENT ME!
      */
-    public Dockable getDockable() {
-        return dockable;
+    public Component getDockable() {
+        return this;
     }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public String getDockTitle() {
+    	return title.getText();
+    }
+    
 }

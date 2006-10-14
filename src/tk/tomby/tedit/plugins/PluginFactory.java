@@ -72,8 +72,8 @@ public class PluginFactory implements ObjectCreationFactory {
     public Object createObject(Attributes attrs)
                         throws Exception {
         String name      = attrs.getValue("name");
-        String className = attrs.getValue("className");
+        String clazz = attrs.getValue("class");
 
-        return PluginManager.createPlugin(name, className);
+        return PluginManager.createPlugin(name, clazz);
     }
 }

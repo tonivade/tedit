@@ -49,8 +49,9 @@ import javax.swing.event.ChangeListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.eleritec.docking.DockingManager;
-import net.eleritec.docking.DockingPort;
+import org.flexdock.docking.DockingConstants;
+import org.flexdock.docking.DockingManager;
+import org.flexdock.docking.defaults.DefaultDockingPort;
 
 import tk.tomby.tedit.core.preferences.IPreferencePage;
 import tk.tomby.tedit.core.preferences.PreferencePageDriver;
@@ -62,7 +63,6 @@ import tk.tomby.tedit.messages.WorkspaceMessage;
 
 import tk.tomby.tedit.plugins.IDockablePlugin;
 import tk.tomby.tedit.plugins.IPlugin;
-import tk.tomby.tedit.plugins.PluginDockingPort;
 
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.PreferenceManager;
@@ -97,13 +97,13 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
     private JTabbedPane bufferPane = null;
 
     /** DOCUMENT ME! */
-    private PluginDockingPort bottomPort = null;
+    private DefaultDockingPort bottomPort = null;
 
     /** DOCUMENT ME! */
-    private PluginDockingPort leftPort = null;
+    private DefaultDockingPort leftPort = null;
 
     /** DOCUMENT ME! */
-    private PluginDockingPort rightPort = null;
+    private DefaultDockingPort rightPort = null;
 
     //~ Constructors *******************************************************************************
 
@@ -123,14 +123,14 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
         bufferPane.setPreferredSize(new Dimension(800, 600));
         bufferPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        bottomPort = new PluginDockingPort(IWorkspace.PLUGIN_BOTTOM);
+        bottomPort = new DefaultDockingPort();
         bottomPort.setPreferredSize(new Dimension(0, 80));
 
-        rightPort = new PluginDockingPort(IWorkspace.PLUGIN_RIGHT);
+        rightPort = new DefaultDockingPort();
         rightPort.setMinimumSize(new Dimension(0, 0));
         rightPort.setPreferredSize(new Dimension(80, 0));
 
-        leftPort = new PluginDockingPort(IWorkspace.PLUGIN_LEFT);
+        leftPort = new DefaultDockingPort();
         leftPort.setMinimumSize(new Dimension(0, 0));
         leftPort.setPreferredSize(new Dimension(80, 0));
 
@@ -293,21 +293,21 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
     public void addPlugin(IPlugin plugin) {
         IDockablePlugin dock = (IDockablePlugin) plugin;
 
-        DockingManager.registerDockable(dock.getDockable());
+        DockingManager.registerDockable(dock.getDockable(), dock.getDockTitle());
 
         switch (dock.getDockLocation()) {
             case PLUGIN_BOTTOM:
-                bottomPort.dock(dock, DockingPort.CENTER_REGION);
+                bottomPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
 
                 break;
 
             case PLUGIN_LEFT:
-                leftPort.dock(dock, DockingPort.CENTER_REGION);
+                leftPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
 
                 break;
 
             case PLUGIN_RIGHT:
-                rightPort.dock(dock, DockingPort.CENTER_REGION);
+                rightPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
 
                 break;
 
