@@ -1,4 +1,4 @@
-  tEdit was written by Antonio G. Muñoz Conejo, amunoz AT tomby.homelinux.org.
+  tEdit was written by Antonio G. Muñoz Conejo, tomby AT tomby.homeip.org.
 
   tEdit is free software; you can redistribute it and/or modify it
 under the of the GNU General Public License as published by the
@@ -18,12 +18,13 @@ Free Software Foundation. either version 2 of the License, or
   	- Apache log4j. http://logging.apache.org/log4j/
   	- Jakarta BSF. http://jakarta.apache.org/bsf/
   	
-  See COPYING.Apache file for details.
+  See COPYING.Apache file for details
   
   tEdit includes software under BSD license: 
   	
   	- ASM. http://asm.objectweb.org/
   	- JGoodies looks software. http://looks.dev.java.net/
+  	- Lipstik LnF. http://regis.risp.pl/
   
   See COPYING.BSD file for details.
   
@@ -39,8 +40,7 @@ Free Software Foundation. either version 2 of the License, or
   
   tEdit includes sofware under MIT license: 
 
-  	- SmoothMetal lnf. http://smoothmetal.sourceforge.net/
-	- Docking Framework. http://www.eleritec.net/projects/docking.html
+	- FlexDock. http://flexdock.dev.java.net/
   
   See COPYING.MIT file for details.
   
@@ -48,3 +48,6 @@ Free Software Foundation. either version 2 of the License, or
   
   See COPYING.Groovy file for details.
   
+  tEdit includes jruby. http://jruby.codehaus.org/
+  
+  See COPYING.JRuby file for details.
