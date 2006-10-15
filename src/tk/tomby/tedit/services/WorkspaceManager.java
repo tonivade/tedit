@@ -39,7 +39,7 @@ import tk.tomby.tedit.core.Workspace;
 import tk.tomby.tedit.core.popupmenu.PopupMenu;
 import tk.tomby.tedit.core.popupmenu.PopupMenuDriver;
 import tk.tomby.tedit.core.preferences.IPreferences;
-import tk.tomby.tedit.core.preferences.Preferences;
+import tk.tomby.tedit.core.preferences.PreferencesPane;
 
 import tk.tomby.tedit.gui.Menu;
 
@@ -193,7 +193,7 @@ public class WorkspaceManager {
      */
     public static void load() {
         instance.main            = new MainFrame();
-        instance.preferences     = new Preferences();
+        instance.preferences     = new PreferencesPane();
         instance.workspace       = new Workspace();
         instance.statusBar       = new StatusBar();
         instance.popup           = new PopupMenuDriver().create();

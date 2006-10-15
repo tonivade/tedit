@@ -22,6 +22,7 @@ package tk.tomby.tedit.core.preferences;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -33,6 +34,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
@@ -45,6 +47,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import tk.tomby.tedit.services.ResourceManager;
+import tk.tomby.tedit.services.WorkspaceManager;
 
 
 /**
@@ -53,7 +56,7 @@ import tk.tomby.tedit.services.ResourceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class Preferences extends JPanel implements IPreferences {
+public class PreferencesPane extends JPanel implements IPreferences {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */
@@ -84,7 +87,7 @@ public class Preferences extends JPanel implements IPreferences {
     /**
      * Creates a new Preferences object.
      */
-    public Preferences() {
+    public PreferencesPane() {
         super();
 
         ResourceManager.loadCategory(CATEGORY_NAME, RESOURCE_ROOT);
@@ -243,5 +246,55 @@ public class Preferences extends JPanel implements IPreferences {
         Border etchedBorder = BorderFactory.createEtchedBorder();
 
         return BorderFactory.createCompoundBorder(emptyBorder, etchedBorder);
+    }
+    
+    /**
+     * DOCUMENT ME!
+     */
+    public static void showDialog() {
+    	final JDialog dialog =
+            new JDialog(WorkspaceManager.getMainFrame(),
+                        ResourceManager.getProperty("preferences.title"), true);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setResizable(true);
+
+        final IPreferences preferences = WorkspaceManager.getPreferences();
+
+        dialog.getContentPane().add((JComponent) preferences, BorderLayout.CENTER);
+
+        JPanel buttons = new JPanel();
+        JButton accept = new JButton(ResourceManager.getProperty("preferences.accept"));
+        accept.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    preferences.commit();
+                    dialog.setVisible(false);
+                    dialog.dispose();
+                }
+            });
+
+        JButton cancel = new JButton(ResourceManager.getProperty("preferences.cancel"));
+        cancel.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    preferences.restore();
+                    dialog.setVisible(false);
+                    dialog.dispose();
+                }
+            });
+        buttons.add(accept);
+        buttons.add(cancel);
+
+        dialog.getContentPane().add(buttons, BorderLayout.SOUTH);
+
+        Toolkit toolkit      = Toolkit.getDefaultToolkit();
+        Dimension screenSize = toolkit.getScreenSize();
+
+        dialog.setSize(new Dimension(640, 480));
+        dialog.setLocation((screenSize.width / 2) - 320, (screenSize.height / 2) - 240);
+        
+        SwingUtilities.invokeLater(new Runnable() {
+        	public void run() {
+        		dialog.setVisible(true);
+        	}
+        });
     }
 }

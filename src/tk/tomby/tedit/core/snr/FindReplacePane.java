@@ -30,6 +30,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import tk.tomby.tedit.core.IBuffer;
 
@@ -262,6 +263,11 @@ public class FindReplacePane extends JPanel {
             dialog.setLocation((screenSize.width / 2) - 220, (screenSize.height / 2) - 125);
         }
 
-        dialog.setVisible(true);
+        SwingUtilities.invokeLater(new Runnable() {
+        	public void run() {
+        		dialog.setVisible(true);
+        	}
+        });
+        
     }
 }
