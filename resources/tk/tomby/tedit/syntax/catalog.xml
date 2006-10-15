@@ -42,6 +42,10 @@
         <contentType>text/html</contentType>
         <extension>rhtml</extension>
     </syntax>
+    <syntax name="jsp" file="jsp.xml">
+        <contentType>text/html</contentType>
+        <extension>jsp</extension>
+    </syntax>
     <syntax name="bash" file="bash.xml">
         <contentType>text/bash</contentType>
         <extension>sh</extension>
