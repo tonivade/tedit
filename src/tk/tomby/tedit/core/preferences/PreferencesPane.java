@@ -25,7 +25,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -47,6 +46,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import tk.tomby.tedit.services.ResourceManager;
+import tk.tomby.tedit.services.ThreadManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -102,28 +102,22 @@ public class PreferencesPane extends JPanel implements IPreferences {
         JButton apply = new JButton(ResourceManager.getProperty("preferences.apply"));
         apply.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Thread worker =
-                                new Thread(new Runnable() {
-                                public void run() {
-                                    commit();
-                                }
-                            });
-
-                    worker.start();
+                	ThreadManager.execute(new Runnable() {
+                        public void run() {
+                            commit();
+                        }
+                    });
                 }
             });
 
         JButton restore = new JButton(ResourceManager.getProperty("preferences.restore"));
         restore.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Thread worker =
-                        new Thread(new Runnable() {
+                	ThreadManager.execute(new Runnable() {
                         public void run() {
                             restore();
                         }
                     });
-
-            worker.start();
                 }
             });
         buttons.add(Box.createHorizontalGlue());

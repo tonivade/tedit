@@ -162,9 +162,7 @@ public class MessageManager {
         if (group != null) {
             Dispacher dispacher = new Dispacher(group, message);
 
-            Thread worker = new Thread(dispacher);
-            
-            worker.start();
+            ThreadManager.execute(dispacher);
         }
     }
 

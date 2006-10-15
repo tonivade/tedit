@@ -45,14 +45,4 @@ public class FileComparator implements Comparator {
         return o1.toString().compareTo(o2.toString());
     }
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param o1 DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean equals(Object o1) {
-        return false;
-    }
 }

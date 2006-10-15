@@ -25,9 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +37,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -48,17 +45,16 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdesktop.swingworker.SwingWorker;
 
 import tk.tomby.tedit.core.BufferFactory;
 import tk.tomby.tedit.core.IBuffer;
 import tk.tomby.tedit.core.IWorkspace;
-
 import tk.tomby.tedit.messages.IMessageListener;
-
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
-
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
+import tk.tomby.tedit.services.ThreadManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -123,38 +119,8 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         topPanel = new TopPanel(rootDir.getAbsolutePath());
         topPanel.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
-                    final JComboBox combo = (JComboBox) evt.getSource();
-
-                    Thread worker =
-                                   new Thread(new Runnable() {
-                                public void run() {
-                                    final String dirName = (String) combo.getSelectedItem();
-                                    final File dir       = new File(dirName);
-
-                                    if (dir.exists()) {
-                                        final DefaultMutableTreeNode root =
-                                              new DefaultMutableTreeNode(dir);
-                                        directoryTreeModel =
-                                              new ShortedTreeModel(root, new FileComparator());
-
-                                        final List files = getFiles(dir);
-                                        final List dirs  = openDirectory(dir);
-
-                                        SwingUtilities.invokeLater(new Runnable() {
-                                                public void run() {
-                                                    directoryTreeModel.insertAllInto(dirs, root);
-                                                    fileListModel.removeAllElements();
-                                                    fileListModel.addAll(files);
-                                                    directoryTree.setModel(directoryTreeModel);
-
-                                                    directoryTree.expandRow(0);
-                                                }
-                                            });
-                                    }
-                                }
-                            });
-
-                    worker.start();
+                    JComboBox combo = (JComboBox) evt.getSource();
+                    ThreadManager.execute(new ReadDirectoryWorker(combo));
                 }
             });
 
@@ -172,13 +138,11 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         directoryTree.setShowsRootHandles(true);
         directoryTree.addTreeSelectionListener(new TreeSelectionListener() {
                 public void valueChanged(TreeSelectionEvent evt) {
-                    final TreePath path     = evt.getPath();
-                    final TreePath leadPath = evt.getNewLeadSelectionPath();
+                    TreePath path     = evt.getPath();
+                    TreePath leadPath = evt.getNewLeadSelectionPath();
 
                     if ((path != null) && (leadPath != null)) {
-                        Thread worker = new Thread(new RefreshThread(leadPath, false));
-
-                        worker.start();
+                        ThreadManager.execute(new RefreshWorker(leadPath, false));
                     }
                 }
             });
@@ -212,23 +176,20 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
                     if (evt.getClickCount() == 2) {
                         final int index = fileList.locationToIndex(evt.getPoint());
 
-                        Thread worker =
-                                  new Thread(new Runnable() {
-                                    public void run() {
-                                        File file = (File) fileListModel.getElementAt(index);
+                        ThreadManager.execute(new Runnable() {
+                            public void run() {
+                                File file = (File) fileListModel.getElementAt(index);
 
-                                        if (log.isDebugEnabled()) {
-                                            log.debug(file);
-                                        }
+                                if (log.isDebugEnabled()) {
+                                    log.debug(file);
+                                }
 
-                                        IBuffer buffer = new BufferFactory().createBuffer();
-                                        buffer.open(file);
+                                IBuffer buffer = new BufferFactory().createBuffer();
+                                buffer.open(file);
 
-                                        WorkspaceManager.addBuffer(buffer);
-                                    }
-                                });
-
-                        worker.start();
+                                WorkspaceManager.addBuffer(buffer);
+                            }
+                        });
                     }
                 }
             });
@@ -272,8 +233,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         TreePath leadPath = directoryTree.getLeadSelectionPath();
 
         if (leadPath != null) {
-            Thread worker = new Thread(new RefreshThread(leadPath, true));
-            worker.start();
+            ThreadManager.execute(new RefreshWorker(leadPath, true));
         }
     }
 
@@ -340,12 +300,17 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
      * @author $Author: amunoz $
      * @version $Revision: 1.4 $
      */
-    private class RefreshThread implements Runnable {
+    private class RefreshWorker extends SwingWorker {
         /** DOCUMENT ME! */
         private TreePath leadPath = null;
 
         /** DOCUMENT ME! */
         private boolean refreshDir = true;
+        
+        private DefaultMutableTreeNode selected = null;
+        private File dir = null;
+        private List files = null;
+        private List dirs = null;
 
         /**
          * Creates a new RefreshThread object.
@@ -353,7 +318,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
          * @param leadPath DOCUMENT ME!
          * @param refreshDir DOCUMENT ME!
          */
-        public RefreshThread(TreePath leadPath,
+        public RefreshWorker(TreePath leadPath,
                              boolean  refreshDir) {
             this.leadPath       = leadPath;
             this.refreshDir     = refreshDir;
@@ -362,30 +327,70 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         /**
          * DOCUMENT ME!
          */
-        public void run() {
-            final DefaultMutableTreeNode selected =
+        protected Object doInBackground() throws Exception {
+        	selected =
                 (DefaultMutableTreeNode) leadPath.getLastPathComponent();
 
-            final File dir   = (File) selected.getUserObject();
-            final List files = getFiles(dir);
-            final List dirs  = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
-
-            SwingUtilities.invokeLater(new Runnable() {
-                    public void run() {
-                        if (dir.exists()) {
-                            if (refreshDir) {
-                                selected.removeAllChildren();
-                                directoryTreeModel.insertAllInto(dirs, selected);
-                                directoryTreeModel.nodeStructureChanged(selected);
-                            } else if (selected.isLeaf()) {
-                                directoryTreeModel.insertAllInto(dirs, selected);
-                            }
-
-                            fileListModel.removeAllElements();
-                            fileListModel.addAll(files);
-                        }
-                    }
-                });
+            dir   = (File) selected.getUserObject();
+            files = getFiles(dir);
+            dirs  = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
+            
+            return dir;
         }
+        
+        protected void done() {
+        	if (dir.exists()) {
+                if (refreshDir) {
+                    selected.removeAllChildren();
+                    directoryTreeModel.insertAllInto(dirs, selected);
+                    directoryTreeModel.nodeStructureChanged(selected);
+                } else if (selected.isLeaf()) {
+                    directoryTreeModel.insertAllInto(dirs, selected);
+                }
+
+                fileListModel.removeAllElements();
+                fileListModel.addAll(files);
+            }
+        }
+    }
+    
+    private class ReadDirectoryWorker extends SwingWorker {
+    	
+    	private JComboBox combo = null;
+    	
+    	private File dir = null;
+    	private DefaultMutableTreeNode root = null;
+    	private List files = null;
+    	private List dirs = null;
+    	
+    	public ReadDirectoryWorker(JComboBox combo) {
+    		this.combo = combo;
+    	}
+    	
+    	protected Object doInBackground() throws Exception {
+    		String dirName = (String) combo.getSelectedItem();
+            
+    		dir = new File(dirName);
+
+            if (dir.exists()) {
+                root = new DefaultMutableTreeNode(dir);
+                directoryTreeModel =
+                      new ShortedTreeModel(root, new FileComparator());
+
+                files = getFiles(dir);
+                dirs  = openDirectory(dir);
+            }
+            
+            return dir;
+    	}
+    	
+    	protected void done() {
+    		directoryTreeModel.insertAllInto(dirs, root);
+            fileListModel.removeAllElements();
+            fileListModel.addAll(files);
+            directoryTree.setModel(directoryTreeModel);
+
+            directoryTree.expandRow(0);
+    	}
     }
 }

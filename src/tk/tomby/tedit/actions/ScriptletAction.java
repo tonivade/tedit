@@ -25,6 +25,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import tk.tomby.tedit.services.ScriptingManager;
+import tk.tomby.tedit.services.ThreadManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -114,13 +115,10 @@ public class ScriptletAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        Thread worker =
-            new Thread(new Runnable() {
-                    public void run() {
-                        ScriptingManager.exec(lang, file, WorkspaceManager.getCurrentBuffer());
-                    }
-                });
-
-        worker.start();
+        ThreadManager.execute(new Runnable() {
+	            public void run() {
+	                ScriptingManager.exec(lang, file, WorkspaceManager.getCurrentBuffer());
+	            }
+	        });
     }
 }
