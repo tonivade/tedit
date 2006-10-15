@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+
+<syntax name="html" contentType="text/html" extends="html">
+	<state name="main">
+        <comment1>
+            <multiLine state="comment">
+                <start><![CDATA[<\!--]]></start>
+                <end><![CDATA[-->]]></end>
+            </multiLine>
+        </comment1>
+        
+		<scriptlet>
+            <multiLine state="java:main">
+                <start><![CDATA[<%\=?]]></start>
+                <end><![CDATA[%>]]></end>
+            </multiLine>    
+        </scriptlet>
+        
+        <label>
+			<![CDATA[&[a-zA-Z]+;]]>
+        </label>
+        
+        <literal1>
+            <multiLine state="xml:cdata">
+                <start><![CDATA[<\!\[CDATA\[]]></start>
+                <end><![CDATA[\]\]>]]></end>
+            </multiLine>
+        </literal1>
+        
+        <literal2>
+	    	<multiLine state="xml:dtd-tags">
+	    		<start><![CDATA[<\!]]></start>
+	    		<end><![CDATA[>]]></end>
+	    	</multiLine>	
+	    </literal2>
+        
+        <literal3>
+            <multiLine state="script">
+                <start><![CDATA[<script]]></start>
+                <end><![CDATA[script>]]></end>
+            </multiLine>    
+        </literal3>
+        
+        <literal4>
+            <multiLine state="style">
+                <start><![CDATA[<style]]></start>
+                <end><![CDATA[style>]]></end>
+            </multiLine>    
+        </literal4>
+        
+        <markup>
+            <multiLine state="xml:tags">
+                <start><![CDATA[<]]></start>
+                <end><![CDATA[>]]></end>
+            </multiLine>    
+        </markup>
+    </state>
+    
+    <state name="comment" default="comment1"/>
+    
+    <state name="script" default="literal3">
+    	<markup>
+            <multiLine state="javascript:main">
+                <start><![CDATA[>]]></start>
+                <end><![CDATA[</]]></end>
+            </multiLine>
+        </markup>
+    </state>
+    
+    <state name="style" default="literal4">
+    	<markup>
+            <multiLine state="css:main">
+                <start><![CDATA[>]]></start>
+                <end><![CDATA[</]]></end>
+            </multiLine>    
+        </markup>
+    </state>
+</syntax>
