@@ -21,6 +21,7 @@
 package tk.tomby.tedit.actions;
 
 import java.awt.event.ActionEvent;
+import java.io.InputStream;
 
 import javax.swing.AbstractAction;
 
@@ -115,9 +116,11 @@ public class ScriptletAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
+    	final InputStream in = this.getClass().getClassLoader().getResourceAsStream(file);
+    	
         ThreadManager.execute(new Runnable() {
 	            public void run() {
-	                ScriptingManager.exec(lang, file, WorkspaceManager.getCurrentBuffer());
+	                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
 	            }
 	        });
     }
