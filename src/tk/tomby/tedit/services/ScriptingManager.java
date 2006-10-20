@@ -37,7 +37,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import tk.tomby.tedit.core.IBuffer;
-import tk.tomby.tedit.core.IBufferIterator;
 
 
 /**
@@ -327,9 +326,5 @@ public class ScriptingManager {
 		public void undo() {
 			buffer.undo();
 		}
-
-		public IBufferIterator getIterator() {
-			return buffer.getIterator();
-		}		
     }
 }
