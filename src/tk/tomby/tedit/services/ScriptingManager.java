@@ -21,9 +21,14 @@
 package tk.tomby.tedit.services;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+
+import javax.swing.SwingUtilities;
+import javax.swing.text.Document;
 
 import org.apache.bsf.BSFException;
 import org.apache.bsf.BSFManager;
@@ -32,6 +37,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import tk.tomby.tedit.core.IBuffer;
+import tk.tomby.tedit.core.IBufferIterator;
 
 
 /**
@@ -63,7 +69,7 @@ public class ScriptingManager {
     }
 
     //~ Methods ************************************************************************************
-
+    
     /**
      * DOCUMENT ME!
      *
@@ -113,7 +119,7 @@ public class ScriptingManager {
      * @param script DOCUMENT ME!
      */
     public static void exec(String lang,
-                            String script) {
+                            InputStream script) {
         exec(lang, script, null);
     }
 
@@ -125,13 +131,11 @@ public class ScriptingManager {
      * @param buffer DOCUMENT ME!
      */
     public static void exec(String  lang,
-                            String  script,
+                            InputStream  stream,
                             IBuffer buffer) {
         BSFManager manager = new BSFManager();
 
         try {
-            InputStream stream =
-                ScriptingManager.class.getClassLoader().getResourceAsStream(script);
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
 
             StringBuffer sb = new StringBuffer();
@@ -141,10 +145,10 @@ public class ScriptingManager {
             }
 
             if (buffer != null) {
-                manager.declareBean("buffer", buffer, IBuffer.class);
+                manager.declareBean("buffer", new BufferDecorator(buffer), IBuffer.class);
             }
 
-            manager.exec(lang, script, 0, 0, sb);
+            manager.exec(lang, "script", 0, 0, sb);
         } catch (BSFException e) {
             log.warn(e);
         } catch (IOException e) {
@@ -163,5 +167,169 @@ public class ScriptingManager {
                                 String   engine,
                                 String[] exts) {
         BSFManager.registerScriptingEngine(lang, engine, exts);
+    }
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @param file DOCUMENT ME!
+     * @return DOCUMENT ME!
+     */
+    public static String getLanguage(String file) {
+    	try {
+			return BSFManager.getLangFromFilename(file);
+		} catch (BSFException e) {
+			log.warn("cannot found language for file " + file);
+		}
+		return null;
+    }
+    
+    public static class BufferDecorator implements IBuffer {
+    	
+    	private IBuffer buffer = null;
+    	
+    	public BufferDecorator(IBuffer buffer) {
+    		this.buffer = buffer;
+    	}
+
+		public boolean canRedo() {
+			return buffer.canRedo();
+		}
+
+		public boolean canUndo() {
+			return buffer.canUndo();
+		}
+
+		public void clean() {
+			buffer.clean();
+		}
+
+		public void close() {
+			buffer.close();
+		}
+
+		public void copy() {
+			buffer.copy();
+		}
+
+		public void cut() {
+			buffer.cut();
+		}
+
+		public void findNext() {
+			buffer.findNext();
+		}
+
+		public void findPrevious() {
+			buffer.findPrevious();
+		}
+
+		public int getCaretPosition() {
+			return buffer.getCaretPosition();
+		}
+
+		public int getCurrentLine() {
+			return buffer.getCurrentLine();
+		}
+
+		public Document getDocument() {
+			return buffer.getDocument();
+		}
+
+		public File getFile() {
+			return buffer.getFile();
+		}
+
+		public String getFileName() {
+			return buffer.getFileName();
+		}
+
+		public int getLineCount() {
+			return buffer.getLineCount();
+		}
+
+		public int getSelectionEnd() {
+			return buffer.getSelectionEnd();
+		}
+
+		public int getSelectionStart() {
+			return buffer.getSelectionStart();
+		}
+
+		public void gotoLine(final int line) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					buffer.gotoLine(line);
+				}
+			});
+		}
+
+		public boolean isModified() {
+			return buffer.isModified();
+		}
+
+		public boolean isNew() {
+			return buffer.isNew();
+		}
+
+		public boolean isReadOnly() {
+			return buffer.isReadOnly();
+		}
+
+		public void open(File file) {
+			buffer.open(file);
+		}
+
+		public void open(String file) {
+			buffer.open(file);
+		}
+
+		public void open(URL url) {
+			buffer.open(url);
+		}
+
+		public void paste() {
+			buffer.paste();
+		}
+
+		public void redo() {
+			buffer.redo();
+		}
+
+		public void replace() {
+			buffer.replace();
+		}
+
+		public void save() {
+			buffer.save();
+		}
+
+		public void saveAs(File file) {
+			buffer.saveAs(file);
+		}
+
+		public void saveAs(String file) {
+			buffer.saveAs(file);
+		}
+
+		public void saveAs(URL url) {
+			buffer.saveAs(url);
+		}
+
+		public void select(int start, int end) {
+			buffer.select(start, end);
+		}
+
+		public void selectAll() {
+			buffer.selectAll();
+		}
+
+		public void undo() {
+			buffer.undo();
+		}
+
+		public IBufferIterator getIterator() {
+			return buffer.getIterator();
+		}		
     }
 }
