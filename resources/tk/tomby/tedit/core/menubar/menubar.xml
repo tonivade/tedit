@@ -121,6 +121,14 @@
         	<action name="goto" class="tk.tomby.tedit.actions.GotoLineAction"/>
         </menuitem>
     </menu>
+    <menu textKey="menubar.tools" mnemonicKey="menubar.tools.mnemonic">
+    	<menuitem textKey="menubar.tools.runscript"
+                  mnemonicKey="menubar.tools.runscript.mnemonic"
+                  acceleratorKey="menubar.tools.runscript.accelerator"
+                  iconKey="menubar.tools.runscript.icon">
+        	<action name="run_script" class="tk.tomby.tedit.actions.RunScriptAction"/>
+        </menuitem>
+    </menu>
     <menu textKey="menubar.help" mnemonicKey="menubar.help.mnemonic">
         <menuitem textKey="menubar.help.content"
                   mnemonicKey="menubar.help.content.mnemonic"
