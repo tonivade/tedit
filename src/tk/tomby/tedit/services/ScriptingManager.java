@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
@@ -100,7 +101,7 @@ public class ScriptingManager {
 
         try {
             if (buffer != null) {
-                manager.declareBean("buffer", buffer, IBuffer.class);
+            	manager.declareBean("buffer", new BufferDecorator(buffer), BufferDecorator.class);
             }
 
             result = manager.eval(lang, "eval", 0, 0, script);
@@ -144,7 +145,7 @@ public class ScriptingManager {
             }
 
             if (buffer != null) {
-                manager.declareBean("buffer", new BufferDecorator(buffer), IBuffer.class);
+                manager.declareBean("buffer", new BufferDecorator(buffer), BufferDecorator.class);
             }
 
             manager.exec(lang, "script", 0, 0, sb);
@@ -325,6 +326,22 @@ public class ScriptingManager {
 
 		public void undo() {
 			buffer.undo();
+		}
+
+		public Iterator elementIterator() {
+			return buffer.elementIterator();
+		}
+
+		public void insertString(final int offset, final String text) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					buffer.insertString(offset, text);
+				}
+			});
+		}
+
+		public Iterator lineIterator() {
+			return buffer.lineIterator();
 		}
     }
 }
