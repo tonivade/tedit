@@ -34,6 +34,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.BorderFactory;
 import javax.swing.InputMap;
@@ -47,6 +48,7 @@ import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.undo.CannotRedoException;
@@ -56,6 +58,7 @@ import javax.swing.undo.UndoManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tk.tomby.tedit.core.snr.FindReplaceWorker;
 
 import tk.tomby.tedit.messages.BufferMessage;
@@ -634,6 +637,22 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
             log.error(e.getMessage(), e);
         }
     }
+    
+    public void insertString(int offset, String text) {
+    	try {
+			getDocument().insertString(offset, text, null);
+		} catch (BadLocationException e) {
+			log.error(e.getMessage(), e);
+		}
+    }
+    
+    public Iterator elementIterator() {
+    	return new ElementIterator(getDocument());
+    }
+    
+    public Iterator lineIterator() {
+    	return new LineIterator(getDocument());
+    }
 
     /**
      * DOCUMENT ME!
@@ -695,5 +714,55 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
 
         MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
                                    new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
+    }
+    
+    class ElementIterator implements Iterator {
+    	
+    	Document doc;
+    	int count;
+    	
+    	public ElementIterator(Document doc) {
+			this.doc = doc;
+		}
+
+		public boolean hasNext() {
+			return doc.getDefaultRootElement().getElementCount() > count;
+		}
+
+		public Object next() {
+			return doc.getDefaultRootElement().getElement(count++);
+		}
+
+		public void remove() {
+			throw new NotImplementedException();
+		}
+    }
+    
+    class LineIterator implements Iterator {
+    	
+    	Document doc;
+    	int count;
+    	
+    	public LineIterator(Document doc) {
+			this.doc = doc;
+		}
+
+		public boolean hasNext() {
+			return doc.getDefaultRootElement().getElementCount() > count;
+		}
+
+		public Object next() {
+			Element line = doc.getDefaultRootElement().getElement(count++);
+			try {
+				return doc.getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());
+			} catch (BadLocationException e) {
+				log.error(e.getMessage(), e);
+			}
+			return null;
+		}
+
+		public void remove() {
+			throw new NotImplementedException();
+		}
     }
 }

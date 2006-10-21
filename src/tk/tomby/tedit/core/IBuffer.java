@@ -23,6 +23,7 @@ package tk.tomby.tedit.core;
 import java.io.File;
 
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.text.Document;
 
@@ -244,4 +245,25 @@ public interface IBuffer {
      * DOCUMENT ME!
      */
     public abstract void undo();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract Iterator elementIterator();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract Iterator lineIterator();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract void insertString(int offset, String text);
 }
