@@ -89,6 +89,7 @@ public class TaskManager {
 		
 		public void init() {
 			TaskManager.initProgress(minimun, maximun, message, note);
+			setProgress(minimun);
 		}
 		
 		public boolean isDone() {
@@ -122,7 +123,9 @@ public class TaskManager {
 		public abstract void work();
 		
 		public void clean() {
-			
+			if (!isDone()) {
+				setProgress(maximun);
+			}
 		}
 	}
 	
@@ -141,8 +144,8 @@ public class TaskManager {
 		}
 		
 		public void init() {
+			TaskManager.initProgress(minimun, maximun, message, note);
 			this.worker.addPropertyChangeListener(this);
-			super.init();
 		}
 		
 		public void propertyChange(PropertyChangeEvent evt) {
@@ -159,6 +162,8 @@ public class TaskManager {
 			worker.execute();
 		}
 		
+		public void clean() {
+		}
 	}
 
 }
