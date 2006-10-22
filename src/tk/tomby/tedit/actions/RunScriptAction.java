@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import tk.tomby.tedit.messages.StatusMessage;
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.ScriptingManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 public class RunScriptAction extends AbstractAction {
@@ -36,9 +36,11 @@ public class RunScriptAction extends AbstractAction {
 				final String lang = ScriptingManager.getLanguage(script.getName()); 
 
 				if (lang != null) {
-					ThreadManager.execute(new Runnable() {
-			            public void run() {
+					TaskManager.execute(new TaskManager.Task(0, 100) {
+			            public void work() {
+			            	setProgress(25);
 			                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
+			                setProgress(75);
 			            }
 			        });
 				}

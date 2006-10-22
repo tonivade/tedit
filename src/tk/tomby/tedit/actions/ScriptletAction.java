@@ -26,7 +26,7 @@ import java.io.InputStream;
 import javax.swing.AbstractAction;
 
 import tk.tomby.tedit.services.ScriptingManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -118,9 +118,11 @@ public class ScriptletAction extends AbstractAction {
     public void actionPerformed(ActionEvent evt) {
     	final InputStream in = this.getClass().getClassLoader().getResourceAsStream(file);
     	
-        ThreadManager.execute(new Runnable() {
-	            public void run() {
+    	TaskManager.execute(new TaskManager.Task(0, 100) {
+	            public void work() {
+	            	setProgress(25);
 	                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
+	                setProgress(75);
 	            }
 	        });
     }

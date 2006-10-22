@@ -46,7 +46,7 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import tk.tomby.tedit.services.ResourceManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -102,7 +102,7 @@ public class PreferencesPane extends JPanel implements IPreferences {
         JButton apply = new JButton(ResourceManager.getProperty("preferences.apply"));
         apply.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                	ThreadManager.execute(new Runnable() {
+                	TaskManager.execute(new Runnable() {
                         public void run() {
                             commit();
                         }
@@ -113,7 +113,7 @@ public class PreferencesPane extends JPanel implements IPreferences {
         JButton restore = new JButton(ResourceManager.getProperty("preferences.restore"));
         restore.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                	ThreadManager.execute(new Runnable() {
+                	TaskManager.execute(new Runnable() {
                         public void run() {
                             restore();
                         }

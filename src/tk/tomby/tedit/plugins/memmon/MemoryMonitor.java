@@ -30,7 +30,7 @@ import javax.swing.Timer;
 
 import tk.tomby.tedit.plugins.IPlugin;
 import tk.tomby.tedit.services.ResourceManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -63,7 +63,7 @@ public class MemoryMonitor extends JLabel implements IPlugin {
         addMouseListener(new MouseAdapter() {
                 public void mouseClicked(MouseEvent evt) {
                     if (evt.getClickCount() == 2) {
-                        ThreadManager.execute(new Runnable() {
+                        TaskManager.execute(new Runnable() {
                                     public void run() {
                                         Runtime.getRuntime().gc();
                                     }

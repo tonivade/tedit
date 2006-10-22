@@ -67,7 +67,7 @@ import tk.tomby.tedit.plugins.IPlugin;
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -196,7 +196,7 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
                                     }
 
                                     if (obj instanceof String) {
-                                        ThreadManager.execute(new Runnable() {
+                                        TaskManager.execute(new Runnable() {
                                         	public void run() {
                                                 BufferFactory factory = new BufferFactory();
                                                 IBuffer buffer        = factory.createBuffer();

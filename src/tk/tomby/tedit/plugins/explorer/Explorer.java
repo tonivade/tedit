@@ -54,7 +54,7 @@ import tk.tomby.tedit.messages.IMessageListener;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
-import tk.tomby.tedit.services.ThreadManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -120,7 +120,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         topPanel.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     JComboBox combo = (JComboBox) evt.getSource();
-                    ThreadManager.execute(new ReadDirectoryWorker(combo));
+                    TaskManager.execute(new ReadDirectoryWorker(combo));
                 }
             });
 
@@ -142,7 +142,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
                     TreePath leadPath = evt.getNewLeadSelectionPath();
 
                     if ((path != null) && (leadPath != null)) {
-                        ThreadManager.execute(new RefreshWorker(leadPath, false));
+                    	TaskManager.execute(new RefreshWorker(leadPath, false));
                     }
                 }
             });
@@ -176,7 +176,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
                     if (evt.getClickCount() == 2) {
                         final int index = fileList.locationToIndex(evt.getPoint());
 
-                        ThreadManager.execute(new Runnable() {
+                        TaskManager.execute(new Runnable() {
                             public void run() {
                                 File file = (File) fileListModel.getElementAt(index);
 
@@ -233,7 +233,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         TreePath leadPath = directoryTree.getLeadSelectionPath();
 
         if (leadPath != null) {
-            ThreadManager.execute(new RefreshWorker(leadPath, true));
+        	TaskManager.execute(new RefreshWorker(leadPath, true));
         }
     }
 
