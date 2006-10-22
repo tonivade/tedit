@@ -38,9 +38,9 @@ public class RunScriptAction extends AbstractAction {
 				if (lang != null) {
 					TaskManager.execute(new TaskManager.Task(0, 100) {
 			            public void work() {
-			            	setProgress(25);
+			            	setProgress(50);
 			                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
-			                setProgress(75);
+			                setProgress(100);
 			            }
 			        });
 				}
