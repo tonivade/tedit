@@ -120,7 +120,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
         topPanel.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     JComboBox combo = (JComboBox) evt.getSource();
-                    TaskManager.execute(new ReadDirectoryWorker(combo));
+                    TaskManager.execute(new TaskManager.SwingWorkerTask(new ReadDirectoryWorker(combo)));
                 }
             });
 
@@ -142,7 +142,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
                     TreePath leadPath = evt.getNewLeadSelectionPath();
 
                     if ((path != null) && (leadPath != null)) {
-                    	TaskManager.execute(new RefreshWorker(leadPath, false));
+                    	TaskManager.execute(new TaskManager.SwingWorkerTask(new RefreshWorker(leadPath, false)));
                     }
                 }
             });
@@ -333,7 +333,9 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 
             dir   = (File) selected.getUserObject();
             files = getFiles(dir);
+            setProgress(50);
             dirs  = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
+            setProgress(100);
             
             return dir;
         }
@@ -378,7 +380,9 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
                       new ShortedTreeModel(root, new FileComparator());
 
                 files = getFiles(dir);
+                setProgress(50);
                 dirs  = openDirectory(dir);
+                setProgress(100);
             }
             
             return dir;
