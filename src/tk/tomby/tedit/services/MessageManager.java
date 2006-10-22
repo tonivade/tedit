@@ -162,7 +162,7 @@ public class MessageManager {
         if (group != null) {
             Dispacher dispacher = new Dispacher(group, message);
 
-            TaskManager.execute(dispacher);
+            dispacher.dispatch();
         }
     }
 
@@ -241,7 +241,7 @@ public class MessageManager {
      * @author $Author: amunoz $
      * @version $Revision: 1.1.1.1 $
      */
-    public static class Dispacher implements Runnable {
+    public static class Dispacher {
         /** DOCUMENT ME! */
         private GroupManager group = null;
 
@@ -263,7 +263,7 @@ public class MessageManager {
         /**
          * DOCUMENT ME!
          */
-        public void run() {
+        public void dispatch() {
             group.sendMessage(message);
         }
     }

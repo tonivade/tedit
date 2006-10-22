@@ -1,5 +1,8 @@
 package tk.tomby.tedit.services;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -11,6 +14,7 @@ import javax.swing.SwingUtilities;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jdesktop.swingworker.SwingWorker;
 
 import tk.tomby.tedit.messages.StatusMessage;
 
@@ -38,32 +42,40 @@ public class TaskManager {
 	
 	public static void setProgress(final int progress) {
 		if (monitor != null) {
-			try {
-				SwingUtilities.invokeAndWait(new Runnable() {
+			if (SwingUtilities.isEventDispatchThread()) {
+				SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						monitor.setProgress(progress);
 					}
 				});
-			} catch (InterruptedException e) {
-				log.warn(e);
-			} catch (InvocationTargetException e) {
-				log.warn(e);
+			} else {
+				try {
+					SwingUtilities.invokeAndWait(new Runnable() {
+						public void run() {
+							monitor.setProgress(progress);
+						}
+					});
+				} catch (InterruptedException e) {
+					log.warn(e.getMessage(), e);
+				} catch (InvocationTargetException e) {
+					log.warn(e.getMessage(), e);
+				}
 			}
 		}
 	}
 	
 	public static abstract class Task implements Runnable {
-		private int current;
-		private int maximun;
-		private int minimun;
-		private String message;
-		private String note;
+		protected int current;
+		protected int maximun;
+		protected int minimun;
+		protected String message;
+		protected String note;
 		
 		public Task(int minimun, int maximun) {
 			this.current = 0;
 			this.maximun = maximun;
 			this.minimun = minimun;
-			this.message = "Progress";
+			this.message = "Task";
 			this.note = "Work in progress";
 		}
 		
@@ -88,23 +100,65 @@ public class TaskManager {
 		}
 		
 		public void run() {
-			init();
-			work();
-			setProgress(maximun);
+			try {
+				init();
+				work();
+			} finally {
+				clean();
+			}
 		}
 		
 		public void setProgress(int progress) {
 			this.current = progress;
 			TaskManager.setProgress(progress);
 			MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME, 
-					new StatusMessage(this, note + " at " + computePercent() + " %"));
+					new StatusMessage(this, note + " at " + getPercent() + " %"));
 		}
 
-		private int computePercent() {
-			return (int)((double)current / (double)maximun) * 100;
+		public int getPercent() {
+			return (int) (((double) current / (double) maximun) * 100);
 		}
 		
 		public abstract void work();
+		
+		public void clean() {
+			
+		}
+	}
+	
+	public static class SwingWorkerTask extends Task implements PropertyChangeListener {
+
+		private SwingWorker worker;
+		
+		public SwingWorkerTask(SwingWorker worker) {
+			super(0, 100);
+			this.worker = worker;			
+		}
+
+		public SwingWorkerTask(String message, String note, SwingWorker worker) {
+			super(0, 100, message, note);
+			this.worker = worker;
+		}
+		
+		public void init() {
+			this.worker.addPropertyChangeListener(this);
+			super.init();
+		}
+		
+		public void propertyChange(PropertyChangeEvent evt) {
+			if (log.isDebugEnabled()) {
+				log.debug(evt.getPropertyName() + " = " + evt.getNewValue());
+			}
+			setProgress(worker.getProgress());
+			if (worker.isDone()) {
+				worker.removePropertyChangeListener(this);
+			}
+		}
+		
+		public void work() {
+			worker.execute();
+		}
+		
 	}
 
 }
