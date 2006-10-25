@@ -2,8 +2,6 @@ package tk.tomby.tedit.services;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
-import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -49,17 +47,7 @@ public class TaskManager {
 					}
 				});
 			} else {
-				try {
-					SwingUtilities.invokeAndWait(new Runnable() {
-						public void run() {
-							monitor.setProgress(progress);
-						}
-					});
-				} catch (InterruptedException e) {
-					log.warn(e.getMessage(), e);
-				} catch (InvocationTargetException e) {
-					log.warn(e.getMessage(), e);
-				}
+				monitor.setProgress(progress);
 			}
 		}
 	}
