@@ -93,6 +93,24 @@ public class ThreadSafeRepaintManager extends RepaintManager {
      */
     private void checkThread(JComponent c) {
         if (!SwingUtilities.isEventDispatchThread() && (isShowing(c) || isRootShowing(c))) {
+        	boolean threadSafeMethod = false;
+            boolean fromSwing = false;
+            StackTraceElement[] stackTrace = new Exception().getStackTrace();
+            for (int i = 0; i < stackTrace.length; i++) {
+                if (threadSafeMethod && stackTrace[i].getClassName().startsWith("javax.swing.")) {
+                    fromSwing = true;
+                }
+                if ("repaint".equals(stackTrace[i].getMethodName())) {
+                    threadSafeMethod = true;
+                    fromSwing = false;
+                }
+            }
+
+            if (threadSafeMethod && !fromSwing) {
+                // Calling a thread safe method; no problem
+                return;
+            }
+
             throw new Error("Invalid thread access to display");
         }
     }
