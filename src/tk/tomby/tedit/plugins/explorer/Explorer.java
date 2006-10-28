@@ -57,344 +57,373 @@ import tk.tomby.tedit.services.ResourceManager;
 import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
-
 /**
  * DOCUMENT ME!
- *
+ * 
  * @author $Author: amunoz $
  * @version $Revision: 1.4 $
  */
-public class Explorer extends AbstractDockablePlugin implements IMessageListener {
-    //~ Static fields/initializers *****************************************************************
+public class Explorer extends AbstractDockablePlugin implements
+		IMessageListener {
+	// ~ Static fields/initializers
+	// *****************************************************************
 
-    /** DOCUMENT ME! */
-    private static Log log = LogFactory.getLog(Explorer.class);
+	/** DOCUMENT ME! */
+	private static Log log = LogFactory.getLog(Explorer.class);
 
-    static {
-        ResourceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
-        PreferenceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
-    }
+	static {
+		ResourceManager.loadCategory("explorer",
+				"tk/tomby/tedit/plugins/explorer");
+		PreferenceManager.loadCategory("explorer",
+				"tk/tomby/tedit/plugins/explorer");
+	}
 
-    //~ Instance fields ****************************************************************************
+	// ~ Instance fields
+	// ****************************************************************************
 
-    /** DOCUMENT ME! */
-    private JList fileList = null;
+	/** DOCUMENT ME! */
+	private JList fileList = null;
 
-    /** DOCUMENT ME! */
-    private JSplitPane splitPane = null;
+	/** DOCUMENT ME! */
+	private JSplitPane splitPane = null;
 
-    /** DOCUMENT ME! */
-    private JTree directoryTree = null;
+	/** DOCUMENT ME! */
+	private JTree directoryTree = null;
 
-    /** DOCUMENT ME! */
-    private ShortedListModel fileListModel = null;
+	/** DOCUMENT ME! */
+	private ShortedListModel fileListModel = null;
 
-    /** DOCUMENT ME! */
-    private ShortedTreeModel directoryTreeModel = null;
+	/** DOCUMENT ME! */
+	private ShortedTreeModel directoryTreeModel = null;
 
-    /** DOCUMENT ME! */
-    private TopPanel topPanel = null;
+	/** DOCUMENT ME! */
+	private TopPanel topPanel = null;
 
-    //~ Constructors *******************************************************************************
+	// ~ Constructors
+	// *******************************************************************************
 
-    /**
-     * Creates a new Explorer object.
-     */
-    public Explorer() {
-        super();
+	/**
+	 * Creates a new Explorer object.
+	 */
+	public Explorer() {
+		super();
 
-        setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 
-        location = PreferenceManager.getInt("explorer.location", IWorkspace.PLUGIN_LEFT);
+		location = PreferenceManager.getInt("explorer.location",
+				IWorkspace.PLUGIN_LEFT);
 
-        File rootDir =
-            new File(PreferenceManager.getString("explorer.directory",
-                                                 System.getProperty("user.home")));
+		File rootDir = new File(PreferenceManager.getString(
+				"explorer.directory", System.getProperty("user.home")));
 
-        title.setText("Explorer");
+		title.setText("Explorer");
 
-        JPanel internalPanel = new JPanel();
-        internalPanel.setLayout(new BorderLayout());
+		JPanel internalPanel = new JPanel();
+		internalPanel.setLayout(new BorderLayout());
 
-        topPanel = new TopPanel(rootDir.getAbsolutePath());
-        topPanel.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    JComboBox combo = (JComboBox) evt.getSource();
-                    TaskManager.execute(new TaskManager.SwingWorkerTask(new ReadDirectoryWorker(combo)));
-                }
-            });
+		topPanel = new TopPanel(rootDir.getAbsolutePath());
+		topPanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				JComboBox combo = (JComboBox) evt.getSource();
+				TaskManager.execute(new TaskManager.SwingWorkerTask(
+						new ReadDirectoryWorker(combo)));
+			}
+		});
 
-        internalPanel.add(BorderLayout.NORTH, topPanel);
+		internalPanel.add(BorderLayout.NORTH, topPanel);
 
-        DefaultMutableTreeNode directoryRoot = new DefaultMutableTreeNode(rootDir);
+		DefaultMutableTreeNode directoryRoot = new DefaultMutableTreeNode(
+				rootDir);
 
-        directoryTreeModel     = new ShortedTreeModel(directoryRoot, new FileComparator());
-        directoryTree          = new JTree(directoryTreeModel);
-        directoryTree.setCellRenderer(new DirectoryCellRenderer());
-        directoryTree.setRootVisible(true);
-        directoryTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-        directoryTree.setEnabled(true);
-        directoryTree.setEditable(false);
-        directoryTree.setShowsRootHandles(true);
-        directoryTree.addTreeSelectionListener(new TreeSelectionListener() {
-                public void valueChanged(TreeSelectionEvent evt) {
-                    TreePath path     = evt.getPath();
-                    TreePath leadPath = evt.getNewLeadSelectionPath();
+		directoryTreeModel = new ShortedTreeModel(directoryRoot,
+				new FileComparator());
+		directoryTree = new JTree(directoryTreeModel);
+		directoryTree.setCellRenderer(new DirectoryCellRenderer());
+		directoryTree.setRootVisible(true);
+		directoryTree.getSelectionModel().setSelectionMode(
+				TreeSelectionModel.SINGLE_TREE_SELECTION);
+		directoryTree.setEnabled(true);
+		directoryTree.setEditable(false);
+		directoryTree.setShowsRootHandles(true);
+		directoryTree.addTreeSelectionListener(new TreeSelectionListener() {
+			public void valueChanged(TreeSelectionEvent evt) {
+				TreePath path = evt.getPath();
+				TreePath leadPath = evt.getNewLeadSelectionPath();
 
-                    if ((path != null) && (leadPath != null)) {
-                    	TaskManager.execute(new TaskManager.SwingWorkerTask(new RefreshWorker(leadPath, false)));
-                    }
-                }
-            });
-        directoryTree.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent evt) {
-                    if (evt.getClickCount() == 2) {
-                        DefaultMutableTreeNode node =
-                                       (DefaultMutableTreeNode) directoryTree
-                                       .getLastSelectedPathComponent();
+				if ((path != null) && (leadPath != null)) {
+					TaskManager.execute(new TaskManager.SwingWorkerTask(
+							new RefreshWorker(leadPath, false)));
+				}
+			}
+		});
+		directoryTree.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() == 2) {
+					DefaultMutableTreeNode node = (DefaultMutableTreeNode) directoryTree
+							.getLastSelectedPathComponent();
 
-                        if (!node.isRoot()) {
-                            File dir = (File) node.getUserObject();
+					if (!node.isRoot()) {
+						File dir = (File) node.getUserObject();
 
-                            topPanel.setDirectory(dir.getAbsolutePath());
-                        }
-                    }
-                }
-            });
+						topPanel.setDirectory(dir.getAbsolutePath());
+					}
+				}
+			}
+		});
 
-        JScrollPane directoryScroll = new JScrollPane(directoryTree);
-        directoryScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        directoryScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        directoryScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
+		JScrollPane directoryScroll = new JScrollPane(directoryTree);
+		directoryScroll
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		directoryScroll
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		directoryScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
-        fileListModel     = new ShortedListModel(new FileComparator());
-        fileList          = new JList(fileListModel);
-        fileList.setDragEnabled(true);
-        fileList.setCellRenderer(new FileCellRenderer());
-        fileList.addMouseListener(new MouseAdapter() {
-                public void mouseClicked(MouseEvent evt) {
-                    if (evt.getClickCount() == 2) {
-                        final int index = fileList.locationToIndex(evt.getPoint());
+		fileListModel = new ShortedListModel(new FileComparator());
+		fileList = new JList(fileListModel);
+		fileList.setDragEnabled(true);
+		fileList.setCellRenderer(new FileCellRenderer());
+		fileList.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				if (evt.getClickCount() == 2) {
+					final int index = fileList.locationToIndex(evt.getPoint());
 
-                        TaskManager.execute(new Runnable() {
-                            public void run() {
-                                File file = (File) fileListModel.getElementAt(index);
+					TaskManager.execute(new Runnable() {
+						public void run() {
+							File file = (File) fileListModel
+									.getElementAt(index);
 
-                                if (log.isDebugEnabled()) {
-                                    log.debug(file);
-                                }
+							if (log.isDebugEnabled()) {
+								log.debug(file);
+							}
 
-                                IBuffer buffer = new BufferFactory().createBuffer();
-                                buffer.open(file);
+							IBuffer buffer = new BufferFactory().createBuffer();
+							buffer.open(file);
 
-                                WorkspaceManager.addBuffer(buffer);
-                            }
-                        });
-                    }
-                }
-            });
+							WorkspaceManager.addBuffer(buffer);
+						}
+					});
+				}
+			}
+		});
 
-        JScrollPane filesScroll = new JScrollPane(fileList);
-        filesScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        filesScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        filesScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
+		JScrollPane filesScroll = new JScrollPane(fileList);
+		filesScroll
+				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		filesScroll
+				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		filesScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
-        splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll, filesScroll);
-        splitPane.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-        splitPane.setDividerLocation(PreferenceManager.getInt("explorer.divider", 0));
+		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll,
+				filesScroll);
+		splitPane.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		splitPane.setDividerLocation(PreferenceManager.getInt(
+				"explorer.divider", 0));
 
-        List dirs = openDirectory(rootDir);
-        directoryTreeModel.insertAllInto(dirs, directoryRoot);
+		List dirs = openDirectory(rootDir);
+		directoryTreeModel.insertAllInto(dirs, directoryRoot);
 
-        List files = getFiles(rootDir);
-        fileListModel.addAll(files);
+		List files = getFiles(rootDir);
+		fileListModel.addAll(files);
 
-        directoryTree.expandRow(0);
+		directoryTree.expandRow(0);
 
-        internalPanel.add(splitPane, BorderLayout.CENTER);
+		internalPanel.add(splitPane, BorderLayout.CENTER);
 
-        add(title, BorderLayout.NORTH);
-        add(internalPanel, BorderLayout.CENTER);
-    }
+		add(title, BorderLayout.NORTH);
+		add(internalPanel, BorderLayout.CENTER);
+	}
 
-    //~ Methods ************************************************************************************
+	// ~ Methods
+	// ************************************************************************************
 
-    /**
-     * DOCUMENT ME!
-     */
-    public void init() {
-        WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
-    }
+	/**
+	 * DOCUMENT ME!
+	 */
+	public void init() {
+		WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION,
+				this);
+	}
 
-    /**
-     * DOCUMENT ME!
-     */
-    public void refresh() {
-        TreePath leadPath = directoryTree.getLeadSelectionPath();
+	/**
+	 * DOCUMENT ME!
+	 */
+	public void refresh() {
+		TreePath leadPath = directoryTree.getLeadSelectionPath();
 
-        if (leadPath != null) {
-        	TaskManager.execute(new RefreshWorker(leadPath, true));
-        }
-    }
+		if (leadPath != null) {
+			TaskManager.execute(new RefreshWorker(leadPath, true));
+		}
+	}
 
-    /**
-     * DOCUMENT ME!
-     */
-    public void save() {
-        PreferenceManager.putInt("explorer.location", location);
-        PreferenceManager.putInt("explorer.divider", splitPane.getDividerLocation());
-        PreferenceManager.putString("explorer.directory", topPanel.getDirectory());
-    }
+	/**
+	 * DOCUMENT ME!
+	 */
+	public void save() {
+		PreferenceManager.putInt("explorer.location", location);
+		PreferenceManager.putInt("explorer.divider", splitPane
+				.getDividerLocation());
+		PreferenceManager.putString("explorer.directory", topPanel
+				.getDirectory());
+	}
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param dir DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    private List getFiles(File dir) {
-        List result = new ArrayList();
+	/**
+	 * DOCUMENT ME!
+	 * 
+	 * @param dir
+	 *            DOCUMENT ME!
+	 * 
+	 * @return DOCUMENT ME!
+	 */
+	private List getFiles(File dir) {
+		List result = new ArrayList();
 
-        if (dir.exists() && dir.canRead()) {
-            File[] files = dir.listFiles();
+		if (dir.exists() && dir.canRead()) {
+			File[] files = dir.listFiles();
 
-            for (int i = 0; i < files.length; i++) {
-                if (!files[i].isHidden() && files[i].isFile()) {
-                    result.add(files[i]);
-                }
-            }
-        }
+			for (int i = 0; i < files.length; i++) {
+				if (!files[i].isHidden() && files[i].isFile()) {
+					result.add(files[i]);
+				}
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param dir DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    private List openDirectory(File dir) {
-        List result = new ArrayList();
+	/**
+	 * DOCUMENT ME!
+	 * 
+	 * @param dir
+	 *            DOCUMENT ME!
+	 * 
+	 * @return DOCUMENT ME!
+	 */
+	private List openDirectory(File dir) {
+		List result = new ArrayList();
 
-        if (dir.exists() && dir.canRead()) {
-            File[] files = dir.listFiles();
+		if (dir.exists() && dir.canRead()) {
+			File[] files = dir.listFiles();
 
-            for (int i = 0; i < files.length; i++) {
-                if (!files[i].isHidden() && files[i].isDirectory()) {
-                    result.add(new DefaultMutableTreeNode(files[i]));
-                }
-            }
-        }
+			for (int i = 0; i < files.length; i++) {
+				if (!files[i].isHidden() && files[i].isDirectory()) {
+					result.add(new DefaultMutableTreeNode(files[i]));
+				}
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
-    //~ Inner Classes ******************************************************************************
+	// ~ Inner Classes
+	// ******************************************************************************
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @author $Author: amunoz $
-     * @version $Revision: 1.4 $
-     */
-    private class RefreshWorker extends SwingWorker {
-        /** DOCUMENT ME! */
-        private TreePath leadPath = null;
+	/**
+	 * DOCUMENT ME!
+	 * 
+	 * @author $Author: amunoz $
+	 * @version $Revision: 1.4 $
+	 */
+	private class RefreshWorker extends SwingWorker {
+		/** DOCUMENT ME! */
+		private TreePath leadPath = null;
 
-        /** DOCUMENT ME! */
-        private boolean refreshDir = true;
-        
-        private DefaultMutableTreeNode selected = null;
-        private File dir = null;
-        private List files = null;
-        private List dirs = null;
+		/** DOCUMENT ME! */
+		private boolean refreshDir = true;
 
-        /**
-         * Creates a new RefreshThread object.
-         *
-         * @param leadPath DOCUMENT ME!
-         * @param refreshDir DOCUMENT ME!
-         */
-        public RefreshWorker(TreePath leadPath,
-                             boolean  refreshDir) {
-            this.leadPath       = leadPath;
-            this.refreshDir     = refreshDir;
-        }
+		private DefaultMutableTreeNode selected = null;
 
-        /**
-         * DOCUMENT ME!
-         */
-        protected Object doInBackground() throws Exception {
-        	selected =
-                (DefaultMutableTreeNode) leadPath.getLastPathComponent();
+		private File dir = null;
 
-            dir   = (File) selected.getUserObject();
-            files = getFiles(dir);
-            setProgress(50);
-            dirs  = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
-            setProgress(100);
-            
-            return dir;
-        }
-        
-        protected void done() {
-        	if (dir.exists()) {
-                if (refreshDir) {
-                    selected.removeAllChildren();
-                    directoryTreeModel.insertAllInto(dirs, selected);
-                    directoryTreeModel.nodeStructureChanged(selected);
-                } else if (selected.isLeaf()) {
-                    directoryTreeModel.insertAllInto(dirs, selected);
-                }
+		private List files = null;
 
-                fileListModel.removeAllElements();
-                fileListModel.addAll(files);
-            }
-        }
-    }
-    
-    private class ReadDirectoryWorker extends SwingWorker {
-    	
-    	private JComboBox combo = null;
-    	
-    	private File dir = null;
-    	private DefaultMutableTreeNode root = null;
-    	private List files = null;
-    	private List dirs = null;
-    	
-    	public ReadDirectoryWorker(JComboBox combo) {
-    		this.combo = combo;
-    	}
-    	
-    	protected Object doInBackground() throws Exception {
-    		String dirName = (String) combo.getSelectedItem();
-            
-    		dir = new File(dirName);
+		private List dirs = null;
 
-            if (dir.exists()) {
-                root = new DefaultMutableTreeNode(dir);
-                directoryTreeModel =
-                      new ShortedTreeModel(root, new FileComparator());
+		/**
+		 * Creates a new RefreshThread object.
+		 * 
+		 * @param leadPath
+		 *            DOCUMENT ME!
+		 * @param refreshDir
+		 *            DOCUMENT ME!
+		 */
+		public RefreshWorker(TreePath leadPath, boolean refreshDir) {
+			this.leadPath = leadPath;
+			this.refreshDir = refreshDir;
+		}
 
-                files = getFiles(dir);
-                setProgress(50);
-                dirs  = openDirectory(dir);
-                setProgress(100);
-            }
-            
-            return dir;
-    	}
-    	
-    	protected void done() {
-    		directoryTreeModel.insertAllInto(dirs, root);
-            fileListModel.removeAllElements();
-            fileListModel.addAll(files);
-            directoryTree.setModel(directoryTreeModel);
+		/**
+		 * DOCUMENT ME!
+		 */
+		protected Object doInBackground() throws Exception {
+			selected = (DefaultMutableTreeNode) leadPath.getLastPathComponent();
 
-            directoryTree.expandRow(0);
-    	}
-    }
+			dir = (File) selected.getUserObject();
+			files = getFiles(dir);
+			dirs = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
+			
+			setProgress(100);
+
+			return dir;
+		}
+
+		protected void done() {
+			if (dir.exists()) {
+				if (refreshDir) {
+					selected.removeAllChildren();
+					directoryTreeModel.insertAllInto(dirs, selected);
+					directoryTreeModel.nodeStructureChanged(selected);
+				} else if (selected.isLeaf()) {
+					directoryTreeModel.insertAllInto(dirs, selected);
+				}
+
+				fileListModel.removeAllElements();
+				fileListModel.addAll(files);
+			}
+		}
+	}
+
+	private class ReadDirectoryWorker extends SwingWorker {
+
+		private JComboBox combo = null;
+
+		private File dir = null;
+
+		private DefaultMutableTreeNode root = null;
+
+		private List files = null;
+
+		private List dirs = null;
+
+		public ReadDirectoryWorker(JComboBox combo) {
+			this.combo = combo;
+		}
+
+		protected Object doInBackground() throws Exception {
+			String dirName = (String) combo.getSelectedItem();
+
+			dir = new File(dirName);
+
+			if (dir.exists()) {
+				root = new DefaultMutableTreeNode(dir);
+				directoryTreeModel = new ShortedTreeModel(root,
+						new FileComparator());
+
+				files = getFiles(dir);
+				dirs = openDirectory(dir);
+			}
+			
+			setProgress(100);
+
+			return dir;
+		}
+
+		protected void done() {
+			directoryTreeModel.insertAllInto(dirs, root);
+			fileListModel.removeAllElements();
+			fileListModel.addAll(files);
+			directoryTree.setModel(directoryTreeModel);
+
+			directoryTree.expandRow(0);
+		}
+	}
 }
