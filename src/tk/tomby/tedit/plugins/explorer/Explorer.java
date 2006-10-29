@@ -63,8 +63,8 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.4 $
  */
-public class Explorer extends AbstractDockablePlugin implements
-		IMessageListener {
+public class Explorer extends AbstractDockablePlugin implements IMessageListener {
+
 	// ~ Static fields/initializers
 	// *****************************************************************
 
@@ -72,10 +72,8 @@ public class Explorer extends AbstractDockablePlugin implements
 	private static Log log = LogFactory.getLog(Explorer.class);
 
 	static {
-		ResourceManager.loadCategory("explorer",
-				"tk/tomby/tedit/plugins/explorer");
-		PreferenceManager.loadCategory("explorer",
-				"tk/tomby/tedit/plugins/explorer");
+		ResourceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
+		PreferenceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
 	}
 
 	// ~ Instance fields
@@ -110,11 +108,9 @@ public class Explorer extends AbstractDockablePlugin implements
 
 		setLayout(new BorderLayout());
 
-		location = PreferenceManager.getInt("explorer.location",
-				IWorkspace.PLUGIN_LEFT);
+		location = PreferenceManager.getInt("explorer.location", IWorkspace.PLUGIN_LEFT);
 
-		File rootDir = new File(PreferenceManager.getString(
-				"explorer.directory", System.getProperty("user.home")));
+		File rootDir = new File(PreferenceManager.getString("explorer.directory", System.getProperty("user.home")));
 
 		title.setText("Explorer");
 
@@ -125,23 +121,19 @@ public class Explorer extends AbstractDockablePlugin implements
 		topPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				JComboBox combo = (JComboBox) evt.getSource();
-				TaskManager.execute(new TaskManager.SwingWorkerTask(
-						new ReadDirectoryWorker(combo)));
+				TaskManager.execute(new TaskManager.SwingWorkerTask(new ReadDirectoryWorker(combo)));
 			}
 		});
 
 		internalPanel.add(BorderLayout.NORTH, topPanel);
 
-		DefaultMutableTreeNode directoryRoot = new DefaultMutableTreeNode(
-				rootDir);
+		DefaultMutableTreeNode directoryRoot = new DefaultMutableTreeNode(rootDir);
 
-		directoryTreeModel = new ShortedTreeModel(directoryRoot,
-				new FileComparator());
+		directoryTreeModel = new ShortedTreeModel(directoryRoot, new FileComparator());
 		directoryTree = new JTree(directoryTreeModel);
 		directoryTree.setCellRenderer(new DirectoryCellRenderer());
 		directoryTree.setRootVisible(true);
-		directoryTree.getSelectionModel().setSelectionMode(
-				TreeSelectionModel.SINGLE_TREE_SELECTION);
+		directoryTree.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
 		directoryTree.setEnabled(true);
 		directoryTree.setEditable(false);
 		directoryTree.setShowsRootHandles(true);
@@ -151,16 +143,15 @@ public class Explorer extends AbstractDockablePlugin implements
 				TreePath leadPath = evt.getNewLeadSelectionPath();
 
 				if ((path != null) && (leadPath != null)) {
-					TaskManager.execute(new TaskManager.SwingWorkerTask(
-							new RefreshWorker(leadPath, false)));
+					TaskManager.execute(new TaskManager.SwingWorkerTask(new RefreshWorker(leadPath, false)));
 				}
 			}
 		});
 		directoryTree.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
 				if (evt.getClickCount() == 2) {
-					DefaultMutableTreeNode node = (DefaultMutableTreeNode) directoryTree
-							.getLastSelectedPathComponent();
+					DefaultMutableTreeNode node = 
+						(DefaultMutableTreeNode) directoryTree.getLastSelectedPathComponent();
 
 					if (!node.isRoot()) {
 						File dir = (File) node.getUserObject();
@@ -172,10 +163,8 @@ public class Explorer extends AbstractDockablePlugin implements
 		});
 
 		JScrollPane directoryScroll = new JScrollPane(directoryTree);
-		directoryScroll
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		directoryScroll
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		directoryScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		directoryScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		directoryScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
 		fileListModel = new ShortedListModel(new FileComparator());
@@ -189,8 +178,7 @@ public class Explorer extends AbstractDockablePlugin implements
 
 					TaskManager.execute(new Runnable() {
 						public void run() {
-							File file = (File) fileListModel
-									.getElementAt(index);
+							File file = (File) fileListModel.getElementAt(index);
 
 							if (log.isDebugEnabled()) {
 								log.debug(file);
@@ -207,17 +195,13 @@ public class Explorer extends AbstractDockablePlugin implements
 		});
 
 		JScrollPane filesScroll = new JScrollPane(fileList);
-		filesScroll
-				.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		filesScroll
-				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		filesScroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		filesScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		filesScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
-		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll,
-				filesScroll);
+		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll, filesScroll);
 		splitPane.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
-		splitPane.setDividerLocation(PreferenceManager.getInt(
-				"explorer.divider", 0));
+		splitPane.setDividerLocation(PreferenceManager.getInt("explorer.divider", 0));
 
 		List dirs = openDirectory(rootDir);
 		directoryTreeModel.insertAllInto(dirs, directoryRoot);
@@ -240,8 +224,7 @@ public class Explorer extends AbstractDockablePlugin implements
 	 * DOCUMENT ME!
 	 */
 	public void init() {
-		WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION,
-				this);
+		WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
 	}
 
 	/**
@@ -260,10 +243,8 @@ public class Explorer extends AbstractDockablePlugin implements
 	 */
 	public void save() {
 		PreferenceManager.putInt("explorer.location", location);
-		PreferenceManager.putInt("explorer.divider", splitPane
-				.getDividerLocation());
-		PreferenceManager.putString("explorer.directory", topPanel
-				.getDirectory());
+		PreferenceManager.putInt("explorer.divider", splitPane.getDividerLocation());
+		PreferenceManager.putString("explorer.directory", topPanel.getDirectory());
 	}
 
 	/**
