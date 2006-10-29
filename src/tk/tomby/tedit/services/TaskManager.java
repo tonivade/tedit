@@ -120,6 +120,7 @@ public class TaskManager {
 		
 		public void init() {
 			TaskManager.initProgress(this);
+			setProgress(minimun);
 		}
 		
 		public boolean isDone() {
@@ -194,8 +195,8 @@ public class TaskManager {
 		}
 		
 		public void init() {
-			super.init();
-			this.worker.addPropertyChangeListener(this);
+			TaskManager.initProgress(this);
+			worker.addPropertyChangeListener(this);
 		}
 		
 		public void propertyChange(PropertyChangeEvent evt) {
