@@ -361,8 +361,6 @@ public class Explorer extends AbstractDockablePlugin implements
 			files = getFiles(dir);
 			dirs = (refreshDir || selected.isLeaf()) ? openDirectory(dir) : null;
 			
-			setProgress(100);
-
 			return dir;
 		}
 
@@ -378,6 +376,8 @@ public class Explorer extends AbstractDockablePlugin implements
 
 				fileListModel.removeAllElements();
 				fileListModel.addAll(files);
+				
+				setProgress(100);
 			}
 		}
 	}
@@ -412,8 +412,6 @@ public class Explorer extends AbstractDockablePlugin implements
 				dirs = openDirectory(dir);
 			}
 			
-			setProgress(100);
-
 			return dir;
 		}
 
@@ -424,6 +422,8 @@ public class Explorer extends AbstractDockablePlugin implements
 			directoryTree.setModel(directoryTreeModel);
 
 			directoryTree.expandRow(0);
+			
+			setProgress(100);
 		}
 	}
 }
