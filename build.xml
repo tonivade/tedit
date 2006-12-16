@@ -10,9 +10,10 @@
     <property name="log" value="log" />
     <property name="results" value="results" />
     <property name="resources" value="resources" />
+	<property name="scripts" value="scripts" />
     <property name="config" value="config" />
 
-    <property name="version" value="0.0.2"/>
+    <property name="version" value="0.1.1"/>
 
     <property name="packages" value="tk.tomby.tedit.*" />
 
@@ -23,6 +24,7 @@
         <pathelement location="${classes}" />
         <pathelement location="${config}" />
         <pathelement location="${resources}" />
+    	<pathelement location="${scripts}" />
         <fileset dir="${lib}" >
             <include name="*.jar" />
         </fileset>
@@ -94,6 +96,12 @@
         <jar jarfile="${build}/${ant.project.name}-resources-${version}.jar"
              compress="true">
              <fileset dir="${resources}">
+                <include name="**/*"/>
+             </fileset>
+        </jar>
+    	<jar jarfile="${build}/${ant.project.name}-scripts-${version}.jar"
+             compress="true">
+             <fileset dir="${scripts}">
                 <include name="**/*"/>
              </fileset>
         </jar>
