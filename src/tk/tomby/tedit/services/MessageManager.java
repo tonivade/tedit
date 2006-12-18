@@ -20,20 +20,19 @@
 
 package tk.tomby.tedit.services;
 
-import java.lang.reflect.InvocationTargetException;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.beanutils.MethodUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import tk.tomby.tedit.messages.ActivationMessage;
+import tk.tomby.tedit.messages.BufferMessage;
 import tk.tomby.tedit.messages.IMessage;
 import tk.tomby.tedit.messages.IMessageListener;
+import tk.tomby.tedit.messages.PreferenceMessage;
+import tk.tomby.tedit.messages.StatusMessage;
 
 
 /**
@@ -44,9 +43,6 @@ import tk.tomby.tedit.messages.IMessageListener;
  */
 public class MessageManager {
     //~ Static fields/initializers *****************************************************************
-
-    /** DOCUMENT ME! */
-    public static final String DEFAULT_GROUP_NAME = "default";
 
     /** DOCUMENT ME! */
     public static final String ACTIVATION_GROUP_NAME = "activation";
@@ -67,30 +63,17 @@ public class MessageManager {
     public static final String DEFAULT_METHOD_NAME = "receiveMessage";
 
     /** DOCUMENT ME! */
-    private static Map groups = new HashMap();
-
-    /** DOCUMENT ME! */
-    private static Log log = LogFactory.getLog(MessageManager.class);
+    private static Map<String, GroupManager> groups = new HashMap<String, GroupManager>();
 
     static {
-        createGroup(DEFAULT_GROUP_NAME);
-        createGroup(ACTIVATION_GROUP_NAME);
-        createGroup(BUFFER_GROUP_NAME);
-        createGroup(STATUS_GROUP_NAME);
-        createGroup(WORKSPACE_GROUP_NAME);
-        createGroup(PREFERENCE_GROUP_NAME);
+        addGroup(ACTIVATION_GROUP_NAME, new GroupManager<ActivationMessage>());
+        addGroup(BUFFER_GROUP_NAME, new GroupManager<BufferMessage>());
+        addGroup(STATUS_GROUP_NAME, new GroupManager<StatusMessage>());
+        addGroup(WORKSPACE_GROUP_NAME, new GroupManager<WorkspaceManager>());
+        addGroup(PREFERENCE_GROUP_NAME, new GroupManager<PreferenceMessage>());
     }
 
     //~ Methods ************************************************************************************
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param listener DOCUMENT ME!
-     */
-    public static void addMessageListener(IMessageListener listener) {
-        addMessageListener(DEFAULT_GROUP_NAME, listener);
-    }
 
     /**
      * DOCUMENT ME!
@@ -100,7 +83,7 @@ public class MessageManager {
      */
     public static void addMessageListener(String           groupName,
                                           IMessageListener listener) {
-        GroupManager group = (GroupManager) groups.get(groupName);
+        GroupManager group = groups.get(groupName);
 
         if (group != null) {
             group.addMessageListener(listener);
@@ -112,17 +95,8 @@ public class MessageManager {
      *
      * @param groupName DOCUMENT ME!
      */
-    public static void createGroup(String groupName) {
-        groups.put(groupName, new GroupManager());
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param listener DOCUMENT ME!
-     */
-    public static void removeMessageListener(IMessageListener listener) {
-        removeMessageListener(DEFAULT_GROUP_NAME, listener);
+    public static void addGroup(String groupName, GroupManager groupManager) {
+        groups.put(groupName, groupManager);
     }
 
     /**
@@ -133,20 +107,11 @@ public class MessageManager {
      */
     public static void removeMessageListener(String           groupName,
                                              IMessageListener listener) {
-        GroupManager group = (GroupManager) groups.get(groupName);
+        GroupManager group = groups.get(groupName);
 
         if (group != null) {
             group.removeMessageListener(listener);
         }
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param message DOCUMENT ME!
-     */
-    public static void sendMessage(IMessage message) {
-        sendMessage(DEFAULT_GROUP_NAME, message);
     }
 
     /**
@@ -157,7 +122,7 @@ public class MessageManager {
      */
     public static void sendMessage(String   groupName,
                                    IMessage message) {
-        GroupManager group = (GroupManager) groups.get(groupName);
+        GroupManager group = groups.get(groupName);
 
         if (group != null) {
             Dispacher dispacher = new Dispacher(group, message);
@@ -174,22 +139,17 @@ public class MessageManager {
      * @author $Author: amunoz $
      * @version $Revision: 1.1.1.1 $
      */
-    public static class GroupManager {
+    public static class GroupManager<T> {
         /** DOCUMENT ME! */
-        private List listeners = new ArrayList();
-
-        /** DOCUMENT ME! */
-        private Object monitor = new Object();
+        private List<IMessageListener<T>> listeners = Collections.synchronizedList(new ArrayList<IMessageListener<T>>());
 
         /**
          * DOCUMENT ME!
          *
          * @param listener DOCUMENT ME!
          */
-        public void addMessageListener(IMessageListener listener) {
-            synchronized (monitor) {
-                listeners.add(listener);
-            }
+        public void addMessageListener(IMessageListener<T> listener) {
+            listeners.add(listener);
         }
 
         /**
@@ -197,10 +157,8 @@ public class MessageManager {
          *
          * @param listener DOCUMENT ME!
          */
-        public void removeMessageListener(IMessageListener listener) {
-            synchronized (monitor) {
-                listeners.remove(listener);
-            }
+        public void removeMessageListener(IMessageListener<T> listener) {
+            listeners.remove(listener);
         }
 
         /**
@@ -208,29 +166,13 @@ public class MessageManager {
          *
          * @param message DOCUMENT ME!
          */
-        public void sendMessage(IMessage message) {
-            synchronized (monitor) {
-                for (Iterator i = listeners.iterator(); i.hasNext();) {
-                    IMessageListener listener = (IMessageListener) i.next();
-
-                    try {
-                        MethodUtils.invokeExactMethod(listener, DEFAULT_METHOD_NAME, message);
-                    } catch (NoSuchMethodException e) {
-                        try {
-                            MethodUtils.invokeMethod(listener, DEFAULT_METHOD_NAME, message);
-                        } catch (NoSuchMethodException e1) {
-                            log.error(e.getMessage(), e);
-                        } catch (IllegalAccessException e1) {
-                            log.error(e.getMessage(), e);
-                        } catch (InvocationTargetException e1) {
-                            log.error(e.getMessage(), e);
-                        }
-                    } catch (IllegalAccessException e) {
-                        log.error(e.getMessage(), e);
-                    } catch (InvocationTargetException e) {
-                        log.error(e.getMessage(), e);
-                    }
-                }
+        public void sendMessage(T message) {
+        	List<IMessageListener<T>> listenersCopy = new ArrayList<IMessageListener<T>>(listeners);
+        	
+            for (Iterator<IMessageListener<T>> i = listenersCopy.iterator(); i.hasNext();) {
+                IMessageListener<T> listener = i.next();
+                
+                listener.receiveMessage(message);
             }
         }
     }

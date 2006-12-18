@@ -49,7 +49,7 @@ import tk.tomby.tedit.services.PreferenceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.4 $
  */
-public class MainFrame extends JFrame implements IMessageListener {
+public class MainFrame extends JFrame {
     //~ Constructors *******************************************************************************
 
     /**
@@ -58,8 +58,17 @@ public class MainFrame extends JFrame implements IMessageListener {
     public MainFrame() {
         super();
 
-        MessageManager.addMessageListener(MessageManager.ACTIVATION_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, this);
+        MessageManager.addMessageListener(MessageManager.ACTIVATION_GROUP_NAME, new IMessageListener<ActivationMessage>() {
+        	public void receiveMessage(ActivationMessage message) {
+        		MainFrame.this.receiveMessage(message);
+        	}
+        });
+        
+        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, new IMessageListener<WorkspaceMessage>() {
+        	public void receiveMessage(WorkspaceMessage message) {
+        		MainFrame.this.receiveMessage(message);
+        	}
+        });
 
         this.setTitle(Main.NAME + " - " + Main.VERSION);
 

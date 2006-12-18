@@ -29,7 +29,7 @@ import java.util.Comparator;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class FileComparator implements Comparator {
+public class FileComparator<File> implements Comparator {
     //~ Methods ************************************************************************************
 
     /**

@@ -42,7 +42,7 @@ import tk.tomby.tedit.services.ResourceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class SplashWindow extends JWindow implements IMessageListener {
+public class SplashWindow extends JWindow implements IMessageListener<ActivationMessage> {
     //~ Constructors *******************************************************************************
 
     /**
@@ -74,7 +74,7 @@ public class SplashWindow extends JWindow implements IMessageListener {
      * @param message DOCUMENT ME!
      */
     public void receiveMessage(ActivationMessage message) {
-        MessageManager.removeMessageListener(this);
+        MessageManager.removeMessageListener(MessageManager.ACTIVATION_GROUP_NAME, this);
         
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

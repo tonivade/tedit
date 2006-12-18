@@ -46,7 +46,7 @@ public class ActionManager {
     private static Log log = LogFactory.getLog(ActionManager.class);
 
     /** DOCUMENT ME! */
-    private static Map actions = new HashMap();
+    private static Map<String, Action> actions = new HashMap<String, Action>();
 
     //~ Methods ************************************************************************************
 
@@ -58,7 +58,7 @@ public class ActionManager {
      * @return DOCUMENT ME!
      */
     public static Action getAction(String name) {
-        return (Action) actions.get(name);
+        return actions.get(name);
     }
 
     /**
@@ -67,7 +67,7 @@ public class ActionManager {
      * @param action DOCUMENT ME!
      */
     public static void addAction(Action action) {
-        actions.put(action.getValue("name"), action);
+        actions.put((String) action.getValue("name"), action);
     }
 
     /**
@@ -80,7 +80,7 @@ public class ActionManager {
      */
     public static Action createFromClass(String actionName,
                                          String actionClass) {
-        Action action = (Action) actions.get(actionName);
+        Action action = actions.get(actionName);
 
         if (action == null) {
             try {
@@ -115,7 +115,7 @@ public class ActionManager {
     public static Action createFromScriptlet(String actionName,
                                              String scriptLang,
                                              String scriptFile) {
-        Action action = (Action) actions.get(actionName);
+        Action action = actions.get(actionName);
 
         if (action == null) {
             action = new ScriptletAction(actionName, scriptLang, scriptFile);

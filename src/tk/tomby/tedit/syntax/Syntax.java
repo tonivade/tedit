@@ -190,10 +190,10 @@ public class Syntax {
     public static final String UNKNOWN_NAME = "unknown";
 
     /** DOCUMENT ME! */
-    public static final Map NAME_INDEX = new HashMap();
+    public static final Map<String, Integer> NAME_INDEX = new HashMap<String, Integer>();
 
     /** DOCUMENT ME! */
-    public static final Map VALUE_INDEX = new HashMap();
+    public static final Map<Integer, String> VALUE_INDEX = new HashMap<Integer, String>();
 
     static {
         NAME_INDEX.put(KEYWORD1_NAME, new Integer(KEYWORD1));
@@ -254,7 +254,7 @@ public class Syntax {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private Map states = new HashMap();
+    private Map<String, State> states = new HashMap<String, State>();
 
     /** DOCUMENT ME! */
     private String contentType = null;
@@ -281,7 +281,7 @@ public class Syntax {
      * @return DOCUMENT ME!
      */
     public static String getTokenName(int value) {
-        String name = (String) VALUE_INDEX.get(new Integer(value));
+        String name = VALUE_INDEX.get(new Integer(value));
 
         return (name != null) ? name : UNKNOWN_NAME;
     }
@@ -294,7 +294,7 @@ public class Syntax {
      * @return DOCUMENT ME!
      */
     public static int getTokenValue(String name) {
-        Integer value = (Integer) NAME_INDEX.get(name);
+        Integer value = NAME_INDEX.get(name);
 
         return (value != null) ? value.intValue() : UNKNOWN;
     }
@@ -323,7 +323,7 @@ public class Syntax {
      * @return Returns the mainState.
      */
     public State getMainState() {
-        return (State) states.get(State.MAIN);
+        return states.get(State.MAIN);
     }
 
     /**
@@ -352,7 +352,7 @@ public class Syntax {
      * @return DOCUMENT ME!
      */
     public State getState(String name) {
-        return (State) states.get(name);
+        return states.get(name);
     }
 
     /**
@@ -377,7 +377,7 @@ public class Syntax {
         private static final String MAIN = "main";
 
         /** DOCUMENT ME! */
-        private Map groups = new TreeMap();
+        private Map<Integer, List<IRule>> groups = new TreeMap<Integer, List<IRule>>();
 
         /** DOCUMENT ME! */
         private String name = MAIN;
@@ -406,7 +406,7 @@ public class Syntax {
          *
          * @return DOCUMENT ME!
          */
-        public Map getGroups() {
+        public Map<Integer, List<IRule>> getGroups() {
             return groups;
         }
 
@@ -642,11 +642,11 @@ public class Syntax {
          *
          * @return DOCUMENT ME!
          */
-        private List getGroup(int type) {
-            List group = (List) groups.get(new Integer(type));
+        private List<IRule> getGroup(int type) {
+            List<IRule> group = groups.get(new Integer(type));
 
             if (group == null) {
-                group = new ArrayList();
+                group = new ArrayList<IRule>();
 
                 groups.put(new Integer(type), group);
             }

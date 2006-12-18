@@ -33,7 +33,7 @@ public class RunScriptAction extends AbstractAction {
 			try {
 				File script = chooser.getSelectedFile();
 				final InputStream in = new FileInputStream(script);
-				final String lang = ScriptingManager.getLanguage(script.getName()); 
+				final String lang = ScriptingManager.getLanguage(script.getName());
 
 				if (lang != null) {
 					TaskManager.execute(new TaskManager.Task(0, 100, 10) {

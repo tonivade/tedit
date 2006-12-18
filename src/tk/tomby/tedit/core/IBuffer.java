@@ -26,6 +26,7 @@ import java.net.URL;
 import java.util.Iterator;
 
 import javax.swing.text.Document;
+import javax.swing.text.Element;
 
 
 /**
@@ -251,14 +252,14 @@ public interface IBuffer {
      * 
      * @return DOCUMENT ME!
      */
-    public abstract Iterator elementIterator();
+    public abstract Iterator<Element> elementIterator();
     
     /**
      * DOCUMENT ME!
      * 
      * @return DOCUMENT ME!
      */
-    public abstract Iterator lineIterator();
+    public abstract Iterator<String> lineIterator();
     
     /**
      * DOCUMENT ME!

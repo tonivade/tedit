@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ProgressMonitor;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdesktop.swingworker.SwingWorker;
 
 import tk.tomby.tedit.messages.StatusMessage;
 
@@ -30,7 +30,7 @@ public class TaskManager {
 	private static Timer timer;
 	
 	private static Executor pool = 
-		new ThreadPoolExecutor(5, 20, 1000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue());
+		new ThreadPoolExecutor(5, 20, 1000, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 	
 	public static void execute(Runnable work) {
 		pool.execute(work);

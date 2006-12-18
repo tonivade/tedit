@@ -35,7 +35,7 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private Comparator comparator = null;
+    private Comparator<Object> comparator = null;
 
     //~ Constructors *******************************************************************************
 
@@ -44,7 +44,7 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
      *
      * @param comparator DOCUMENT ME!
      */
-    public ShortedComboBoxModel(Comparator comparator) {
+    public ShortedComboBoxModel(Comparator<Object> comparator) {
         super();
 
         this.comparator = comparator;

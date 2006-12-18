@@ -37,7 +37,7 @@ public class ShortedListModel extends DefaultListModel {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private Comparator comparator = null;
+    private Comparator<Object> comparator = null;
 
     //~ Constructors *******************************************************************************
 
@@ -46,7 +46,7 @@ public class ShortedListModel extends DefaultListModel {
      *
      * @param comparator DOCUMENT ME!
      */
-    public ShortedListModel(Comparator comparator) {
+    public ShortedListModel(Comparator<Object> comparator) {
         super();
 
         this.comparator = comparator;
@@ -72,7 +72,7 @@ public class ShortedListModel extends DefaultListModel {
      */
     public void addAll(Collection c) {
         for (Iterator iter = c.iterator(); iter.hasNext();) {
-            Object element = (Object) iter.next();
+            Object element = iter.next();
             addElement(element);
         }
     }

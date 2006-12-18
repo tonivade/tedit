@@ -36,7 +36,7 @@ public class Catalog {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private Map extensionCatalog = new HashMap();
+    private Map<String, String> extensionCatalog = new HashMap<String, String>();
 
     //~ Methods ************************************************************************************
 
@@ -48,7 +48,7 @@ public class Catalog {
      * @return DOCUMENT ME!
      */
     public String getSyntaxName(String extension) {
-        return (String) extensionCatalog.get(extension);
+        return extensionCatalog.get(extension);
     }
 
     /**
@@ -57,10 +57,10 @@ public class Catalog {
      * @param syntax DOCUMENT ME!
      */
     public void addSyntax(Syntax syntax) {
-        List collection = syntax.getExtensions();
+        List<Extension> collection = syntax.getExtensions();
 
-        for (Iterator iter = collection.iterator(); iter.hasNext();) {
-            Extension extension = (Extension) iter.next();
+        for (Iterator<Extension> iter = collection.iterator(); iter.hasNext();) {
+            Extension extension = iter.next();
 
             extensionCatalog.put(extension.getValue(), syntax.getName());
         }

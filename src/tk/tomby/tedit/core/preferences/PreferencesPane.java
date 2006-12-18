@@ -80,7 +80,7 @@ public class PreferencesPane extends JPanel implements IPreferences {
     private JTree preferencesTree = null;
 
     /** DOCUMENT ME! */
-    private Map preferences = null;
+    private Map<String, IPreferencePage> preferences = null;
 
     //~ Constructors *******************************************************************************
 
@@ -92,7 +92,7 @@ public class PreferencesPane extends JPanel implements IPreferences {
 
         ResourceManager.loadCategory(CATEGORY_NAME, RESOURCE_ROOT);
 
-        preferences = new TreeMap();
+        preferences = new TreeMap<String, IPreferencePage>();
 
         setLayout(new BorderLayout());
 
@@ -151,12 +151,9 @@ public class PreferencesPane extends JPanel implements IPreferences {
 
                     if ((path != null) && (leadPath != null)) {
                         DefaultMutableTreeNode selected =
-                                                 (DefaultMutableTreeNode) leadPath
-                                                 .getLastPathComponent();
+                        	(DefaultMutableTreeNode) leadPath.getLastPathComponent();
 
-                        IPreferencePage preferencePage =
-                                                 (IPreferencePage) preferences.get(selected
-                                                                                   .getUserObject());
+                        IPreferencePage preferencePage = preferences.get(selected.getUserObject());
 
                         preferencesPane.removeAll();
                         preferencesPane.add((JComponent) preferencePage, BorderLayout.CENTER);

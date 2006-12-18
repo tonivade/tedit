@@ -37,7 +37,7 @@ public class SyntaxManager {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */
-    private static Map syntaxPool = new HashMap();
+    private static Map<String, Syntax> syntaxPool = new HashMap<String, Syntax>();
 
     //~ Methods ************************************************************************************
 
@@ -64,7 +64,7 @@ public class SyntaxManager {
      * @return DOCUMENT ME!
      */
     public static Syntax getSyntax(String syntaxName) {
-        Syntax syntax = (Syntax) syntaxPool.get(syntaxName);
+        Syntax syntax = syntaxPool.get(syntaxName);
 
         if (syntax == null) {
             syntax = createSyntax(syntaxName);

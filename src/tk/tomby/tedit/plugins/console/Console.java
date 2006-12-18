@@ -46,7 +46,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  *
  * @author tomby
  */
-public class Console extends AbstractDockablePlugin implements IMessageListener {
+public class Console extends AbstractDockablePlugin implements IMessageListener<IMessage> {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
@@ -84,7 +84,6 @@ public class Console extends AbstractDockablePlugin implements IMessageListener 
 
         MessageManager.addMessageListener(MessageManager.ACTIVATION_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.DEFAULT_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.STATUS_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.PREFERENCE_GROUP_NAME, this);

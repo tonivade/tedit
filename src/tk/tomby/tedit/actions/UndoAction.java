@@ -42,7 +42,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class UndoAction extends AbstractAction implements IMessageListener {
+public class UndoAction extends AbstractAction {
     //~ Constructors *******************************************************************************
 
     /**
@@ -52,8 +52,16 @@ public class UndoAction extends AbstractAction implements IMessageListener {
         super("undo");
         this.setEnabled(false);
 
-        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, this);
+        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, new IMessageListener<BufferMessage>() {
+        	public void receiveMessage(BufferMessage message) {
+        		UndoAction.this.receiveMessage(message);
+        	}
+        });
+        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, new IMessageListener<WorkspaceMessage>() {
+        	public void receiveMessage(WorkspaceMessage message) {
+        		UndoAction.this.receiveMessage(message);
+        	}
+        });
     }
 
     //~ Methods ************************************************************************************

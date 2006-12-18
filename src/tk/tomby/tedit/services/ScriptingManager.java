@@ -28,14 +28,21 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.Iterator;
 
+import javax.script.Bindings;
+import javax.script.ScriptContext;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineFactory;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.SwingUtilities;
 import javax.swing.text.Document;
-
-import org.apache.bsf.BSFException;
-import org.apache.bsf.BSFManager;
+import javax.swing.text.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.sun.script.groovy.GroovyScriptEngineFactory;
+import com.sun.script.jruby.JRubyScriptEngineFactory;
 
 import tk.tomby.tedit.core.IBuffer;
 
@@ -60,12 +67,13 @@ public class ScriptingManager {
 
     /** DOCUMENT ME! */
     public static String DEFAULT_LANGUAGE = GROOVY_LANGUAGE;
-
+    
+    /** DOCUMENT ME! */ 
+    private static ScriptEngineManager manager = new ScriptEngineManager();
+    
     static {
-        register(GROOVY_LANGUAGE, "org.codehaus.groovy.bsf.GroovyEngine",
-                 new String[] { "groovy", "gy" });
-        register(RUBY_LANGUAGE, "org.jruby.javasupport.bsf.JRubyEngine",
-                 new String[] { "rb" });
+    	register("ruby", new String[] { "rb" }, new JRubyScriptEngineFactory());
+    	register("groovy", new String[] { "gy", "groovy" }, new GroovyScriptEngineFactory());
     }
 
     //~ Methods ************************************************************************************
@@ -96,17 +104,19 @@ public class ScriptingManager {
                               String  script,
                               IBuffer buffer) {
         Object result = null;
-
-        BSFManager manager = new BSFManager();
-
+        
         try {
-            if (buffer != null) {
-            	manager.declareBean("buffer", new BufferDecorator(buffer), BufferDecorator.class);
+        	ScriptEngine engine = manager.getEngineByName(lang);
+        	
+        	if (buffer != null) {
+            	Bindings bindings = engine.createBindings();
+            	bindings.put("buffer", new BufferDecorator(buffer));
+            	engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
             }
 
-            result = manager.eval(lang, "eval", 0, 0, script);
-        } catch (BSFException e) {
-            log.warn(e);
+            result = engine.eval(script);
+        } catch (ScriptException e) {
+            log.error(e);
         }
 
         return result;
@@ -118,9 +128,9 @@ public class ScriptingManager {
      * @param lang DOCUMENT ME!
      * @param script DOCUMENT ME!
      */
-    public static void exec(String lang,
-                            InputStream script) {
-        exec(lang, script, null);
+    public static Object exec(String lang,
+                              InputStream script) {
+        return exec(lang, script, null);
     }
 
     /**
@@ -130,58 +140,75 @@ public class ScriptingManager {
      * @param script DOCUMENT ME!
      * @param buffer DOCUMENT ME!
      */
-    public static void exec(String  lang,
-                            InputStream  stream,
-                            IBuffer buffer) {
-        BSFManager manager = new BSFManager();
-
+    public static Object exec(String  lang,
+                              InputStream  stream,
+                              IBuffer buffer) {
+    	Object result = null;
+    	BufferedReader reader = null;
+        
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-
-            StringBuffer sb = new StringBuffer();
-
-            for (String line = ""; (line = reader.readLine()) != null;) {
-                sb.append(line).append("\n");
-            }
+        	ScriptEngine engine = manager.getEngineByName(lang);
+        	
+            reader = new BufferedReader(new InputStreamReader(stream));
 
             if (buffer != null) {
-                manager.declareBean("buffer", new BufferDecorator(buffer), BufferDecorator.class);
+            	Bindings bindings = engine.createBindings();
+            	bindings.put("buffer", new BufferDecorator(buffer));
+            	engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
             }
+            
+            engine.eval(reader);
 
-            manager.exec(lang, "script", 0, 0, sb);
-        } catch (BSFException e) {
-            log.warn(e);
-        } catch (IOException e) {
-            log.warn(e);
+        } catch (ScriptException e) {
+            log.error(e);
+        } finally {
+        	if (reader != null) {
+        		try {
+					reader.close();
+				} catch (IOException e) {
+					log.warn(e);
+				}
+        	}
         }
+        
+        return result;
     }
 
     /**
      * DOCUMENT ME!
      *
-     * @param lang DOCUMENT ME!
+     * @param name DOCUMENT ME!
      * @param engine DOCUMENT ME!
      * @param exts DOCUMENT ME!
      */
-    public static void register(String   lang,
-                                String   engine,
-                                String[] exts) {
-        BSFManager.registerScriptingEngine(lang, engine, exts);
+    public static void register(String name,
+                                String[] exts,
+                                ScriptEngineFactory factory) {
+        manager.registerEngineName(name, factory);
+        
+        for (int i = 0; i < exts.length; i++) {
+			manager.registerEngineExtension(exts[i], factory);
+		}
     }
     
-    /**
-     * DOCUMENT ME!
-     * 
-     * @param file DOCUMENT ME!
-     * @return DOCUMENT ME!
-     */
-    public static String getLanguage(String file) {
-    	try {
-			return BSFManager.getLangFromFilename(file);
-		} catch (BSFException e) {
-			log.warn("cannot found language for file " + file);
+    public static String getLanguage(String name) {
+		ScriptEngine engine = manager.getEngineByExtension(getExtension(name));
+		
+		if (engine != null) {
+			return engine.getFactory().getLanguageName();
 		}
+		
 		return null;
+	}
+    
+    private static String getExtension(String fileName) {
+        int index = fileName.lastIndexOf('.');
+
+        if (index > 0) {
+            return fileName.substring(index + 1);
+        }
+
+        return null;
     }
     
     public static class BufferDecorator implements IBuffer {
@@ -328,7 +355,7 @@ public class ScriptingManager {
 			buffer.undo();
 		}
 
-		public Iterator elementIterator() {
+		public Iterator<Element> elementIterator() {
 			return buffer.elementIterator();
 		}
 
@@ -340,8 +367,9 @@ public class ScriptingManager {
 			});
 		}
 
-		public Iterator lineIterator() {
+		public Iterator<String> lineIterator() {
 			return buffer.lineIterator();
 		}
     }
+
 }

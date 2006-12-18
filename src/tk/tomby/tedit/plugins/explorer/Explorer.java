@@ -37,20 +37,20 @@ import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTree;
 import javax.swing.JViewport;
+import javax.swing.SwingWorker;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.jdesktop.swingworker.SwingWorker;
 
 import tk.tomby.tedit.core.BufferFactory;
 import tk.tomby.tedit.core.IBuffer;
 import tk.tomby.tedit.core.IWorkspace;
-import tk.tomby.tedit.messages.IMessageListener;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
@@ -63,7 +63,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.4 $
  */
-public class Explorer extends AbstractDockablePlugin implements IMessageListener {
+public class Explorer extends AbstractDockablePlugin {
 
 	// ~ Static fields/initializers
 	// *****************************************************************
@@ -203,7 +203,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 		splitPane.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 		splitPane.setDividerLocation(PreferenceManager.getInt("explorer.divider", 0));
 
-		List dirs = openDirectory(rootDir);
+		List<MutableTreeNode> dirs = openDirectory(rootDir);
 		directoryTreeModel.insertAllInto(dirs, directoryRoot);
 
 		List files = getFiles(rootDir);
@@ -255,8 +255,8 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 	 * 
 	 * @return DOCUMENT ME!
 	 */
-	private List getFiles(File dir) {
-		List result = new ArrayList();
+	private List<File> getFiles(File dir) {
+		List<File> result = new ArrayList<File>();
 
 		if (dir.exists() && dir.canRead()) {
 			File[] files = dir.listFiles();
@@ -279,8 +279,8 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 	 * 
 	 * @return DOCUMENT ME!
 	 */
-	private List openDirectory(File dir) {
-		List result = new ArrayList();
+	private List<MutableTreeNode> openDirectory(File dir) {
+		List<MutableTreeNode> result = new ArrayList<MutableTreeNode>();
 
 		if (dir.exists() && dir.canRead()) {
 			File[] files = dir.listFiles();
@@ -315,9 +315,9 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 
 		private File dir = null;
 
-		private List files = null;
+		private List<File> files = null;
 
-		private List dirs = null;
+		private List<MutableTreeNode> dirs = null;
 
 		/**
 		 * Creates a new RefreshThread object.
@@ -371,9 +371,9 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 
 		private DefaultMutableTreeNode root = null;
 
-		private List files = null;
+		private List<File> files = null;
 
-		private List dirs = null;
+		private List<MutableTreeNode> dirs = null;
 
 		public ReadDirectoryWorker(JComboBox combo) {
 			this.combo = combo;
@@ -386,8 +386,7 @@ public class Explorer extends AbstractDockablePlugin implements IMessageListener
 
 			if (dir.exists()) {
 				root = new DefaultMutableTreeNode(dir);
-				directoryTreeModel = new ShortedTreeModel(root,
-						new FileComparator());
+				directoryTreeModel = new ShortedTreeModel(root, new FileComparator());
 
 				files = getFiles(dir);
 				dirs = openDirectory(dir);

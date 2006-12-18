@@ -65,7 +65,7 @@ public interface IWorkspace {
      *
      * @return DOCUMENT ME!
      */
-    public abstract List getBufferList();
+    public abstract List<IBuffer> getBufferList();
 
     /**
      * DOCUMENT ME!

@@ -78,7 +78,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class Buffer extends JPanel implements IBuffer, IMessageListener {
+public class Buffer extends JPanel implements IBuffer, IMessageListener<PreferenceMessage> {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */
@@ -646,11 +646,11 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
 		}
     }
     
-    public Iterator elementIterator() {
+    public Iterator<Element> elementIterator() {
     	return new ElementIterator(getDocument());
     }
     
-    public Iterator lineIterator() {
+    public Iterator<String> lineIterator() {
     	return new LineIterator(getDocument());
     }
 
@@ -716,7 +716,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
                                    new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
     }
     
-    class ElementIterator implements Iterator {
+    class ElementIterator implements Iterator<Element> {
     	
     	Document doc;
     	int count;
@@ -729,7 +729,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
 			return doc.getDefaultRootElement().getElementCount() > count;
 		}
 
-		public Object next() {
+		public Element next() {
 			return doc.getDefaultRootElement().getElement(count++);
 		}
 
@@ -738,7 +738,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
 		}
     }
     
-    class LineIterator implements Iterator {
+    class LineIterator implements Iterator<String> {
     	
     	Document doc;
     	int count;
@@ -751,7 +751,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener {
 			return doc.getDefaultRootElement().getElementCount() > count;
 		}
 
-		public Object next() {
+		public String next() {
 			Element line = doc.getDefaultRootElement().getElement(count++);
 			try {
 				return doc.getText(line.getStartOffset(), line.getEndOffset() - line.getStartOffset());

@@ -68,10 +68,10 @@ public class ExitAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        List buffers = WorkspaceManager.getBufferList();
+        List<IBuffer> buffers = WorkspaceManager.getBufferList();
 
-        for (Iterator iter = buffers.iterator(); iter.hasNext();) {
-            IBuffer buffer = (IBuffer) iter.next();
+        for (Iterator<IBuffer> iter = buffers.iterator(); iter.hasNext();) {
+            IBuffer buffer = iter.next();
 
             if (buffer.isModified()) {
                 if (log.isDebugEnabled()) {

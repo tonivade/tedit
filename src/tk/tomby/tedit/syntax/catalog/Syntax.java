@@ -34,7 +34,7 @@ public class Syntax {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private List extensions = new ArrayList();
+    private List<Extension> extensions = new ArrayList<Extension>();
 
     /** DOCUMENT ME! */
     private String file = "";
@@ -49,7 +49,7 @@ public class Syntax {
      *
      * @return DOCUMENT ME!
      */
-    public List getExtensions() {
+    public List<Extension> getExtensions() {
         return extensions;
     }
 

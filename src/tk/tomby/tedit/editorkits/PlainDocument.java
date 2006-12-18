@@ -39,8 +39,7 @@ import tk.tomby.tedit.services.PreferenceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class PlainDocument extends javax.swing.text.PlainDocument implements IMessageListener,
-                                                                             ICleanable {
+public class PlainDocument extends javax.swing.text.PlainDocument implements IMessageListener<PreferenceMessage>, ICleanable {
     //~ Constructors *******************************************************************************
 
     /**

@@ -94,7 +94,7 @@ public class WorkspaceManager {
      *
      * @return DOCUMENT ME!
      */
-    public static List getBufferList() {
+    public static List<IBuffer> getBufferList() {
         return instance.workspace.getBufferList();
     }
 

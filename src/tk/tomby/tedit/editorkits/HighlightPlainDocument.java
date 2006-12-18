@@ -47,8 +47,7 @@ import tk.tomby.tedit.syntax.Tokenizer;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class HighlightPlainDocument extends AbstractDocument implements IMessageListener,
-                                                                        ICleanable {
+public class HighlightPlainDocument extends AbstractDocument implements IMessageListener<PreferenceMessage>, ICleanable {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */
@@ -66,10 +65,10 @@ public class HighlightPlainDocument extends AbstractDocument implements IMessage
     private Tokenizer tokenizer = null;
 
     /** DOCUMENT ME! */
-    private Vector added = new Vector();
+    private Vector<Element> added = new Vector<Element>();
 
     /** DOCUMENT ME! */
-    private Vector removed = new Vector();
+    private Vector<Element> removed = new Vector<Element>();
 
     //~ Constructors *******************************************************************************
 

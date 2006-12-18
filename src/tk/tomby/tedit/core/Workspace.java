@@ -77,7 +77,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class Workspace extends JPanel implements IMessageListener, IWorkspace {
+public class Workspace extends JPanel implements IWorkspace {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */
@@ -116,8 +116,16 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
 
         this.setLayout(new BorderLayout());
 
-        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.PREFERENCE_GROUP_NAME, this);
+        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, new IMessageListener<BufferMessage>() {
+        	public void receiveMessage(BufferMessage message) {
+        		Workspace.this.receiveMessage(message);
+        	}
+        });
+        MessageManager.addMessageListener(MessageManager.PREFERENCE_GROUP_NAME, new IMessageListener<PreferenceMessage>() {
+        	public void receiveMessage(PreferenceMessage message) {
+        		Workspace.this.receiveMessage(message);
+        	}
+        });
 
         bufferPane = new JTabbedPane();
         bufferPane.setMinimumSize(new Dimension(600, 400));
@@ -249,8 +257,8 @@ public class Workspace extends JPanel implements IMessageListener, IWorkspace {
      *
      * @return DOCUMENT ME!
      */
-    public List getBufferList() {
-        List buffers = new ArrayList();
+    public List<IBuffer> getBufferList() {
+        List<IBuffer> buffers = new ArrayList<IBuffer>();
 
         for (int i = 0; i < bufferPane.getTabCount(); i++) {
             buffers.add((IBuffer) bufferPane.getComponentAt(i));

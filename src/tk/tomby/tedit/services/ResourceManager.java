@@ -53,7 +53,7 @@ public class ResourceManager {
     private static Log log = LogFactory.getLog(ResourceManager.class);
 
     /** DOCUMENT ME! */
-    private static Map categories = new HashMap();
+    private static Map<String, Category> categories = new HashMap<String, Category>();
 
     static {
         loadCategory(MAIN_CATEGORY_NAME, DEFAULT_RESOURCE_ROOT);
@@ -164,7 +164,7 @@ public class ResourceManager {
                                 String iconKey) {
         Icon icon = null;
 
-        Category category = (Category) categories.get(categoryName);
+        Category category = categories.get(categoryName);
 
         if (category != null) {
             icon = category.getIcon(iconKey);
@@ -208,7 +208,7 @@ public class ResourceManager {
                                       String key) {
         String property = null;
 
-        Category category = (Category) categories.get(categoryName);
+        Category category = categories.get(categoryName);
 
         if (category != null) {
             property = category.getProperty(key);

@@ -47,7 +47,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class StatusBar extends JPanel implements IMessageListener, IStatusBar {
+public class StatusBar extends JPanel implements IStatusBar {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
@@ -69,9 +69,21 @@ public class StatusBar extends JPanel implements IMessageListener, IStatusBar {
 
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 
-        MessageManager.addMessageListener(MessageManager.STATUS_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, this);
-        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, this);
+        MessageManager.addMessageListener(MessageManager.STATUS_GROUP_NAME, new IMessageListener<StatusMessage>() {
+        	public void receiveMessage(StatusMessage message) {
+        		StatusBar.this.receiveMessage(message);
+        	}
+        });
+        MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, new IMessageListener<BufferMessage>() {
+        	public void receiveMessage(BufferMessage message) {
+        		StatusBar.this.receiveMessage(message);
+        	}
+        });
+        MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, new IMessageListener<WorkspaceMessage>() {
+        	public void receiveMessage(WorkspaceMessage message) {
+        		StatusBar.this.receiveMessage(message);
+        	}
+        });
 
         status = new JLabel(ResourceManager.getProperty("main.statusbar.initial"), JLabel.LEFT);
         status.setPreferredSize(new Dimension(200, 0));

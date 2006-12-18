@@ -47,7 +47,7 @@ public class PreferenceManager {
     private static Log log = LogFactory.getLog(PreferenceManager.class);
 
     /** DOCUMENT ME! */
-    private static Map categories = new HashMap();
+    private static Map<String, Category> categories = new HashMap<String, Category>();
 
     static {
         loadCategory(MAIN_CATEGORY_NAME, DEFAULT_PREFERENCE_ROOT);
@@ -230,7 +230,7 @@ public class PreferenceManager {
             category = key.substring(0, index);
         }
 
-        return (Category) categories.get(category);
+        return categories.get(category);
     }
 
     //~ Inner Classes ******************************************************************************

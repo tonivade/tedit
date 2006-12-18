@@ -43,7 +43,7 @@ public class PluginManager {
     private static Log log = LogFactory.getLog(PluginManager.class);
 
     /** DOCUMENT ME! */
-    private static Map plugins = new HashMap();
+    private static Map<String, IPlugin> plugins = new HashMap<String, IPlugin>();
 
     //~ Methods ************************************************************************************
 
@@ -55,7 +55,7 @@ public class PluginManager {
      * @return DOCUMENT ME!
      */
     public static IPlugin getPlugin(String name) {
-        return (IPlugin) plugins.get(name);
+        return plugins.get(name);
     }
 
     /**
@@ -89,9 +89,8 @@ public class PluginManager {
      * DOCUMENT ME!
      */
     public static void save() {
-        for (Iterator iter = plugins.keySet().iterator(); iter.hasNext();) {
-            String name    = (String) iter.next();
-            IPlugin plugin = (IPlugin) plugins.get(name);
+        for (Iterator<IPlugin> iter = plugins.values().iterator(); iter.hasNext();) {
+        	IPlugin plugin = iter.next();
             plugin.save();
         }
     }

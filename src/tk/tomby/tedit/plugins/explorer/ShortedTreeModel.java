@@ -39,7 +39,7 @@ public class ShortedTreeModel extends DefaultTreeModel {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
-    private Comparator comparator = null;
+    private Comparator<Object> comparator = null;
 
     //~ Constructors *******************************************************************************
 
@@ -50,7 +50,7 @@ public class ShortedTreeModel extends DefaultTreeModel {
      * @param comparator DOCUMENT ME!
      */
     public ShortedTreeModel(TreeNode   node,
-                            Comparator comparator) {
+                            Comparator<Object> comparator) {
         super(node);
 
         this.comparator = comparator;
@@ -65,7 +65,7 @@ public class ShortedTreeModel extends DefaultTreeModel {
      */
     public ShortedTreeModel(TreeNode   node,
                             boolean    askAllowsChildren,
-                            Comparator comparator) {
+                            Comparator<Object> comparator) {
         super(node, askAllowsChildren);
 
         this.comparator = comparator;
@@ -79,10 +79,10 @@ public class ShortedTreeModel extends DefaultTreeModel {
      * @param c DOCUMENT ME!
      * @param parent DOCUMENT ME!
      */
-    public void insertAllInto(Collection      c,
+    public void insertAllInto(Collection<MutableTreeNode> c,
                               MutableTreeNode parent) {
-        for (Iterator iter = c.iterator(); iter.hasNext();) {
-            MutableTreeNode element = (MutableTreeNode) iter.next();
+        for (Iterator<MutableTreeNode> iter = c.iterator(); iter.hasNext();) {
+            MutableTreeNode element = iter.next();
             insertNodeInto(element, parent);
         }
     }

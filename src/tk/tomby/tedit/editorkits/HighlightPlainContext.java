@@ -57,8 +57,7 @@ import tk.tomby.tedit.syntax.Tokenizer;
  * @author $Author: amunoz $
  * @version $Revision: 1.3 $
  */
-public class HighlightPlainContext extends StyleContext implements ViewFactory, IMessageListener,
-                                                                   ICleanable {
+public class HighlightPlainContext extends StyleContext implements ViewFactory, IMessageListener<PreferenceMessage>, ICleanable {
     //~ Static fields/initializers *****************************************************************
 
     /** DOCUMENT ME! */

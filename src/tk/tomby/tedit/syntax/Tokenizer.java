@@ -56,7 +56,7 @@ public class Tokenizer {
     private Matcher matcher = null;
 
     /** DOCUMENT ME! */
-    private Stack state = null;
+    private Stack<RuntimeState> state = null;
 
     /** DOCUMENT ME! */
     private String text = null;
@@ -85,7 +85,7 @@ public class Tokenizer {
      * @return DOCUMENT ME!
      */
     public RuntimeState getCurrentState() {
-        return (RuntimeState) state.peek();
+        return state.peek();
     }
 
     /**
@@ -93,7 +93,7 @@ public class Tokenizer {
      *
      * @return Returns the state.
      */
-    public Stack getState() {
+    public Stack<RuntimeState> getState() {
         return (Stack) state.clone();
     }
 
@@ -237,7 +237,7 @@ public class Tokenizer {
      * DOCUMENT ME!
      */
     private void initState() {
-        this.state = new Stack();
+        this.state = new Stack<RuntimeState>();
         this.state.push(new RuntimeState(UNINITIALIZED));
     }
 
@@ -271,7 +271,7 @@ public class Tokenizer {
         private IRule rule = null;
 
         /** DOCUMENT ME! */
-        private Map groups = null;
+        private Map<Integer, List<IRule>> groups = null;
 
         /** DOCUMENT ME! */
         private Pattern pattern = null;
@@ -314,7 +314,7 @@ public class Tokenizer {
          *
          * @return DOCUMENT ME!
          */
-        public Map getGroups() {
+        public Map<Integer, List<IRule>> getGroups() {
             Syntax.State s = resolveState(name);
 
             if (rule == null) {
@@ -322,7 +322,7 @@ public class Tokenizer {
             }
 
             if (groups == null) {
-                groups = new TreeMap();
+                groups = new TreeMap<Integer, List<IRule>>();
 
                 groups.putAll(s.getGroups());
                 getGroup(Syntax.END).add(rule);
@@ -381,11 +381,11 @@ public class Tokenizer {
          *
          * @return DOCUMENT ME!
          */
-        private List getGroup(int type) {
-            List group = (List) getGroups().get(new Integer(type));
+        private List<IRule> getGroup(int type) {
+            List<IRule> group = getGroups().get(new Integer(type));
 
             if (group == null) {
-                group = new ArrayList();
+                group = new ArrayList<IRule>();
 
                 groups.put(new Integer(type), group);
             }
@@ -403,7 +403,7 @@ public class Tokenizer {
         private String createPattern(int group) {
             StringBuffer sb = new StringBuffer();
 
-            List list = (List) getGroup(group);
+            List<IRule> list = getGroup(group);
 
             for (Iterator i = list.iterator(); i.hasNext();) {
                 IRule rule = (IRule) i.next();
