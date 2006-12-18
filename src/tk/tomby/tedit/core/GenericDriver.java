@@ -85,9 +85,9 @@ public abstract class GenericDriver {
                 object = digester.parse(input);
             }
         } catch (SAXException e) {
-            log.error(e.getMessage());
+            log.error("error in object creation", e);
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("error in object creation", e);
         }
         
         return object;

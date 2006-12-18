@@ -116,7 +116,7 @@ public class ScriptingManager {
 
             result = engine.eval(script);
         } catch (ScriptException e) {
-            log.error(e);
+            log.error("error in script excution", e);
         }
 
         return result;
@@ -160,13 +160,13 @@ public class ScriptingManager {
             engine.eval(reader);
 
         } catch (ScriptException e) {
-            log.error(e);
+            log.error("error in script excution", e);
         } finally {
         	if (reader != null) {
         		try {
 					reader.close();
 				} catch (IOException e) {
-					log.warn(e);
+					log.warn("error closing reader", e);
 				}
         	}
         }

@@ -73,9 +73,9 @@ public class PluginDriver {
                 temp = (IPlugin) digester.parse(input);
             }
         } catch (SAXException e) {
-            log.error(e.getMessage());
+            log.error("error in plugin creation", e);
         } catch (IOException e) {
-            log.error(e.getMessage());
+            log.error("error in plugin creation", e);
         }
 
         return temp;
