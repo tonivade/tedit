@@ -158,7 +158,7 @@ public class ColorEditor extends JPanel implements IEditor {
             PreferenceManager.putInt(key + ".blue", background.getBlue());
 
             PreferenceMessage message = new PreferenceMessage(this, key, background);
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
 
             modified = false;
         }

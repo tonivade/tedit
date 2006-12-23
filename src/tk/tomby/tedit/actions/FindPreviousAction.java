@@ -56,8 +56,7 @@ public class FindPreviousAction extends AbstractAction {
      * @param e DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent e) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "FindPreviousAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "FindPreviousAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 

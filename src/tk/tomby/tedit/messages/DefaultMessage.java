@@ -29,6 +29,9 @@ package tk.tomby.tedit.messages;
 public class DefaultMessage implements IMessage {
     //~ Instance fields ****************************************************************************
 
+	/** DOCUMENT ME! */
+	private String group = null;
+	
     /** DOCUMENT ME! */
     private Object newValue = null;
 
@@ -51,10 +54,12 @@ public class DefaultMessage implements IMessage {
      * @param newValue DOCUMENT ME!
      * @param oldValue DOCUMENT ME!
      */
-    public DefaultMessage(Object source,
+    public DefaultMessage(String group,
+    					  Object source,
                           int    type,
                           Object newValue,
                           Object oldValue) {
+    	this.group 	  = group;
         this.source       = source;
         this.type         = type;
         this.newValue     = newValue;
@@ -68,10 +73,11 @@ public class DefaultMessage implements IMessage {
      * @param newValue DOCUMENT ME!
      * @param oldValue DOCUMENT ME!
      */
-    public DefaultMessage(Object source,
+    public DefaultMessage(String group,
+			  			  Object source,
                           Object newValue,
                           Object oldValue) {
-        this(source, 0, newValue, oldValue);
+        this(group, source, 0, newValue, oldValue);
     }
 
     /**
@@ -80,9 +86,10 @@ public class DefaultMessage implements IMessage {
      * @param source DOCUMENT ME!
      * @param newValue DOCUMENT ME!
      */
-    public DefaultMessage(Object source,
+    public DefaultMessage(String group,
+			  			  Object source,
                           Object newValue) {
-        this(source, 0, newValue, null);
+        this(group, source, 0, newValue, null);
     }
 
     /**
@@ -90,8 +97,9 @@ public class DefaultMessage implements IMessage {
      *
      * @param source DOCUMENT ME!
      */
-    public DefaultMessage(Object source) {
-        this(source, null, null);
+    public DefaultMessage(String group,
+			  			  Object source) {
+        this(group, source, null, null);
     }
 
     /**
@@ -100,9 +108,10 @@ public class DefaultMessage implements IMessage {
      * @param source DOCUMENT ME!
      * @param type DOCUMENT ME!
      */
-    public DefaultMessage(Object source,
+    public DefaultMessage(String group,
+			  			  Object source,
                           int    type) {
-        this(source, type, null, null);
+        this(group, source, type, null, null);
     }
 
     //~ Methods ************************************************************************************
@@ -142,6 +151,10 @@ public class DefaultMessage implements IMessage {
     public int getType() {
         return type;
     }
+    
+    public String getGroup() {
+    	return group;
+    }
 
     /**
      * DOCUMENT ME!
@@ -152,6 +165,7 @@ public class DefaultMessage implements IMessage {
         StringBuffer sb = new StringBuffer();
 
         sb.append("[").append("type=").append(type).append(",");
+        sb.append("group=").append(group).append(",");
         sb.append("source=").append(source).append(",");
         sb.append("oldValue=").append(oldValue).append(",");
         sb.append("newValue=").append(newValue).append("]");

@@ -132,7 +132,7 @@ public class BooleanEditor extends JPanel implements IEditor {
 
             PreferenceManager.putBoolean(key, newValue);
 
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
         }
     }
 

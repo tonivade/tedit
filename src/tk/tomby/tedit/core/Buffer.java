@@ -167,9 +167,8 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 
         editor.addCaretListener(new CaretListener() {
                 public void caretUpdate(CaretEvent evt) {
-                    MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                               new BufferMessage(evt.getSource(),
-                                                                 BufferMessage.CARET_EVENT));
+                    MessageManager.sendMessage(new BufferMessage(evt.getSource(),
+					                     BufferMessage.CARET_EVENT));
                 }
             });
 
@@ -216,9 +215,8 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
                     public void undoableEditHappened(UndoableEditEvent evt) {
                         undo.addEdit(evt.getEdit());
 
-                        MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                                   new BufferMessage(evt.getSource(),
-                                                                     BufferMessage.UNDOABLE_EDIT_EVENT));
+                        MessageManager.sendMessage(new BufferMessage(evt.getSource(),
+						                     BufferMessage.UNDOABLE_EDIT_EVENT));
 
                         if (!modifiedState) {
                             setModifiedState(true);
@@ -529,8 +527,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
     public void redo() {
         try {
             undo.redo();
-            MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                       new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
+            MessageManager.sendMessage(new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
 
             if (!modifiedState) {
                 setModifiedState(true);
@@ -627,8 +624,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
     public void undo() {
         try {
             undo.undo();
-            MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                       new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
+            MessageManager.sendMessage(new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
 
             if (!modifiedState) {
                 setModifiedState(true);
@@ -679,8 +675,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
     private void setFileName(String fileName) {
         this.fileName = fileName;
 
-        MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                   new BufferMessage(this, BufferMessage.CHANGE_FILE_EVENT));
+        MessageManager.sendMessage(new BufferMessage(this, BufferMessage.CHANGE_FILE_EVENT));
     }
 
     /**
@@ -691,8 +686,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
     private void setModifiedState(boolean modifiedState) {
         this.modifiedState = modifiedState;
 
-        MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                   new BufferMessage(this, BufferMessage.MODIFIED_FILE_EVENT));
+        MessageManager.sendMessage(new BufferMessage(this, BufferMessage.MODIFIED_FILE_EVENT));
     }
 
     /**
@@ -712,8 +706,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 
         undo.discardAllEdits();
 
-        MessageManager.sendMessage(MessageManager.BUFFER_GROUP_NAME,
-                                   new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
+        MessageManager.sendMessage(new BufferMessage(this, BufferMessage.UNDOABLE_EDIT_EVENT));
     }
     
     class ElementIterator implements Iterator<Element> {

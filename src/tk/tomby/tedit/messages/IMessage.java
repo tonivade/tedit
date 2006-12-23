@@ -28,6 +28,11 @@ package tk.tomby.tedit.messages;
  */
 public interface IMessage {
     //~ Methods ************************************************************************************
+	
+	/**
+	 * 
+	 */
+	public String getGroup();
 
     /**
      * DOCUMENT ME!

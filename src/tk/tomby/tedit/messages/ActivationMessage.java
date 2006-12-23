@@ -20,6 +20,8 @@
 
 package tk.tomby.tedit.messages;
 
+import tk.tomby.tedit.services.MessageManager;
+
 /**
  * DOCUMENT ME!
  *
@@ -41,7 +43,7 @@ public class ActivationMessage extends DefaultMessage {
                              int    type,
                              Object newValue,
                              Object oldValue) {
-        super(source, type, newValue, oldValue);
+        super(MessageManager.ACTIVATION_GROUP_NAME, source, type, newValue, oldValue);
     }
 
     /**
@@ -54,7 +56,7 @@ public class ActivationMessage extends DefaultMessage {
     public ActivationMessage(Object source,
                              Object newValue,
                              Object oldValue) {
-        super(source, newValue, oldValue);
+        super(MessageManager.ACTIVATION_GROUP_NAME, source, newValue, oldValue);
     }
 
     /**
@@ -65,7 +67,7 @@ public class ActivationMessage extends DefaultMessage {
      */
     public ActivationMessage(Object source,
                              Object newValue) {
-        super(source, newValue);
+        super(MessageManager.ACTIVATION_GROUP_NAME, source, newValue);
     }
 
     /**
@@ -74,7 +76,7 @@ public class ActivationMessage extends DefaultMessage {
      * @param source DOCUMENT ME!
      */
     public ActivationMessage(Object source) {
-        super(source);
+        super(MessageManager.ACTIVATION_GROUP_NAME, source);
     }
 
     /**
@@ -85,6 +87,6 @@ public class ActivationMessage extends DefaultMessage {
      */
     public ActivationMessage(Object source,
                              int    type) {
-        super(source, type);
+        super(MessageManager.ACTIVATION_GROUP_NAME, source, type);
     }
 }

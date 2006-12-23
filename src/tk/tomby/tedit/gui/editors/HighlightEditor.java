@@ -164,7 +164,7 @@ public class HighlightEditor extends JPanel implements IEditor {
             PreferenceManager.putBoolean(key + ".font.italic", model.isItalic());
 
             PreferenceMessage message = new PreferenceMessage(this, key, model);
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
 
             model.setModified(false);
         }

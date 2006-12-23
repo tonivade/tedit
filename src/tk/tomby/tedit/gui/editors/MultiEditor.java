@@ -152,7 +152,7 @@ public class MultiEditor extends JLabel implements IEditor {
 
             PreferenceManager.putInt(key, newValue);
 
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
         }
     }
 

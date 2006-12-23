@@ -53,8 +53,7 @@ public class PreferencesAction extends AbstractAction {
      * @param e DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent e) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "PreferencesAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "PreferencesAction"));
 
         PreferencesPane.showDialog();
     }

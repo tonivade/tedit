@@ -56,8 +56,7 @@ public class CopyAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "CopyAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "CopyAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 

@@ -20,6 +20,8 @@
 
 package tk.tomby.tedit.messages;
 
+import tk.tomby.tedit.services.MessageManager;
+
 /**
  * DOCUMENT ME!
  *
@@ -46,7 +48,7 @@ public class PreferenceMessage extends DefaultMessage {
                              String key,
                              Object newValue,
                              Object oldValue) {
-        super(source, 0, newValue, oldValue);
+        super(MessageManager.PREFERENCE_GROUP_NAME, source, 0, newValue, oldValue);
 
         this.key = key;
     }

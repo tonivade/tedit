@@ -157,9 +157,8 @@ public class Workspace extends JPanel implements IWorkspace {
 
         bufferPane.addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent evt) {
-                    MessageManager.sendMessage(MessageManager.WORKSPACE_GROUP_NAME,
-                                               new WorkspaceMessage(evt.getSource(),
-                                                                    bufferPane.getSelectedComponent()));
+                    MessageManager.sendMessage(new WorkspaceMessage(evt.getSource(),
+					                        bufferPane.getSelectedComponent()));
                 }
             });
 

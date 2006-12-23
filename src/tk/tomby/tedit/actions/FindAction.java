@@ -55,8 +55,7 @@ public class FindAction extends AbstractAction {
      * @param e DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent e) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "FindAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "FindAction"));
 
         FindReplacePane.showDialog(FindReplacePane.FIND);
     }

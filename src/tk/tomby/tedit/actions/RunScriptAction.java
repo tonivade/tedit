@@ -23,8 +23,7 @@ public class RunScriptAction extends AbstractAction {
 	}
 
 	public void actionPerformed(ActionEvent evt) {
-		MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                new StatusMessage(this, "RunScriptAction"));
+		MessageManager.sendMessage(new StatusMessage(this, "RunScriptAction"));
 
 		JFileChooser chooser = new JFileChooser();
 		int retVal           = chooser.showOpenDialog(WorkspaceManager.getMainFrame());

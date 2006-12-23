@@ -57,8 +57,7 @@ public class SaveAsAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "SaveAsAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "SaveAsAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 

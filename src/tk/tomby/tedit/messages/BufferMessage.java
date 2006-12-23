@@ -20,6 +20,8 @@
 
 package tk.tomby.tedit.messages;
 
+import tk.tomby.tedit.services.MessageManager;
+
 /**
  * DOCUMENT ME!
  *
@@ -55,7 +57,7 @@ public class BufferMessage extends DefaultMessage {
                          int    type,
                          Object newValue,
                          Object oldValue) {
-        super(source, type, newValue, oldValue);
+        super(MessageManager.BUFFER_GROUP_NAME, source, type, newValue, oldValue);
     }
 
     /**
@@ -68,7 +70,7 @@ public class BufferMessage extends DefaultMessage {
     public BufferMessage(Object source,
                          Object newValue,
                          Object oldValue) {
-        super(source, newValue, oldValue);
+        super(MessageManager.BUFFER_GROUP_NAME, source, newValue, oldValue);
     }
 
     /**
@@ -79,7 +81,7 @@ public class BufferMessage extends DefaultMessage {
      */
     public BufferMessage(Object source,
                          Object newValue) {
-        super(source, newValue);
+        super(MessageManager.BUFFER_GROUP_NAME, source, newValue);
     }
 
     /**
@@ -88,7 +90,7 @@ public class BufferMessage extends DefaultMessage {
      * @param source DOCUMENT ME!
      */
     public BufferMessage(Object source) {
-        super(source);
+        super(MessageManager.BUFFER_GROUP_NAME, source);
     }
 
     /**
@@ -99,6 +101,6 @@ public class BufferMessage extends DefaultMessage {
      */
     public BufferMessage(Object source,
                          int    type) {
-        super(source, type);
+        super(MessageManager.BUFFER_GROUP_NAME, source, type);
     }
 }

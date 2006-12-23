@@ -68,8 +68,7 @@ public class Main {
 
         PluginLoader.load();
 
-        MessageManager.sendMessage(MessageManager.ACTIVATION_GROUP_NAME,
-                                   new ActivationMessage(WorkspaceManager.getMainFrame()));
+        MessageManager.sendMessage(new ActivationMessage(WorkspaceManager.getMainFrame()));
 
         BufferFactory factory = new BufferFactory();
 

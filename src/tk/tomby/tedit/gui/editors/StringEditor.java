@@ -131,7 +131,7 @@ public class StringEditor extends JPanel implements IEditor {
 
             PreferenceManager.putString(key, newValue);
 
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
         }
     }
 

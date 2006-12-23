@@ -58,8 +58,7 @@ public class OpenAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "OpenAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "OpenAction"));
 
         JFileChooser chooser = new JFileChooser();
         int retVal           = chooser.showOpenDialog(WorkspaceManager.getMainFrame());

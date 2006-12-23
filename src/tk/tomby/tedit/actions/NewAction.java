@@ -56,8 +56,7 @@ public class NewAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "NewAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "NewAction"));
 
         WorkspaceManager.addBuffer(new BufferFactory().createBuffer());
     }

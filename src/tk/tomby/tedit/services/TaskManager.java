@@ -39,8 +39,8 @@ public class TaskManager {
 	public static void initProgress(final Task work) {
 		monitor = new ProgressMonitor(WorkspaceManager.getMainFrame(), 
 				work.getMessage(), work.getNote(), work.getMinimun(), work.getMaximun());
-		monitor.setMillisToDecideToPopup(0);
-		monitor.setMillisToPopup(100);
+		monitor.setMillisToDecideToPopup(50);
+		monitor.setMillisToPopup(500);
 		
 		timer = new Timer(500, new ActionListener() {
 			private Update update = new Update(work);
@@ -163,8 +163,7 @@ public class TaskManager {
 		public void setProgress(int progress) {
 			this.current = progress;
 			TaskManager.setProgress(progress);
-			MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME, 
-					new StatusMessage(this, note + " at " + getPercent() + " %"));
+			MessageManager.sendMessage(new StatusMessage(this, note + " at " + getPercent() + " %"));
 		}
 
 		public int getPercent() {

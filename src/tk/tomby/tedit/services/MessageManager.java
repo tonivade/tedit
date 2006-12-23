@@ -26,6 +26,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import tk.tomby.tedit.messages.ActivationMessage;
 import tk.tomby.tedit.messages.BufferMessage;
@@ -43,6 +48,9 @@ import tk.tomby.tedit.messages.StatusMessage;
  */
 public class MessageManager {
     //~ Static fields/initializers *****************************************************************
+	
+	/** DOCUMENT ME! */
+	private static final Log log = LogFactory.getLog(MessageManager.class);
 
     /** DOCUMENT ME! */
     public static final String ACTIVATION_GROUP_NAME = "activation";
@@ -64,6 +72,12 @@ public class MessageManager {
 
     /** DOCUMENT ME! */
     private static Map<String, GroupManager> groups = new HashMap<String, GroupManager>();
+    
+    /** DOCUMENT ME! */
+    private static BlockingQueue<IMessage> queue = new LinkedBlockingQueue<IMessage>();
+    
+    /** DOCUMENT ME! */
+    private static Thread dispatcherThread = new Thread(new Dispacher(), "Message-Dispatcher");
 
     static {
         addGroup(ACTIVATION_GROUP_NAME, new GroupManager<ActivationMessage>());
@@ -71,9 +85,20 @@ public class MessageManager {
         addGroup(STATUS_GROUP_NAME, new GroupManager<StatusMessage>());
         addGroup(WORKSPACE_GROUP_NAME, new GroupManager<WorkspaceManager>());
         addGroup(PREFERENCE_GROUP_NAME, new GroupManager<PreferenceMessage>());
+        
+        dispatcherThread.start();
     }
 
     //~ Methods ************************************************************************************
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param groupName DOCUMENT ME!
+     */
+    public static void addGroup(String groupName, GroupManager groupManager) {
+        groups.put(groupName, groupManager);
+    }
 
     /**
      * DOCUMENT ME!
@@ -94,15 +119,6 @@ public class MessageManager {
      * DOCUMENT ME!
      *
      * @param groupName DOCUMENT ME!
-     */
-    public static void addGroup(String groupName, GroupManager groupManager) {
-        groups.put(groupName, groupManager);
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param groupName DOCUMENT ME!
      * @param listener DOCUMENT ME!
      */
     public static void removeMessageListener(String           groupName,
@@ -116,19 +132,10 @@ public class MessageManager {
 
     /**
      * DOCUMENT ME!
-     *
-     * @param groupName DOCUMENT ME!
      * @param message DOCUMENT ME!
      */
-    public static void sendMessage(String   groupName,
-                                   IMessage message) {
-        GroupManager group = groups.get(groupName);
-
-        if (group != null) {
-            Dispacher dispacher = new Dispacher(group, message);
-
-            dispacher.dispatch();
-        }
+    public static void sendMessage(IMessage message) {
+        queue.add(message);
     }
 
     //~ Inner Classes ******************************************************************************
@@ -183,30 +190,24 @@ public class MessageManager {
      * @author $Author: amunoz $
      * @version $Revision: 1.1.1.1 $
      */
-    public static class Dispacher {
-        /** DOCUMENT ME! */
-        private GroupManager group = null;
-
-        /** DOCUMENT ME! */
-        private IMessage message = null;
-
-        /**
-         * Creates a new Dispacher object.
-         *
-         * @param group DOCUMENT ME!
-         * @param message DOCUMENT ME!
-         */
-        public Dispacher(GroupManager group,
-                         IMessage     message) {
-            this.group       = group;
-            this.message     = message;
-        }
-
-        /**
-         * DOCUMENT ME!
-         */
-        public void dispatch() {
-            group.sendMessage(message);
-        }
+    public static class Dispacher implements Runnable {
+		public void run() {
+			Thread thread = Thread.currentThread();
+			
+			while(!thread.isInterrupted()) {
+				IMessage message;
+				try {
+					message = queue.take();
+					
+					GroupManager group = groups.get(message.getGroup());
+					
+					if (group != null) {
+						group.sendMessage(message);
+					}
+				} catch (InterruptedException e) {
+					log.warn("error", e);
+				}
+			}
+		}
     }
 }

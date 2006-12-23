@@ -72,8 +72,7 @@ public class UndoAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "UndoAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "UndoAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 

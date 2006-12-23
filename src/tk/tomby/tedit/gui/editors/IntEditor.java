@@ -130,7 +130,7 @@ public class IntEditor extends JPanel implements IEditor {
 
             PreferenceManager.putInt(key, newValue);
 
-            MessageManager.sendMessage(MessageManager.PREFERENCE_GROUP_NAME, message);
+            MessageManager.sendMessage(message);
         }
     }
 

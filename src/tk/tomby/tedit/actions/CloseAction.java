@@ -60,8 +60,7 @@ public class CloseAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "CloseAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "CloseAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 
@@ -75,19 +74,17 @@ public class CloseAction extends AbstractAction {
                     case JOptionPane.YES_OPTION:
                         ActionManager.invokeAction("save", evt);
                         WorkspaceManager.closeCurrentBuffer();
-                        MessageManager.sendMessage(MessageManager.WORKSPACE_GROUP_NAME,
-                                                   new WorkspaceMessage(evt.getSource(),
-                                                                        WorkspaceManager
-                                                                        .getCurrentBuffer()));
+                        MessageManager.sendMessage(new WorkspaceMessage(evt.getSource(),
+						                        WorkspaceManager
+						                        .getCurrentBuffer()));
 
                         break;
 
                     case JOptionPane.NO_OPTION:
                         WorkspaceManager.closeCurrentBuffer();
-                        MessageManager.sendMessage(MessageManager.WORKSPACE_GROUP_NAME,
-                                                   new WorkspaceMessage(evt.getSource(),
-                                                                        WorkspaceManager
-                                                                        .getCurrentBuffer()));
+                        MessageManager.sendMessage(new WorkspaceMessage(evt.getSource(),
+						                        WorkspaceManager
+						                        .getCurrentBuffer()));
 
                         break;
 
@@ -96,9 +93,8 @@ public class CloseAction extends AbstractAction {
                 }
             } else {
                 WorkspaceManager.closeCurrentBuffer();
-                MessageManager.sendMessage(MessageManager.WORKSPACE_GROUP_NAME,
-                                           new WorkspaceMessage(evt.getSource(),
-                                                                WorkspaceManager.getCurrentBuffer()));
+                MessageManager.sendMessage(new WorkspaceMessage(evt.getSource(),
+				                        WorkspaceManager.getCurrentBuffer()));
             }
         }
     }

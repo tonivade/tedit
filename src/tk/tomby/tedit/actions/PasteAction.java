@@ -56,8 +56,7 @@ public class PasteAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                                   new StatusMessage(this, "PasteAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "PasteAction"));
 
         IBuffer buffer = WorkspaceManager.getCurrentBuffer();
 

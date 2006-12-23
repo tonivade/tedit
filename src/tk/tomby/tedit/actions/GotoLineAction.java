@@ -57,8 +57,7 @@ public class GotoLineAction extends AbstractAction {
      * @param e DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent e) {
-        MessageManager.sendMessage(MessageManager.STATUS_GROUP_NAME,
-                new StatusMessage(this, "GotoLineAction"));
+        MessageManager.sendMessage(new StatusMessage(this, "GotoLineAction"));
         
         Object retVal =
             JOptionPane.showInputDialog(WorkspaceManager.getMainFrame(),
