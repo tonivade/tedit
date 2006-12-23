@@ -16,25 +16,18 @@ Free Software Foundation. either version 2 of the License, or
   	- Commons Digester. http://jakarta.apache.org/commons/digester/
   	- Commons Logging. http://jakarta.apache.org/commons/logging/
   	- Apache log4j. http://logging.apache.org/log4j/
-  	- Jakarta BSF. http://jakarta.apache.org/bsf/
   	
   See COPYING.Apache file for details
   
   tEdit includes software under BSD license: 
   	
   	- ASM. http://asm.objectweb.org/
-  	- JGoodies looks software. http://looks.dev.java.net/
-  	- Lipstik LnF. http://regis.risp.pl/
   
   See COPYING.BSD file for details.
   
   tEdit includes software under LGPL license:
 
   	- Nuvola Icon Set. http://www.icon-king.com/
-  	- Liquid lnf. http://liquidlnf.sourceforge.net/ 
-  	- Kunststoff lnf. http://www.incors.org/archive/
-  	- Metouia lnf. http://mlf.sourceforge.net/
-  	- Tonic lnf. http://www.digitprop.com/p.php?page=toniclf&lang=eng
   	
   See COPYING.LGPL file for details.
   
