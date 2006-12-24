@@ -118,10 +118,10 @@ public class ScriptletAction extends AbstractAction {
     public void actionPerformed(ActionEvent evt) {
     	final InputStream in = this.getClass().getClassLoader().getResourceAsStream(file);
     	
-    	TaskManager.execute(new TaskManager.Task(0, 100, 10) {
-	            public void work() {
-	                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
-	            }
-	        });
+    	TaskManager.execute(new Runnable() {
+            public void run() {
+                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
+            }
+        });
     }
 }

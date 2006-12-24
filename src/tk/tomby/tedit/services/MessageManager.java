@@ -195,9 +195,8 @@ public class MessageManager {
 			Thread thread = Thread.currentThread();
 			
 			while(!thread.isInterrupted()) {
-				IMessage message;
 				try {
-					message = queue.take();
+					IMessage message = queue.take();
 					
 					GroupManager group = groups.get(message.getGroup());
 					

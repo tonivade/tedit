@@ -121,7 +121,7 @@ public class Explorer extends AbstractDockablePlugin {
 		topPanel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				JComboBox combo = (JComboBox) evt.getSource();
-				TaskManager.execute(new TaskManager.SwingWorkerTask(new ReadDirectoryWorker(combo)));
+				TaskManager.execute(new ReadDirectoryWorker(combo));
 			}
 		});
 
@@ -143,7 +143,7 @@ public class Explorer extends AbstractDockablePlugin {
 				TreePath leadPath = evt.getNewLeadSelectionPath();
 
 				if ((path != null) && (leadPath != null)) {
-					TaskManager.execute(new TaskManager.SwingWorkerTask(new RefreshWorker(leadPath, false)));
+					TaskManager.execute(new RefreshWorker(leadPath, false));
 				}
 			}
 		});

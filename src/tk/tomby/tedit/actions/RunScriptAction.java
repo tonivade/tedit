@@ -35,8 +35,8 @@ public class RunScriptAction extends AbstractAction {
 				final String lang = ScriptingManager.getLanguage(script.getName());
 
 				if (lang != null) {
-					TaskManager.execute(new TaskManager.Task(0, 100, 10) {
-			            public void work() {
+					TaskManager.execute(new Runnable() {
+			            public void run() {
 			                ScriptingManager.exec(lang, in, WorkspaceManager.getCurrentBuffer());
 			            }
 			        });
