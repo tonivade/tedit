@@ -45,11 +45,13 @@ public class TaskManager {
 			private int counter = 0;
 			
 			public void actionPerformed(ActionEvent evt) {
-				counter += 10;
-				
-				MessageManager.sendMessage(new StatusMessage(task, "Tarea al " + getPercent()));
-				
-				monitor.setProgress(counter);
+				if (counter < 100) {
+					counter += 10;
+					
+					MessageManager.sendMessage(new StatusMessage(task, "Tarea al " + getPercent()));
+					
+					monitor.setProgress(counter);
+				}
 			};
 			
 			public int getPercent() {
