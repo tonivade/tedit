@@ -157,7 +157,7 @@ public class ScriptingManager {
             	engine.setBindings(bindings, ScriptContext.ENGINE_SCOPE);
             }
             
-            engine.eval(reader);
+            result = engine.eval(reader);
 
         } catch (ScriptException e) {
             log.error("error in script excution", e);
