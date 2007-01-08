@@ -83,6 +83,15 @@ public class ThreadSafeRepaintManager extends RepaintManager {
     private boolean isShowing(JComponent c) {
         return c.isShowing();
     }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+	private boolean isThreadValid() {
+		return (SwingUtilities.isEventDispatchThread() || Thread.currentThread().getName().equals("SyntheticImageGenerator"));
+	}
 
     /**
      * DOCUMENT ME!
@@ -92,7 +101,7 @@ public class ThreadSafeRepaintManager extends RepaintManager {
      * @throws Error DOCUMENT ME!
      */
     private void checkThread(JComponent c) {
-        if (!SwingUtilities.isEventDispatchThread() && (isShowing(c) || isRootShowing(c))) {
+        if (!isThreadValid() && (isShowing(c) || isRootShowing(c))) {
         	boolean threadSafeMethod = false;
             boolean fromSwing = false;
             StackTraceElement[] stackTrace = new Exception().getStackTrace();
