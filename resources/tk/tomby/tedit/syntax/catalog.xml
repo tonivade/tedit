@@ -54,4 +54,10 @@
         <blob>#!/bin/sh</blob>
         <blob>#!/bin/bash</blob>
     </syntax>
+    <syntax name="groovy" file="groovy.xml">
+        <contentType>text/groovy</contentType>
+        <extension>gy</extension>
+        <extension>groovy</extension>
+        <blob>#!/usr/bin/groovysh</blob>
+    </syntax>
 </catalog>

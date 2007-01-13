@@ -1,0 +1,281 @@
+<?xml version="1.0" ?>
+
+<syntax name="groovy" contentType="text/groovy">
+
+	<state name="main">
+	    <!-- one line comment -->
+	    <comment1>
+	    	<singleLine>
+	        	<![CDATA[//[^\n]*]]>
+	        </singleLine>
+	    </comment1>
+	    
+	    <!-- multiline javadoc comment -->
+	    <comment2>
+	    	<multiLine state="javadoc">
+	        	<start><![CDATA[/\*\*]]></start>
+		    	<end><![CDATA[\*/]]></end>
+	    	</multiLine>
+	    </comment2>
+	    
+	    <!-- multiline block comment -->
+	   	<comment3>
+			<multiLine state="comment">
+	        	<start><![CDATA[/\*]]></start>
+		    	<end><![CDATA[\*/]]></end>
+	    	</multiLine>
+	    </comment3>
+	
+	    <literal1>
+	    	<singleLine>
+	    		<![CDATA["(?:\\.|[^"\\])*"]]>
+	    	</singleLine>
+	    </literal1>
+	    
+	    <literal2>
+	    	<singleLine>
+	    		<![CDATA['(?:\\[^']+|[^'])']]>
+	    	</singleLine>
+	    </literal2>
+	
+	    <keyword1>
+	    	<keyword>abstract</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>break</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>case</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>catch</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>class</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>const</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>continue</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>def</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>default</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>do</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>else</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>extends</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>false</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>final</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>finally</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>for</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>goto</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>if</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>implements</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>import</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>in</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>instanceof</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>interface</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>native</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>new</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>null</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>package</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>private</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>protected</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>public</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>return</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>static</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>super</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>switch</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>synchronized</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>this</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>throw</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>throws</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>transient</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>true</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>try</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>void</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>volatile</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>while</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>strictfp</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>assert</keyword>
+	    </keyword1>
+	
+	    <keyword2>
+	    	<keyword>boolean</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>byte</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>char</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>double</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>float</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>int</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>long</keyword>
+	    </keyword2>
+	    <keyword2>
+	    	<keyword>short</keyword>
+	    </keyword2>
+	    
+	    <digit>
+	    	<![CDATA[\b(?:0x[0-9A-Fa-f]+[lL]?|[0-9]+(?:\.[0-9]+)?(?:e[0-9]*)?(?:[dDfFlL])?)\b]]>
+	    </digit>
+	
+	    <separator><![CDATA[\(]]></separator>
+	    <separator><![CDATA[\)]]></separator>
+	    <separator><![CDATA[\{]]></separator>
+	    <separator><![CDATA[\}]]></separator>
+	    <separator><![CDATA[\[]]></separator>
+	    <separator><![CDATA[\]]]></separator>
+	    <separator><![CDATA[;]]></separator>
+	    <separator><![CDATA[,]]></separator>
+	    <separator><![CDATA[\.]]></separator>
+	
+	    <operator><![CDATA[=]]></operator>
+	    <operator><![CDATA[>]]></operator>
+	    <operator><![CDATA[<]]></operator>
+	    <operator><![CDATA[!]]></operator>
+	    <operator><![CDATA[~]]></operator>
+	    <operator><![CDATA[\?]]></operator>
+	    <operator><![CDATA[\:]]></operator>
+	    <operator><![CDATA[==]]></operator>
+	    <operator><![CDATA[>=]]></operator>
+	    <operator><![CDATA[<=]]></operator>
+	    <operator><![CDATA[\!=]]></operator>
+	    <operator><![CDATA[\|\|]]></operator>
+	    <operator><![CDATA[&&]]></operator>
+	    <operator><![CDATA[\+\+]]></operator>
+	    <operator><![CDATA[--]]></operator>
+	    <operator><![CDATA[\+]]></operator>
+	    <operator><![CDATA[-]]></operator>
+	    <operator><![CDATA[\*]]></operator>
+	    <operator><![CDATA[/]]></operator>
+	    <operator><![CDATA[&]]></operator>
+	    <operator><![CDATA[\|]]></operator>
+	    <operator><![CDATA[\^]]></operator>
+	    <operator><![CDATA[%]]></operator>
+	    <operator><![CDATA[>>]]></operator>
+	    <operator><![CDATA[<<]]></operator>
+	    <operator><![CDATA[>>>]]></operator>
+	    <operator><![CDATA[\+=]]></operator>
+	    <operator><![CDATA[-=]]></operator>
+	    <operator><![CDATA[\*=]]></operator>
+	    <operator><![CDATA[/=]]></operator>
+	    <operator><![CDATA[&=]]></operator>
+	    <operator><![CDATA[\|=]]></operator>
+	    <operator><![CDATA[\^=]]></operator>
+	    <operator><![CDATA[%=]]></operator>
+	    <operator><![CDATA[>>=]]></operator>
+	    <operator><![CDATA[<<=]]></operator>
+	    <operator><![CDATA[>>>=]]></operator>
+	</state>
+    
+    <state name="javadoc" default="comment2">
+    	<label><![CDATA[@author]]></label>
+    	<label><![CDATA[@deprecated]]></label>
+    	<label><![CDATA[@exception]]></label>
+    	<label><![CDATA[@param]]></label>
+    	<label><![CDATA[@return]]></label>
+    	<label><![CDATA[@see]]></label>
+    	<label><![CDATA[@serial]]></label>
+    	<label><![CDATA[@serialData]]></label>
+    	<label><![CDATA[@serialField]]></label>
+    	<label><![CDATA[@since]]></label>
+    	<label><![CDATA[@throws]]></label>
+    	<label><![CDATA[@version]]></label>
+    	
+    	<label><![CDATA[@docroot]]></label>
+    	<label><![CDATA[@link]]></label>
+    	
+    	<separator><![CDATA[\{]]></separator>
+	    <separator><![CDATA[\}]]></separator>
+    </state>
+    
+    <state name="comment" default="comment3"/>
+
+</syntax>
