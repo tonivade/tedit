@@ -26,7 +26,7 @@ package tk.tomby.tedit.messages;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public interface IMessageListener<T> {
+public interface IMessageListener<T extends IMessage> {
 	
 	public abstract void receiveMessage(T message);
 }

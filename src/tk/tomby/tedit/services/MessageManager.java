@@ -38,6 +38,7 @@ import tk.tomby.tedit.messages.IMessage;
 import tk.tomby.tedit.messages.IMessageListener;
 import tk.tomby.tedit.messages.PreferenceMessage;
 import tk.tomby.tedit.messages.StatusMessage;
+import tk.tomby.tedit.messages.WorkspaceMessage;
 
 
 /**
@@ -83,7 +84,7 @@ public class MessageManager {
         addGroup(ACTIVATION_GROUP_NAME, new GroupManager<ActivationMessage>());
         addGroup(BUFFER_GROUP_NAME, new GroupManager<BufferMessage>());
         addGroup(STATUS_GROUP_NAME, new GroupManager<StatusMessage>());
-        addGroup(WORKSPACE_GROUP_NAME, new GroupManager<WorkspaceManager>());
+        addGroup(WORKSPACE_GROUP_NAME, new GroupManager<WorkspaceMessage>());
         addGroup(PREFERENCE_GROUP_NAME, new GroupManager<PreferenceMessage>());
         
         dispatcherThread.start();
@@ -146,7 +147,7 @@ public class MessageManager {
      * @author $Author: amunoz $
      * @version $Revision: 1.1.1.1 $
      */
-    public static class GroupManager<T> {
+    public static class GroupManager<T extends IMessage> {
         /** DOCUMENT ME! */
         private List<IMessageListener<T>> listeners = Collections.synchronizedList(new ArrayList<IMessageListener<T>>());
 
