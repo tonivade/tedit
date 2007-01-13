@@ -134,6 +134,25 @@
                   iconKey="menubar.tools.runbuffer.icon">
         	<action name="run-buffer" class="tk.tomby.tedit.actions.RunBufferAction"/>
         </menuitem>
+        <menuseparator/>
+        <menu textKey="menubar.tools.runmacro" mnemonicKey="menubar.tools.runmacro.mnemonic">
+        	<menuitem textKey="menubar.tools.runmacro.uppercase"
+	                  mnemonicKey="menubar.tools.runmacro.uppercase.mnemonic"
+	                  acceleratorKey="menubar.tools.runmacro.uppercase.accelerator"
+	                  iconKey="menubar.tools.runmacro.uppercase.icon">
+	        	<scriptlet name="to-upper-case" 
+        			   lang="groovy" 
+        			   file="tk/tomby/tedit/macros/toUpperCase.gy"/>
+	        </menuitem>
+	        <menuitem textKey="menubar.tools.runmacro.lowercase"
+	                  mnemonicKey="menubar.tools.runmacro.lowercase.mnemonic"
+	                  acceleratorKey="menubar.tools.runmacro.lowercase.accelerator"
+	                  iconKey="menubar.tools.runmacro.lowercase.icon">
+	        	<scriptlet name="to-lower-case" 
+        			   lang="groovy" 
+        			   file="tk/tomby/tedit/macros/toLowerCase.gy"/>
+	        </menuitem>
+        </menu>
     </menu>
     <menu textKey="menubar.help" mnemonicKey="menubar.help.mnemonic">
         <menuitem textKey="menubar.help.content"

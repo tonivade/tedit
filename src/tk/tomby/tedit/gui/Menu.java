@@ -64,6 +64,15 @@ public class Menu extends JMenu {
     public void setTextKey(String textKey) {
         this.setText(ResourceManager.getProperty(textKey));
     }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param item DOCUMENT ME!
+     */
+    public void addMenu(Menu menu) {
+        this.add(menu);
+    }
 
     /**
      * DOCUMENT ME!
