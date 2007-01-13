@@ -39,7 +39,10 @@
 	    </literal2>
 	
 	    <keyword1>
-	    	<keyword>abstract</keyword>
+	    	<keyword>as</keyword>
+	    </keyword1>
+	    <keyword1>
+	    	<keyword>assert</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>break</keyword>
@@ -52,9 +55,6 @@
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>class</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>const</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>continue</keyword>
@@ -78,16 +78,10 @@
 	    	<keyword>false</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>final</keyword>
-	    </keyword1>
-	    <keyword1>
 	    	<keyword>finally</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>for</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>goto</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>if</keyword>
@@ -108,9 +102,6 @@
 	    	<keyword>interface</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>native</keyword>
-	    </keyword1>
-	    <keyword1>
 	    	<keyword>new</keyword>
 	    </keyword1>
 	    <keyword1>
@@ -129,19 +120,16 @@
 	    	<keyword>public</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>return</keyword>
+	    	<keyword>property</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>static</keyword>
+	    	<keyword>return</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>super</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>switch</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>synchronized</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>this</keyword>
@@ -153,28 +141,13 @@
 	    	<keyword>throws</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>transient</keyword>
-	    </keyword1>
-	    <keyword1>
 	    	<keyword>true</keyword>
 	    </keyword1>
 	    <keyword1>
 	    	<keyword>try</keyword>
 	    </keyword1>
 	    <keyword1>
-	    	<keyword>void</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>volatile</keyword>
-	    </keyword1>
-	    <keyword1>
 	    	<keyword>while</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>strictfp</keyword>
-	    </keyword1>
-	    <keyword1>
-	    	<keyword>assert</keyword>
 	    </keyword1>
 	
 	    <keyword2>
