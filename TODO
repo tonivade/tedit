@@ -35,15 +35,15 @@
     - Bookmarks
     - Print Support
     - Autoident
-    - Ident & unident
+    \ Ident & unident
     - Comment uncoment
-    - To lower case / To upper case
-    - Capitalize
+    X To lower case / To upper case
+    X Capitalize
     - Toolbar customizable
-    - Scripts
+    \ Scripts
         X Run script
-    - Macro support
-        - Run macro
+    \ Macro support
+        X Run macro
     - More plugins
         - CVS
         - SVN

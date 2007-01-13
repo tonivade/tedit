@@ -20,6 +20,8 @@
 
 package tk.tomby.tedit.messages;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 /**
  * DOCUMENT ME!
  *
@@ -161,15 +163,8 @@ public class DefaultMessage implements IMessage {
      *
      * @return DOCUMENT ME!
      */
+    @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
-
-        sb.append("[").append("type=").append(type).append(",");
-        sb.append("group=").append(group).append(",");
-        sb.append("source=").append(source).append(",");
-        sb.append("oldValue=").append(oldValue).append(",");
-        sb.append("newValue=").append(newValue).append("]");
-
-        return sb.toString();
+        return ToStringBuilder.reflectionToString(this);
     }
 }

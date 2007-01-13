@@ -20,6 +20,8 @@
 
 package tk.tomby.tedit.messages;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+
 import tk.tomby.tedit.services.MessageManager;
 
 /**
@@ -95,5 +97,10 @@ public class PreferenceMessage extends DefaultMessage {
      */
     public String getKey() {
         return key;
+    }
+    
+    @Override
+    public String toString() {
+    	return ToStringBuilder.reflectionToString(this);
     }
 }

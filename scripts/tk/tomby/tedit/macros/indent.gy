@@ -1,0 +1,18 @@
+// indent selection macro
+
+sStart = buffer.getSelectionStart()
+sEnd = buffer.getSelectionEnd()
+
+root = buffer.document.defaultRootElement
+
+lStart = root.getElementIndex(sStart)
+lEnd = root.getElementIndex(sEnd)
+
+println "indent from $lStart to $lEnd"
+
+(lStart..lEnd).each { l ->
+    element = root.getElement(l)
+    text = buffer.getText(element.startOffset, element.endOffset - element.startOffset)
+    println text
+    buffer.replaceString(element.startOffset, element.endOffset - element.startOffset, "\t" + text)
+}

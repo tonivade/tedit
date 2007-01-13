@@ -15,6 +15,7 @@ Free Software Foundation. either version 2 of the License, or
   	- Commons Collections. http://jakarta.apache.org/commons/collections/
   	- Commons Digester. http://jakarta.apache.org/commons/digester/
   	- Commons Logging. http://jakarta.apache.org/commons/logging/
+  	- Commons Lang. http://jakarta.apache.org/commons/lang/
   	- Apache log4j. http://logging.apache.org/log4j/
   	
   See COPYING.Apache file for details

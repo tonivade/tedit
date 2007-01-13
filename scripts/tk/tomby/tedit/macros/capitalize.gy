@@ -1,0 +1,15 @@
+// capitalize selection macro
+
+import org.apache.commons.lang.WordUtils
+
+sStart = buffer.getSelectionStart()
+sEnd = buffer.getSelectionEnd()
+
+println "capitalize from $sStart to $sEnd"
+
+if (sStart > -1 && sEnd > sStart) {
+    string = buffer.getText(sStart, sEnd - sStart)
+    if (string != null) {
+        buffer.replaceString(sStart, sEnd - sStart, WordUtils.capitalize(string))
+    }
+}

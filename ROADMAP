@@ -13,7 +13,7 @@ Version 0.0.2
     X Find and replace
     \ Console plugin
     - Autoident
-    - Ident & unident
+    \ Ident & unident
     - Comment uncoment
     \ File Manager plugin
     X Goto line number

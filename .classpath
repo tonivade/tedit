@@ -8,6 +8,7 @@
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="lib/commons-digester-1.8.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry kind="lib" path="lib/flexdock-0.4.0.jar"/>
 	<classpathentry kind="lib" path="lib/groovy-all-1.0.jar"/>

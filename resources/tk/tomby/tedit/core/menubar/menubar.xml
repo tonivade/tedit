@@ -152,6 +152,22 @@
         			   lang="groovy" 
         			   file="tk/tomby/tedit/macros/toLowerCase.gy"/>
 	        </menuitem>
+	        <menuitem textKey="menubar.tools.runmacro.indent"
+	                  mnemonicKey="menubar.tools.runmacro.indent.mnemonic"
+	                  acceleratorKey="menubar.tools.runmacro.indent.accelerator"
+	                  iconKey="menubar.tools.runmacro.indent.icon">
+	        	<scriptlet name="indent" 
+        			   lang="groovy" 
+        			   file="tk/tomby/tedit/macros/indent.gy"/>
+	        </menuitem>
+	        <menuitem textKey="menubar.tools.runmacro.capitalize"
+	                  mnemonicKey="menubar.tools.runmacro.capitalize.mnemonic"
+	                  acceleratorKey="menubar.tools.runmacro.capitalize.accelerator"
+	                  iconKey="menubar.tools.runmacro.capitalize.icon">
+	        	<scriptlet name="capitalize" 
+        			   lang="groovy" 
+        			   file="tk/tomby/tedit/macros/capitalize.gy"/>
+	        </menuitem>
         </menu>
     </menu>
     <menu textKey="menubar.help" mnemonicKey="menubar.help.mnemonic">
