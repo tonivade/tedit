@@ -10,9 +10,17 @@ lEnd = root.getElementIndex(sEnd)
 
 println "indent from $lStart to $lEnd"
 
+indented = ""
+
 (lStart..lEnd).each { l ->
     element = root.getElement(l)
-    text = buffer.getText(element.startOffset, element.endOffset - element.startOffset)
-    println text
-    buffer.replaceString(element.startOffset, element.endOffset - element.startOffset, "\t" + text)
+    println "element start at $element.startOffset, end at $element.endOffset"
+    indented += "\t" + buffer.getText(element.startOffset, element.endOffset - element.startOffset)
 }
+
+sOffset = root.getElement(lStart).startOffset
+eOffset = root.getElement(lEnd).endOffset
+
+println "replace from $sOffset to $eOffset"
+
+buffer.replaceString(sOffset, eOffset - sOffset, indented)
