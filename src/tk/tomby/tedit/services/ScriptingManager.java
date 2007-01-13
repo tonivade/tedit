@@ -370,6 +370,14 @@ public class ScriptingManager {
 				}
 			});
 		}
+		
+		public void replaceString(final int offset, final int length, final String text) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					buffer.replaceString(offset, length, text);
+				}
+			});
+		}
 
 		public Iterator<String> lineIterator() {
 			return buffer.lineIterator();
@@ -377,6 +385,10 @@ public class ScriptingManager {
 
 		public String getText() {
 			return buffer.getText();
+		}
+		
+		public String getText(int offset, int length) {
+			return buffer.getText(offset, length);
 		}
     }
 

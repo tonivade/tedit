@@ -86,6 +86,13 @@ public interface IBuffer {
      * @return DOCUMENT ME!
      */
     public abstract String getText();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract String getText(int offset, int length);
 
     /**
      * DOCUMENT ME!
@@ -281,4 +288,11 @@ public interface IBuffer {
      * @return DOCUMENT ME!
      */
     public abstract void insertString(int offset, String text);
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract void replaceString(int offset, int length, String text);
 }

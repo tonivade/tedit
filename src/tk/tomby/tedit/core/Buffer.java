@@ -308,6 +308,20 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 		}
 		return null;
     }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public String getText(int offset, int length) {
+    	try {
+			return getDocument().getText(offset, length);
+		} catch (BadLocationException e) {
+			log.error("error getting buffer text", e);
+		}
+		return null;
+    }
 
     /**
      * DOCUMENT ME!
@@ -665,6 +679,15 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
     
     public void insertString(int offset, String text) {
     	try {
+			getDocument().insertString(offset, text, null);
+		} catch (BadLocationException e) {
+			log.error(e.getMessage(), e);
+		}
+    }
+    
+    public void replaceString(int offset, int length, String text) {
+    	try {
+    		getDocument().remove(offset, length);
 			getDocument().insertString(offset, text, null);
 		} catch (BadLocationException e) {
 			log.error(e.getMessage(), e);
