@@ -258,6 +258,10 @@ public class ScriptingManager {
 		public int getCurrentLine() {
 			return buffer.getCurrentLine();
 		}
+		
+		public int getCurrentColumn() {
+			return buffer.getCurrentColumn();
+		}
 
 		public Document getDocument() {
 			return buffer.getDocument();
@@ -369,6 +373,10 @@ public class ScriptingManager {
 
 		public Iterator<String> lineIterator() {
 			return buffer.lineIterator();
+		}
+
+		public String getText() {
+			return buffer.getText();
 		}
     }
 

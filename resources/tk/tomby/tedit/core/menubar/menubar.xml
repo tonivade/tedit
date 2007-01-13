@@ -126,7 +126,13 @@
                   mnemonicKey="menubar.tools.runscript.mnemonic"
                   acceleratorKey="menubar.tools.runscript.accelerator"
                   iconKey="menubar.tools.runscript.icon">
-        	<action name="run_script" class="tk.tomby.tedit.actions.RunScriptAction"/>
+        	<action name="run-script" class="tk.tomby.tedit.actions.RunScriptAction"/>
+        </menuitem>
+        <menuitem textKey="menubar.tools.runbuffer"
+                  mnemonicKey="menubar.tools.runbuffer.mnemonic"
+                  acceleratorKey="menubar.tools.runbuffer.accelerator"
+                  iconKey="menubar.tools.runbuffer.icon">
+        	<action name="run-buffer" class="tk.tomby.tedit.actions.RunBufferAction"/>
         </menuitem>
     </menu>
     <menu textKey="menubar.help" mnemonicKey="menubar.help.mnemonic">

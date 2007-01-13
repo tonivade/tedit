@@ -252,6 +252,20 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 
         return getDocument().getDefaultRootElement().getElementIndex(position);
     }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public int getCurrentColumn() {
+        int position = getCaretPosition();
+        int line = getCurrentLine();
+        
+        Element element = getDocument().getDefaultRootElement().getElement(line);
+
+        return (element != null)? position - element.getStartOffset() : position;
+    }
 
     /**
      * DOCUMENT ME!
@@ -278,6 +292,21 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
      */
     public String getFileName() {
         return this.fileName;
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public String getText() {
+    	int length = getDocument().getLength();
+    	try {
+			return getDocument().getText(0, length);
+		} catch (BadLocationException e) {
+			log.error("error getting buffer text", e);
+		}
+		return null;
     }
 
     /**

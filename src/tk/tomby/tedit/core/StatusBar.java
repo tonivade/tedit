@@ -163,7 +163,7 @@ public class StatusBar extends JPanel implements IStatusBar {
                 state.setText(ResourceManager.getProperty("main.statusbar.state.writable"));
             }
 
-            lines.setText((buffer.getCurrentLine() + 1) + " : " + buffer.getLineCount());
+            lines.setText((buffer.getCurrentLine() + 1) + " : " + (buffer.getCurrentColumn() + 1));
         } else {
             state.setText(ResourceManager.getProperty("main.statusbar.state.nofiles"));
             lines.setText("0 : 0");

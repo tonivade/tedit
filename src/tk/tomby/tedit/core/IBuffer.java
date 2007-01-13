@@ -44,6 +44,13 @@ public interface IBuffer {
      * @return DOCUMENT ME!
      */
     public abstract int getCaretPosition();
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public abstract int getCurrentColumn();
 
     /**
      * DOCUMENT ME!
@@ -72,6 +79,13 @@ public interface IBuffer {
      * @return DOCUMENT ME!
      */
     public abstract String getFileName();
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract String getText();
 
     /**
      * DOCUMENT ME!
