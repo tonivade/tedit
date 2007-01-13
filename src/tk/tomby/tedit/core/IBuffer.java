@@ -295,4 +295,11 @@ public interface IBuffer {
      * @return DOCUMENT ME!
      */
     public abstract void replaceString(int offset, int length, String text);
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @return DOCUMENT ME!
+     */
+    public abstract void removeString(int offset, int length);
 }

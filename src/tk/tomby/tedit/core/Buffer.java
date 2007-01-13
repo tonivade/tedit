@@ -694,6 +694,14 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 		}
     }
     
+    public void removeString(int offset, int length) {
+    	try {
+    		getDocument().remove(offset, length);
+		} catch (BadLocationException e) {
+			log.error(e.getMessage(), e);
+		}
+    }
+    
     public Iterator<Element> elementIterator() {
     	return new ElementIterator(getDocument());
     }

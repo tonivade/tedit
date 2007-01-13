@@ -378,6 +378,14 @@ public class ScriptingManager {
 				}
 			});
 		}
+		
+		public void removeString(final int offset, final int length) {
+			SwingUtilities.invokeLater(new Runnable() {
+				public void run() {
+					buffer.removeString(offset, length);
+				}
+			});
+		}
 
 		public Iterator<String> lineIterator() {
 			return buffer.lineIterator();
