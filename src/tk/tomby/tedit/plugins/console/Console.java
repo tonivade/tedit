@@ -22,9 +22,11 @@ package tk.tomby.tedit.plugins.console;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.io.PrintStream;
 
 import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
@@ -50,7 +52,18 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
+    private JTabbedPane container = null;
+    
+    private JTextArea messages = null;
     private JTextArea console = null;
+    
+    private JTextAreaOutputStream output = null;
+    
+    private ConsoleInterceptor out;
+    private ConsoleInterceptor err;
+    
+    private PrintStream oldOut;
+    private PrintStream oldErr;
 
     //~ Constructors *******************************************************************************
 
@@ -67,20 +80,22 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
         location = PreferenceManager.getInt("console.location", IWorkspace.PLUGIN_BOTTOM);
 
         title.setText("Console");
-
-        console = new JTextArea();
-
-        console.setEditable(false);
-        console.setFont(new Font("monospaced", Font.PLAIN, 12));
-
-        JScrollPane scroll = new JScrollPane(console);
-        scroll.setBorder(BorderFactory.createEmptyBorder());
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
-
+        
+        container = new JTabbedPane();
+        
         add(title, BorderLayout.NORTH);
-        add(scroll, BorderLayout.CENTER);
+        add(container, BorderLayout.CENTER);
+        
+        messages = createArea();
+        console = createArea();
+        
+        container.addTab("Messages", createConsole(messages));
+        container.addTab("Console", createConsole(console));
+        
+        output = new JTextAreaOutputStream(console);
+        
+        out = new ConsoleInterceptor(System.out, output);
+        err = new ConsoleInterceptor(System.err, output);
 
         MessageManager.addMessageListener(MessageManager.ACTIVATION_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, this);
@@ -90,11 +105,33 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
     }
 
     //~ Methods ************************************************************************************
+    
+    private JTextArea createArea() {
+    	JTextArea area = new JTextArea();
+    	area.setEditable(false);
+        area.setFont(new Font("monospaced", Font.PLAIN, 12));
+        return area;
+    }
+    
+    private JScrollPane createConsole(JTextArea area) {
+        JScrollPane scroll = new JScrollPane(area);
+        scroll.setBorder(BorderFactory.createEmptyBorder());
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);        
+        return scroll;
+    }
 
     /**
      * DOCUMENT ME!
      */
     public void init() {
+        oldOut = System.out;
+        System.setOut(out);
+        
+        oldErr = System.err;
+        System.setErr(err);
+        
         WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
     }
 
@@ -106,10 +143,10 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
     public void receiveMessage(final IMessage message) {
         SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    console.append(message.getClass().getName());
-                    console.append(":");
-                    console.append(message.toString());
-                    console.append("\n");
+                    messages.append(message.getClass().getName());
+                    messages.append(":");
+                    messages.append(message.toString());
+                    messages.append("\n");
                 }
             });
     }
@@ -119,5 +156,8 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
      */
     public void save() {
         PreferenceManager.putInt("console.location", location);
+        
+        System.setOut(oldOut);
+        System.setErr(oldErr);
     }
 }
