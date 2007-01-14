@@ -18,7 +18,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package tk.tomby.tedit.plugins.explorer;
+package tk.tomby.tedit.gui;
 
 import java.util.Comparator;
 

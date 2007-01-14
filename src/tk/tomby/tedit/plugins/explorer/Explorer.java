@@ -51,6 +51,9 @@ import org.apache.commons.logging.LogFactory;
 import tk.tomby.tedit.core.BufferFactory;
 import tk.tomby.tedit.core.IBuffer;
 import tk.tomby.tedit.core.IWorkspace;
+import tk.tomby.tedit.gui.ShortedListModel;
+import tk.tomby.tedit.gui.ShortedTreeModel;
+import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
@@ -206,7 +209,7 @@ public class Explorer extends AbstractDockablePlugin {
 		List<MutableTreeNode> dirs = openDirectory(rootDir);
 		directoryTreeModel.insertAllInto(dirs, directoryRoot);
 
-		List files = getFiles(rootDir);
+		List<File> files = getFiles(rootDir);
 		fileListModel.addAll(files);
 
 		directoryTree.expandRow(0);

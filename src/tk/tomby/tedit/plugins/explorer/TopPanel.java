@@ -31,6 +31,8 @@ import javax.swing.JToolBar;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import tk.tomby.tedit.gui.ShortedComboBoxModel;
+import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.gui.ToolBarButton;
 
 import tk.tomby.tedit.plugins.explorer.actions.RefreshAction;

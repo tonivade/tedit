@@ -1,5 +1,5 @@
 /*
- * $Id: ShortedComboBoxModel.java,v 1.1 2004/11/28 12:16:49 amunoz Exp $
+ * $Id: ShortedListModel.java,v 1.1.1.1 2004/09/18 17:16:22 amunoz Exp $
  *
  * Copyright (C) 2003 Antonio G. Muñoz Conejo <amunoz@tomby.homelinux.org>
  *
@@ -18,20 +18,22 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-package tk.tomby.tedit.plugins.explorer;
+package tk.tomby.tedit.gui;
 
+import java.util.Collection;
 import java.util.Comparator;
+import java.util.Iterator;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 
 
 /**
  * DOCUMENT ME!
  *
  * @author $Author: amunoz $
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.1.1.1 $
  */
-public class ShortedComboBoxModel extends DefaultComboBoxModel {
+public class ShortedListModel extends DefaultListModel {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
@@ -40,11 +42,11 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
     //~ Constructors *******************************************************************************
 
     /**
-     * Creates a new ShortedComboModel object.
+     * Creates a new ShortedListModel object.
      *
      * @param comparator DOCUMENT ME!
      */
-    public ShortedComboBoxModel(Comparator<Object> comparator) {
+    public ShortedListModel(Comparator<Object> comparator) {
         super();
 
         this.comparator = comparator;
@@ -55,16 +57,34 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
     /**
      * DOCUMENT ME!
      *
+     * @param i DOCUMENT ME!
      * @param obj DOCUMENT ME!
+     */
+    public void add(int    i,
+                    Object obj) {
+        addElement(obj);
+    }
+
+    /**
+     * DOCUMENT ME!
      *
-     * @see javax.swing.DefaultComboBoxModel#addElement(java.lang.Object)
+     * @param c DOCUMENT ME!
+     */
+    public void addAll(Collection c) {
+        for (Iterator iter = c.iterator(); iter.hasNext();) {
+            Object element = iter.next();
+            addElement(element);
+        }
+    }
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @param obj DOCUMENT ME!
      */
     public void addElement(Object obj) {
         int index = findIndexFor(obj);
-
-        if (index > -1) {
-            insertElementAt(obj, index);
-        }
+        insertElementAt(obj, index);
     }
 
     /**
@@ -75,7 +95,7 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
      * @return DOCUMENT ME!
      */
     private int findIndexFor(Object obj) {
-        int count = getSize();
+        int count = size();
 
         if (count == 0) {
             return 0;
@@ -101,13 +121,7 @@ public class ShortedComboBoxModel extends DefaultComboBoxModel {
                              int    i1,
                              int    i2) {
         if (i1 == i2) {
-            if (comparator.compare(obj, getElementAt(i1)) < 0) {
-                return i1;
-            } else if (comparator.compare(obj, getElementAt(i1)) > 0) {
-                return i1 + 1;
-            }
-
-            return -1;
+            return (comparator.compare(obj, getElementAt(i1)) <= 0) ? i1 : (i1 + 1);
         }
 
         int half = (i1 + i2) / 2;
