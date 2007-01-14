@@ -134,6 +134,16 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
         
         WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
     }
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @param title DOCUMENT ME!
+     * @param component DOCUMENT ME!
+     */
+    public void addConsole(String title, JScrollPane component) {
+    	container.addTab(title, component);
+    }
 
     /**
      * DOCUMENT ME!
