@@ -72,7 +72,7 @@ public class TopPanel extends JPanel {
 
         setLayout(new BorderLayout());
 
-        comboModel = new ShortedComboBoxModel(new FileComparator());
+        comboModel = new ShortedComboBoxModel(new ToStringComparator());
         comboModel.addElement(rootDirectory);
         comboModel.setSelectedItem(rootDirectory);
 

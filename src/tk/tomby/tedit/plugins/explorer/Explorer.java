@@ -129,7 +129,7 @@ public class Explorer extends AbstractDockablePlugin {
 
 		DefaultMutableTreeNode directoryRoot = new DefaultMutableTreeNode(rootDir);
 
-		directoryTreeModel = new ShortedTreeModel(directoryRoot, new FileComparator());
+		directoryTreeModel = new ShortedTreeModel(directoryRoot, new ToStringComparator());
 		directoryTree = new JTree(directoryTreeModel);
 		directoryTree.setCellRenderer(new DirectoryCellRenderer());
 		directoryTree.setRootVisible(true);
@@ -167,7 +167,7 @@ public class Explorer extends AbstractDockablePlugin {
 		directoryScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		directoryScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
-		fileListModel = new ShortedListModel(new FileComparator());
+		fileListModel = new ShortedListModel(new ToStringComparator());
 		fileList = new JList(fileListModel);
 		fileList.setDragEnabled(true);
 		fileList.setCellRenderer(new FileCellRenderer());
@@ -386,7 +386,7 @@ public class Explorer extends AbstractDockablePlugin {
 
 			if (dir.exists()) {
 				root = new DefaultMutableTreeNode(dir);
-				directoryTreeModel = new ShortedTreeModel(root, new FileComparator());
+				directoryTreeModel = new ShortedTreeModel(root, new ToStringComparator());
 
 				files = getFiles(dir);
 				dirs = openDirectory(dir);
