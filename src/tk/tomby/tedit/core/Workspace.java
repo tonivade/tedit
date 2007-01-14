@@ -21,6 +21,7 @@
 package tk.tomby.tedit.core;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
@@ -49,9 +50,13 @@ import javax.swing.event.ChangeListener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.flexdock.docking.DockingConstants;
+import org.flexdock.docking.Dockable;
 import org.flexdock.docking.DockingManager;
+import org.flexdock.docking.DockingPort;
 import org.flexdock.docking.defaults.DefaultDockingPort;
+import org.flexdock.docking.defaults.DockableComponentWrapper;
+import org.flexdock.docking.event.DockingEvent;
+import org.flexdock.docking.event.DockingListener;
 
 import tk.tomby.tedit.core.preferences.IPreferencePage;
 import tk.tomby.tedit.core.preferences.PreferencePageDriver;
@@ -297,22 +302,56 @@ public class Workspace extends JPanel implements IWorkspace {
      */
     public void addPlugin(IPlugin plugin) {
         IDockablePlugin dock = (IDockablePlugin) plugin;
+        
+        Dockable wrapper = 
+        	DockableComponentWrapper.create(dock.getDockable(), dock.getDockTitle(), dock.getDockTitle());
+        wrapper.addDockingListener(new DockingListener() {
+			public void dockingCanceled(DockingEvent evt) {}
 
-        DockingManager.registerDockable(dock.getDockable(), dock.getDockTitle());
+			public void dockingComplete(DockingEvent evt) {
+				DockingPort port = evt.getNewDockingPort();
+				
+				int position = PLUGIN_LEFT;
+				if (port == bottomPort) {
+					position = PLUGIN_BOTTOM;
+				} else if (port == leftPort) {
+					position = PLUGIN_LEFT;
+				} else if (port == rightPort) {
+					position = PLUGIN_RIGHT;
+				}
+				
+				Component component = evt.getComponent();
+				if (component instanceof IDockablePlugin) {
+					IDockablePlugin plugin = (IDockablePlugin) component;
+					plugin.setDockLocation(position);
+					plugin.setDockRegion(evt.getRegion());
+				}
+			}
+
+			public void dragStarted(DockingEvent evt) {}
+
+			public void dropStarted(DockingEvent evt) {}
+
+			public void undockingComplete(DockingEvent evt) {}
+
+			public void undockingStarted(DockingEvent evt) {}
+        });
+
+        DockingManager.registerDockable(wrapper);
 
         switch (dock.getDockLocation()) {
             case PLUGIN_BOTTOM:
-                bottomPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
+                bottomPort.dock(wrapper, dock.getDockRegion());
 
                 break;
 
             case PLUGIN_LEFT:
-                leftPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
+                leftPort.dock(wrapper, dock.getDockRegion());
 
                 break;
 
             case PLUGIN_RIGHT:
-                rightPort.dock(dock.getDockable(), DockingConstants.CENTER_REGION);
+                rightPort.dock(wrapper, dock.getDockRegion());
 
                 break;
 

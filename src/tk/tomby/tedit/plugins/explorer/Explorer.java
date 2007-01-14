@@ -47,6 +47,7 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.flexdock.docking.DockingConstants;
 
 import tk.tomby.tedit.core.BufferFactory;
 import tk.tomby.tedit.core.IBuffer;
@@ -111,7 +112,9 @@ public class Explorer extends AbstractDockablePlugin {
 
 		setLayout(new BorderLayout());
 
+		title.setText("Explorer");
 		location = PreferenceManager.getInt("explorer.location", IWorkspace.PLUGIN_LEFT);
+		region = PreferenceManager.getString("explorer.region", DockingConstants.CENTER_REGION);
 
 		File rootDir = new File(PreferenceManager.getString("explorer.directory", System.getProperty("user.home")));
 
@@ -246,6 +249,7 @@ public class Explorer extends AbstractDockablePlugin {
 	 */
 	public void save() {
 		PreferenceManager.putInt("explorer.location", location);
+		PreferenceManager.putString("explorer.region", region);
 		PreferenceManager.putInt("explorer.divider", splitPane.getDividerLocation());
 		PreferenceManager.putString("explorer.directory", topPanel.getDirectory());
 	}

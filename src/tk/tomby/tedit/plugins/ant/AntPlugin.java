@@ -28,6 +28,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Target;
+import org.flexdock.docking.DockingConstants;
 
 import tk.tomby.tedit.core.IWorkspace;
 import tk.tomby.tedit.gui.ShortedTreeModel;
@@ -64,6 +65,7 @@ public class AntPlugin extends AbstractDockablePlugin {
 		
 		title.setText("Ant");
 		location = PreferenceManager.getInt("ant.location", IWorkspace.PLUGIN_LEFT);
+		region = PreferenceManager.getString("ant.region", DockingConstants.CENTER_REGION);
 		
 		projectTreeModel = new ShortedTreeModel(projectRoot, new ToStringComparator());
 		projectTree = new JTree(projectTreeModel);
@@ -217,6 +219,7 @@ public class AntPlugin extends AbstractDockablePlugin {
 
 	public void save() {
 		PreferenceManager.putInt("ant.location", location);
+		PreferenceManager.putString("ant.region", region);
 	}
 
 }

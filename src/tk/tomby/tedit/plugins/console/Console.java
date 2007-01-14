@@ -31,6 +31,8 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
+import org.flexdock.docking.DockingConstants;
+
 import tk.tomby.tedit.core.IWorkspace;
 
 import tk.tomby.tedit.messages.IMessage;
@@ -77,9 +79,9 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
 
         PreferenceManager.loadCategory("console", "tk/tomby/tedit/plugins/console");
 
-        location = PreferenceManager.getInt("console.location", IWorkspace.PLUGIN_BOTTOM);
-
         title.setText("Console");
+        location = PreferenceManager.getInt("console.location", IWorkspace.PLUGIN_BOTTOM);
+        region = PreferenceManager.getString("console.region", DockingConstants.CENTER_REGION);
         
         container = new JTabbedPane();
         
@@ -166,6 +168,7 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
      */
     public void save() {
         PreferenceManager.putInt("console.location", location);
+        PreferenceManager.putString("console.region", region);
         
         System.setOut(oldOut);
         System.setErr(oldErr);

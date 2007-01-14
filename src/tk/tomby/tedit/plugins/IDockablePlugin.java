@@ -47,6 +47,20 @@ public interface IDockablePlugin extends IPlugin {
     
     /**
      * DOCUMENT ME!
+     *
+     * @param region DOCUMENT ME!
+     */
+    public abstract void setDockRegion(String region);
+
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public abstract String getDockRegion();
+    
+    /**
+     * DOCUMENT ME!
      * 
      * @return DOCUMENT ME!
      */

@@ -27,6 +27,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 
+import org.flexdock.docking.DockingConstants;
+
 import tk.tomby.tedit.core.IWorkspace;
 
 
@@ -44,6 +46,9 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
 
     /** DOCUMENT ME! */
     protected int location = IWorkspace.PLUGIN_LEFT;
+    
+    /** DOCUMENT ME! */
+    protected String region = DockingConstants.CENTER_REGION;
 
     //~ Constructors *******************************************************************************
 
@@ -83,6 +88,24 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
      */
     public int getDockLocation() {
         return location;
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param region DOCUMENT ME!
+     */
+    public void setDockRegion(String region) {
+    	this.region = region;
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public String getDockRegion() {
+    	return region;
     }
 
     /**
