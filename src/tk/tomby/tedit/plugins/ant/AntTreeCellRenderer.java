@@ -1,9 +1,6 @@
 package tk.tomby.tedit.plugins.ant;
 
 import java.awt.Component;
-import java.awt.Font;
-import java.awt.font.TextAttribute;
-import java.util.Map;
 
 import javax.swing.JLabel;
 import javax.swing.JTree;
