@@ -41,13 +41,17 @@ public class TaskManager {
 		monitor.setMillisToDecideToPopup(50);
 		monitor.setMillisToPopup(500);
 		
-		timer = new Timer(500, new ActionListener() {
+		timer = new Timer(1000, new ActionListener() {
 			private int counter = 0;
 			
 			public void actionPerformed(ActionEvent evt) {
-				if (counter < 100) {
+				if (counter < 90) {
 					counter += 10;
-					
+				} else if (counter < 100) {
+					counter += 1;
+				}
+				
+				if (counter < 100) {
 					MessageManager.sendMessage(new StatusMessage(task, "Tarea al " + getPercent()));
 					
 					monitor.setProgress(counter);
