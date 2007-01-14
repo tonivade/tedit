@@ -198,10 +198,10 @@ public class WorkspaceManager {
         instance.statusBar       = new StatusBar();
         instance.popup           = new PopupMenuDriver().create();
 
-        instance.workspace.init();
-
         instance.main.getContentPane().add(BorderLayout.CENTER, (JComponent) instance.workspace);
         instance.main.getContentPane().add(BorderLayout.SOUTH, (JComponent) instance.statusBar);
+        
+        instance.workspace.init();
     }
 
     /**

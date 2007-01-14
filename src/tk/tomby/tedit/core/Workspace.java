@@ -340,12 +340,11 @@ public class Workspace extends JPanel implements IWorkspace {
      * DOCUMENT ME!
      */
     public void init() {
-        IPreferencePage generalPage =
-            new PreferencePageDriver("general", "tk/tomby/tedit/core/preferences/general").create();
+        IPreferencePage generalPage = 
+        	new PreferencePageDriver("general", "tk/tomby/tedit/core/preferences/general").create();
 
         IPreferencePage highlightPage =
-            new PreferencePageDriver("highlight", "tk/tomby/tedit/core/preferences/highlight")
-            .create();
+            new PreferencePageDriver("highlight", "tk/tomby/tedit/core/preferences/highlight").create();
 
         WorkspaceManager.getPreferences().addPage(generalPage);
         WorkspaceManager.getPreferences().addPage(highlightPage);
@@ -359,8 +358,7 @@ public class Workspace extends JPanel implements IWorkspace {
         ResourceManager.loadCategory("snr", "tk/tomby/tedit/core/snr");
         PreferenceManager.loadCategory("snr", "tk/tomby/tedit/core/snr");
 
-        splitPaneBottom.setDividerLocation(PreferenceManager.getInt("main.workspace.bottom.divider",
-                                                                    0));
+        splitPaneBottom.setDividerLocation(PreferenceManager.getInt("main.workspace.bottom.divider", 0));
         splitPaneLeft.setDividerLocation(PreferenceManager.getInt("main.workspace.left.divider", 0));
         splitPaneRight.setDividerLocation(PreferenceManager.getInt("main.workspace.right.divider", 0));
     }
@@ -446,8 +444,7 @@ public class Workspace extends JPanel implements IWorkspace {
      * DOCUMENT ME!
      */
     public void save() {
-        PreferenceManager.putInt("main.workspace.bottom.divider",
-                                 splitPaneBottom.getDividerLocation());
+        PreferenceManager.putInt("main.workspace.bottom.divider", splitPaneBottom.getDividerLocation());
         PreferenceManager.putInt("main.workspace.left.divider", splitPaneLeft.getDividerLocation());
         PreferenceManager.putInt("main.workspace.right.divider", splitPaneRight.getDividerLocation());
     }

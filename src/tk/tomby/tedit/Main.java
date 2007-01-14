@@ -68,8 +68,6 @@ public class Main {
 
         PluginLoader.load();
 
-        MessageManager.sendMessage(new ActivationMessage(WorkspaceManager.getMainFrame()));
-
         BufferFactory factory = new BufferFactory();
 
         //basic CLI interface
@@ -84,5 +82,7 @@ public class Main {
                 WorkspaceManager.addBuffer(buffer);
             }
         }
+        
+        MessageManager.sendMessage(new ActivationMessage(WorkspaceManager.getMainFrame()));
     }
 }
