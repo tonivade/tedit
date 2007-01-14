@@ -4,6 +4,8 @@
 	<classpathentry kind="src" path="config"/>
 	<classpathentry kind="src" path="resources"/>
 	<classpathentry kind="src" path="scripts"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="JAVA_HOME/lib/tools.jar"/>
 	<classpathentry kind="lib" path="lib/commons-collections-3.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.jar"/>
@@ -17,6 +19,5 @@
 	<classpathentry kind="lib" path="lib/jruby-engine.jar"/>
 	<classpathentry kind="lib" path="lib/ant-1.6.5-launcher.jar"/>
 	<classpathentry kind="lib" path="lib/ant-1.6.5.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
