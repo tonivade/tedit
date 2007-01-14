@@ -233,7 +233,7 @@ public class Workspace extends JPanel implements IWorkspace {
                     }
                 });
 
-        this.setDropTarget(dropTarget);
+        bufferPane.setDropTarget(dropTarget);
 
         this.add(BorderLayout.CENTER, splitPaneBottom);
     }
