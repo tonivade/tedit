@@ -28,6 +28,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import tk.tomby.tedit.plugins.IPlugin;
+import tk.tomby.tedit.plugins.IPluginDescriptor;
+import tk.tomby.tedit.plugins.PluginClassLoader;
 
 
 /**
@@ -66,14 +68,16 @@ public class PluginManager {
      *
      * @return DOCUMENT ME!
      */
-    public static IPlugin createPlugin(String name,
-                                       String clazz) {
+    public static IPlugin createPlugin(IPluginDescriptor descriptor) {
         IPlugin plugin = null;
 
         try {
-            plugin = (IPlugin) Class.forName(clazz).newInstance();
+        	PluginClassLoader pluginLoader = new PluginClassLoader(descriptor, PluginManager.class.getClassLoader());
+            Class clazz = pluginLoader.loadClass(descriptor.getPluginClass());
+            
+            plugin = (IPlugin) clazz.newInstance();
 
-            plugins.put(name, plugin);
+            plugins.put(descriptor.getPluginName(), plugin);
         } catch (InstantiationException e) {
             log.error(e.getMessage(), e);
         } catch (IllegalAccessException e) {

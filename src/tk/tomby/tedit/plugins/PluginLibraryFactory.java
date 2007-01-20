@@ -20,12 +20,9 @@
 
 package tk.tomby.tedit.plugins;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.ObjectCreationFactory;
+
 import org.xml.sax.Attributes;
 
 
@@ -35,7 +32,7 @@ import org.xml.sax.Attributes;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class PluginFactory implements ObjectCreationFactory {
+public class PluginLibraryFactory implements ObjectCreationFactory {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
@@ -72,55 +69,28 @@ public class PluginFactory implements ObjectCreationFactory {
      */
     public Object createObject(Attributes attrs) throws Exception {
         String name = attrs.getValue("name");
-        String type = attrs.getValue("type");
-        String clazz = attrs.getValue("class");
+        String path = attrs.getValue("path");
 
-        return new PluginDescriptorImpl(name, type, clazz);
+        return new PluginLibraryDescriptorImpl(name, path);
     }
     
-    public class PluginDescriptorImpl implements IPluginDescriptor {
+    public class PluginLibraryDescriptorImpl implements IPluginDescriptor.IPluginLibrary {
     	
     	private String name;
-    	private String type;
-    	private String clazz;
-    	
     	private String path;
     	
-    	private Map<String, IPluginLibrary> libraries;
-    	
-    	public PluginDescriptorImpl(String name, String type, String clazz) {
+    	public PluginLibraryDescriptorImpl(String name, String path) {
     		this.name = name;
-    		this.type = type;
-    		this.clazz = clazz;
-    		this.libraries = new HashMap<String, IPluginLibrary>();
+    		this.path = path;
     	}
-		
-		public Collection<IPluginLibrary> getLibraries() {
-            return libraries.values();
-		}
-		
-		public void addLibrary(IPluginLibrary lib) {
-			libraries.put(lib.getName(), lib);
-		}
 
-		public String getPluginClass() {
-			return clazz;
-		}
-
-		public String getPluginName() {
+		public String getName() {
 			return name;
 		}
-		
-		public String getPluginType() {
-			return type;
-		}
-    	
-		public void setPluginPath(String path) {
-			this.path = path;
-		}
-		
-		public String getPluginPath() {
+
+		public String getPath() {
 			return path;
 		}
+    	
     }
 }

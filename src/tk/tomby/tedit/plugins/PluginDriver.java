@@ -24,15 +24,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.net.URL;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.xml.sax.SAXException;
+
+import tk.tomby.tedit.services.PluginManager;
 
 
 /**
@@ -54,23 +56,23 @@ public class PluginDriver {
     /**
      * DOCUMENT ME!
      *
-     * @param pluginFile DOCUMENT ME!
+     * @param descriptor DOCUMENT ME!
      *
      * @return DOCUMENT ME!
      */
-    public static IPlugin createPlugin(File pluginFile) {
-        IPlugin temp = null;
+    public static IPlugin createPluginFromXML(File file) {
+        IPlugin plugin = null;
 
         try {
             ClassLoader loader = PluginDriver.class.getClassLoader();
 
-            URL rules         = loader.getResource(RESOURCE_ROOT + "/plugins-rules.xml");
-            InputStream input = new FileInputStream(pluginFile);
+            URL rules = loader.getResource(RESOURCE_ROOT + "/plugins-rules.xml");
+            InputStream input = new FileInputStream(file);
 
             if (input != null) {
                 Digester digester = DigesterLoader.createDigester(rules);
-
-                temp = (IPlugin) digester.parse(input);
+                IPluginDescriptor descriptor = (IPluginDescriptor) digester.parse(input);
+                plugin = PluginManager.createPlugin(descriptor);
             }
         } catch (SAXException e) {
             log.error("error in plugin creation", e);
@@ -78,6 +80,31 @@ public class PluginDriver {
             log.error("error in plugin creation", e);
         }
 
-        return temp;
+        return plugin;
+    }
+    
+    public static IPlugin createPluginFromJAR(File file) {
+    	IPlugin plugin = null;
+    	
+    	try {
+    		JarFile jar = new JarFile(file);
+			JarEntry entry = jar.getJarEntry("META-INF/plugin.xml");
+			InputStream input = jar.getInputStream(entry);
+			
+			ClassLoader loader = PluginDriver.class.getClassLoader();
+			URL rules = loader.getResource(RESOURCE_ROOT + "/plugins-rules.xml");
+
+            if (input != null) {
+                Digester digester = DigesterLoader.createDigester(rules);
+                IPluginDescriptor descriptor = (IPluginDescriptor) digester.parse(input);
+                plugin = PluginManager.createPlugin(descriptor);
+            }
+		} catch (SAXException e) {
+            log.error("error in plugin creation", e);
+        } catch (IOException e) {
+            log.error("error in plugin creation", e);
+        }
+    	
+    	return plugin;
     }
 }

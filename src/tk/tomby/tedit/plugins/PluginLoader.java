@@ -47,39 +47,69 @@ public class PluginLoader {
      * DOCUMENT ME!
      */
     public static void load() {
-    	String home = System.getProperty("tedit.home");
+    	String directory = getBaseDir();
+
+        File fileDir = new File(directory);
+        
+        if (fileDir.exists()) {
+			fromXML(fileDir);
+        	fromJAR(fileDir);
+        } else {
+        	log.warn("plugins directory not exist: " + directory);
+        }
+    }
+
+	public static String getBaseDir() {
+		String home = System.getProperty("tedit.home");
     	if (home == null) {
     		home = System.getProperty("user.dir");
     	}
     	
         String directory =
-            PreferenceManager.getString("main.plugins.directory",
-                                         home + "/plugins");
+            PreferenceManager.getString("main.plugins.directory", home + "/plugins");
+		return directory;
+	}
 
-        File fileDir = new File(directory);
-        
-        if (fileDir.exists()) {
+	private static void fromXML(File fileDir) {
+		File[] files =
+			fileDir.listFiles(new FileFilter() {
+				public boolean accept(File pathname) {
+					return pathname.getName().endsWith(".xml");
+				}
+			});
 
-	        File[] files =
-	            fileDir.listFiles(new FileFilter() {
-	                    public boolean accept(File pathname) {
-	                        return pathname.getName().endsWith(".xml");
-	                    }
-	                });
+		for (int i = 0; i < files.length; i++) {
+			File file = files[i];
+
+			if (log.isDebugEnabled()) {
+				log.debug("loading plugin: " + file.getName());
+			}
+
+			IPlugin plugin = PluginDriver.createPluginFromXML(file);
+
+			plugin.init();
+		}
+	}
 	
-	        for (int i = 0; i < files.length; i++) {
-	            File file = files[i];
-	
-	            if (log.isDebugEnabled()) {
-	                log.debug("loading plugin: " + file.getName());
-	            }
-	
-	            IPlugin plugin = PluginDriver.createPlugin(file);
-	
-	            plugin.init();
-	        }
-        } else {
-        	log.warn("plugins directory not exist: " + directory);
-        }
-    }
+	private static void fromJAR(File fileDir) {
+		File[] files =
+    		fileDir.listFiles(new FileFilter() {
+    			public boolean accept(File pathname) {
+    				return pathname.getName().endsWith(".jar");
+    			}
+    		});
+
+    	for (int i = 0; i < files.length; i++) {
+    		File file = files[i];
+
+    		if (log.isDebugEnabled()) {
+    			log.debug("loading plugin: " + file.getName());
+    		}
+
+    		IPlugin plugin = PluginDriver.createPluginFromJAR(file);
+
+    		plugin.init();
+    	}
+	}
+
 }

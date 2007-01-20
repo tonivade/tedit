@@ -2,6 +2,12 @@
 
 <digester-rules>
 	<pattern value="plugin">
-	    <factory-create-rule  classname="tk.tomby.tedit.plugins.PluginFactory"/>
+	    <factory-create-rule classname="tk.tomby.tedit.plugins.PluginFactory"/>
+	    <pattern value="classpath">
+	    	<pattern value="lib">
+	    		<factory-create-rule classname="tk.tomby.tedit.plugins.PluginLibraryFactory"/>
+		    	<set-next-rule methodname="addLibrary"/>
+		    </pattern>
+	    </pattern>
 	</pattern>
 </digester-rules>
