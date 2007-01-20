@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<plugin name="looks" 
+		type="laf" 
+		class="tk.tomby.tedit.plugins.looks.LooksPlugin">
+		
+	<classpath>
+		<lib name="looks" path="lib/looks-2.1.2.jar"/>
+	</classpath>
+</plugin>
