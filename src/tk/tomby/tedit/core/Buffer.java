@@ -58,7 +58,6 @@ import javax.swing.undo.UndoManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tk.tomby.tedit.core.snr.FindReplaceWorker;
 
 import tk.tomby.tedit.messages.BufferMessage;
@@ -787,7 +786,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 		}
 
 		public void remove() {
-			throw new NotImplementedException();
+			throw new RuntimeException("not implemented");
 		}
     }
     
@@ -815,7 +814,7 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
 		}
 
 		public void remove() {
-			throw new NotImplementedException();
+			throw new RuntimeException("not implemented");
 		}
     }
 }
