@@ -19,6 +19,9 @@
         <fileset dir="${lib}">
             <include name="*.jar" />
         </fileset>
+    	<fileset dir="${plugins}/lib">
+	        <include name="*.jar" />
+	    </fileset>
     </path>
 
     <target name="init">
@@ -42,6 +45,7 @@
              	<exclude name="**/plugins/explorer/**/*"/>
              	<exclude name="**/plugins/console/*"/>
              	<exclude name="**/plugins/memmon/*"/>
+             	<exclude name="**/plugins/looks/*"/>
              </fileset>
         </jar>
     	<jar jarfile="${build}/${ant.project.name}-plugin-ant-${version}.jar" compress="true">
@@ -96,6 +100,19 @@
         		<attribute name="Plugin-Descriptor" value="META-INF/memmon.xml"/>
         	 </manifest>
     		 <metainf file="${plugins}/memmon.xml" />
+        </jar>
+    	<jar jarfile="${build}/${ant.project.name}-plugin-looks-${version}.jar" compress="true">
+             <fileset dir="${classes}">
+                <exclude name="**/*Test.class"/>
+             	<include name="**/plugins/looks/*"/>
+             </fileset>
+     		 <fileset dir="${resources}">
+    		 	<include name="**/plugins/looks/*"/>
+             </fileset>
+    		 <manifest>
+        		<attribute name="Plugin-Descriptor" value="META-INF/looks.xml"/>
+        	 </manifest>
+    		 <metainf file="${plugins}/looks.xml" />
         </jar>
         <jar jarfile="${build}/${ant.project.name}-resources-${version}.jar" compress="true">
              <fileset dir="${resources}">
