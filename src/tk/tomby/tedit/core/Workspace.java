@@ -31,14 +31,11 @@ import java.awt.dnd.DropTargetAdapter;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 import java.io.File;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -49,7 +46,6 @@ import javax.swing.event.ChangeListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.flexdock.docking.Dockable;
 import org.flexdock.docking.DockingManager;
 import org.flexdock.docking.DockingPort;
@@ -60,15 +56,13 @@ import org.flexdock.docking.event.DockingListener;
 
 import tk.tomby.tedit.core.preferences.IPreferencePage;
 import tk.tomby.tedit.core.preferences.PreferencePageDriver;
-
+import tk.tomby.tedit.gui.StrippedSplitPane;
 import tk.tomby.tedit.messages.BufferMessage;
 import tk.tomby.tedit.messages.IMessageListener;
 import tk.tomby.tedit.messages.PreferenceMessage;
 import tk.tomby.tedit.messages.WorkspaceMessage;
-
 import tk.tomby.tedit.plugins.IDockablePlugin;
 import tk.tomby.tedit.plugins.IPlugin;
-
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
@@ -148,16 +142,13 @@ public class Workspace extends JPanel implements IWorkspace {
         leftPort.setMinimumSize(new Dimension(0, 0));
         leftPort.setPreferredSize(new Dimension(80, 0));
 
-        splitPaneLeft = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPort, bufferPane);
-        splitPaneLeft.setBorder(BorderFactory.createEmptyBorder());
+        splitPaneRight = new StrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, bufferPane, rightPort);
+        splitPaneRight.setOneTouchExpandable(true);
+        
+        splitPaneLeft = new StrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPort, splitPaneRight);
         splitPaneLeft.setOneTouchExpandable(true);
 
-        splitPaneRight = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, splitPaneLeft, rightPort);
-        splitPaneRight.setBorder(BorderFactory.createEmptyBorder());
-        splitPaneRight.setOneTouchExpandable(true);
-
-        splitPaneBottom = new JSplitPane(JSplitPane.VERTICAL_SPLIT, splitPaneRight, bottomPort);
-        splitPaneBottom.setBorder(BorderFactory.createEmptyBorder());
+        splitPaneBottom = new StrippedSplitPane(JSplitPane.VERTICAL_SPLIT, splitPaneLeft, bottomPort);
         splitPaneBottom.setOneTouchExpandable(true);
 
         bufferPane.addChangeListener(new ChangeListener() {

@@ -29,7 +29,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -54,6 +53,7 @@ import tk.tomby.tedit.core.IBuffer;
 import tk.tomby.tedit.core.IWorkspace;
 import tk.tomby.tedit.gui.ShortedListModel;
 import tk.tomby.tedit.gui.ShortedTreeModel;
+import tk.tomby.tedit.gui.StrippedSplitPane;
 import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
@@ -199,8 +199,7 @@ public class Explorer extends AbstractDockablePlugin {
 		filesScroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		filesScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
-		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll, filesScroll);
-		splitPane.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
+		splitPane = new StrippedSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll, filesScroll);
 		splitPane.setDividerLocation(PreferenceManager.getInt("explorer.divider", 0));
 
 		List<MutableTreeNode> dirs = openDirectory(rootDir);

@@ -36,7 +36,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
 
-import javax.swing.BorderFactory;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -150,8 +149,6 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
         editor.setEditable(true);
         editor.setDragEnabled(true);
         editor.setEditorKit(EditorKitManager.createEditorKit(getExtension(DEFAULT_FILE_NAME)));
-
-        editor.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
         InputMap map = editor.getInputMap(JComponent.WHEN_FOCUSED);
 

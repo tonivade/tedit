@@ -26,6 +26,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 
 import org.flexdock.docking.DockingConstants;
 
@@ -58,17 +60,15 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
     public AbstractDockablePlugin() {
         super();
 
-        setBorder(BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(),
-                                                     BorderFactory.createEtchedBorder()));
-
         title = new JLabel();
-        title.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createMatteBorder(0, 0, 1,
-                                                                                           0,
-                                                                                           UIManager
-                                                                                           .getColor("Button.borderColor")),
-                                                           BorderFactory.createEmptyBorder(5, 5, 5,
-                                                                                           5)));
+        title.setBorder(createTitleBorder());
     }
+
+	private CompoundBorder createTitleBorder() {
+		Border b1 = BorderFactory.createMatteBorder(0, 0, 1, 0, UIManager.getColor("Button.borderColor"));
+		Border b2 = BorderFactory.createEmptyBorder(5, 5, 5, 5);
+		return BorderFactory.createCompoundBorder(b1, b2);
+	}
 
     //~ Methods ************************************************************************************
 

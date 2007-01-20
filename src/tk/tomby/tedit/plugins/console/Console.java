@@ -24,7 +24,6 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.PrintStream;
 
-import javax.swing.BorderFactory;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
@@ -117,7 +116,6 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
     
     private JScrollPane createConsole(JTextArea area) {
         JScrollPane scroll = new JScrollPane(area);
-        scroll.setBorder(BorderFactory.createEmptyBorder());
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);        
