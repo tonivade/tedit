@@ -4,6 +4,7 @@
 		type="workspace" 
 		class="tk.tomby.tedit.plugins.ant.AntPlugin">
 	<classpath>
-		<lib name="lib/ant-1.6.5.jar"/>
+		<lib name="ant" path="lib/ant-1.6.5.jar"/>
+		<lib name="ant-loader" path="lib/ant-1.6.5-loader.jar"/>
 	</classpath>
 </plugin>
