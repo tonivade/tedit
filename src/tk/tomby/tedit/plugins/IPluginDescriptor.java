@@ -16,6 +16,8 @@ public interface IPluginDescriptor {
 	
 	public abstract Collection<IPluginLibrary> getLibraries();
 	
+	public abstract IPluginLibrary getLibrary(String name);
+	
 	public interface IPluginLibrary {
 		
 		public abstract String getName();

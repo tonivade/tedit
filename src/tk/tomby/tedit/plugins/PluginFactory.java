@@ -99,6 +99,10 @@ public class PluginFactory implements ObjectCreationFactory {
             return libraries.values();
 		}
 		
+		public IPluginLibrary getLibrary(String name) {
+			return libraries.get(name);
+		}
+		
 		public void addLibrary(IPluginLibrary lib) {
 			libraries.put(lib.getName(), lib);
 		}

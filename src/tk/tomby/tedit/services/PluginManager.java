@@ -49,6 +49,9 @@ public class PluginManager {
     
     /** DOCUMENT ME! */
     private static Map<String, IPluginDescriptor> descriptors = new HashMap<String, IPluginDescriptor>();
+    
+    /** DOCUMENT ME! */
+    private static Map<String, ClassLoader> loaders = new HashMap<String, ClassLoader>();
 
     //~ Methods ************************************************************************************
 
@@ -70,8 +73,19 @@ public class PluginManager {
      *
      * @return DOCUMENT ME!
      */
-    public static IPluginDescriptor getPluginDescriptor(String name) {
+    public static IPluginDescriptor getDescriptor(String name) {
         return descriptors.get(name);
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param name DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public static ClassLoader getLoader(String name) {
+        return loaders.get(name);
     }
 
     /**
@@ -86,13 +100,14 @@ public class PluginManager {
         IPlugin plugin = null;
 
         try {
-        	PluginClassLoader pluginLoader = new PluginClassLoader(descriptor, PluginManager.class.getClassLoader());
-            Class clazz = pluginLoader.loadClass(descriptor.getPluginClass());
+        	PluginClassLoader loader = new PluginClassLoader(descriptor, PluginManager.class.getClassLoader());
+            Class clazz = loader.loadClass(descriptor.getPluginClass());
             
             plugin = (IPlugin) clazz.newInstance();
 
             plugins.put(descriptor.getPluginName(), plugin);
             descriptors.put(descriptor.getPluginName(), descriptor);
+            loaders.put(descriptor.getPluginName(), loader);
         } catch (InstantiationException e) {
             log.error(e.getMessage(), e);
         } catch (IllegalAccessException e) {

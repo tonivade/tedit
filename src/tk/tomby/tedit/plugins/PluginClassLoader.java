@@ -28,7 +28,7 @@ public class PluginClassLoader extends URLClassLoader {
 		super(getClasspath(descriptor), parent, factory);
 	}
 	
-	public static URL[] getClasspath(IPluginDescriptor descriptor) {
+	private static URL[] getClasspath(IPluginDescriptor descriptor) {
 		List<URL> list = new ArrayList<URL>();
 		
 		addURL(list, "", descriptor.getPluginPath());
