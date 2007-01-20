@@ -25,7 +25,11 @@ if [ \! -d $TEDIT_HOME/log ] ; then
     mkdir $TEDIT_HOME/log
 fi
 
-CLASSPATH=$TEDIT_HOME/classes:$TEDIT_HOME/config:$TEDIT_HOME/resources:$TEDIT_HOME/scripts
+CLASSPATH=$JAVA_HOME/lib/tools.jar:$TEDIT_HOME/config
+
+for i in `find $TEDIT_HOME/main -type f \( -name '*.jar' -or -name '*.zip' \) -print`; do
+        CLASSPATH=$CLASSPATH:$i
+done
 
 for i in `find $TEDIT_HOME/lib -type f \( -name '*.jar' -or -name '*.zip' \) -print`; do
         CLASSPATH=$CLASSPATH:$i
