@@ -46,6 +46,9 @@ public class PluginManager {
 
     /** DOCUMENT ME! */
     private static Map<String, IPlugin> plugins = new HashMap<String, IPlugin>();
+    
+    /** DOCUMENT ME! */
+    private static Map<String, IPluginDescriptor> descriptors = new HashMap<String, IPluginDescriptor>();
 
     //~ Methods ************************************************************************************
 
@@ -58,6 +61,17 @@ public class PluginManager {
      */
     public static IPlugin getPlugin(String name) {
         return plugins.get(name);
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param name DOCUMENT ME!
+     *
+     * @return DOCUMENT ME!
+     */
+    public static IPluginDescriptor getPluginDescriptor(String name) {
+        return descriptors.get(name);
     }
 
     /**
@@ -78,6 +92,7 @@ public class PluginManager {
             plugin = (IPlugin) clazz.newInstance();
 
             plugins.put(descriptor.getPluginName(), plugin);
+            descriptors.put(descriptor.getPluginName(), descriptor);
         } catch (InstantiationException e) {
             log.error(e.getMessage(), e);
         } catch (IllegalAccessException e) {
