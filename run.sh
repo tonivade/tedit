@@ -18,7 +18,7 @@ if [ "$1" = "--laf" ]; then
 fi
 
 if [ "$TEDIT_HOME" = "" ] ; then
-    TEDIT_HOME="$HOME/tedit"
+    TEDIT_HOME="`pwd`"
 fi
 
 if [ \! -d $TEDIT_HOME/log ] ; then
