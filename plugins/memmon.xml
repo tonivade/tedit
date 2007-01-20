@@ -2,4 +2,5 @@
 
 <plugin name="memmon" 
 		type="status" 
-		class="tk.tomby.tedit.plugins.memmon.MemoryMonitor"/>
+		class="tk.tomby.tedit.plugins.memmon.MemoryMonitor"
+		resources="tk/tomby/tedit/plugins/memmon"/>

@@ -57,7 +57,6 @@ import tk.tomby.tedit.gui.ShortedTreeModel;
 import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
-import tk.tomby.tedit.services.ResourceManager;
 import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
@@ -74,11 +73,6 @@ public class Explorer extends AbstractDockablePlugin {
 
 	/** DOCUMENT ME! */
 	private static Log log = LogFactory.getLog(Explorer.class);
-
-	static {
-		PreferenceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
-		ResourceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer", Explorer.class.getClassLoader());
-	}
 
 	// ~ Instance fields
 	// ****************************************************************************

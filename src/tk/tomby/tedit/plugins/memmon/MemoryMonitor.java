@@ -41,12 +41,6 @@ import tk.tomby.tedit.services.WorkspaceManager;
  * @version $Revision: 1.2 $
  */
 public class MemoryMonitor extends JLabel implements IPlugin {
-    //~ Static fields/initializers *****************************************************************
-
-    static {
-        ResourceManager.loadCategory("memmon", "tk/tomby/tedit/plugins/memmon", MemoryMonitor.class.getClassLoader());
-    }
-
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */

@@ -18,6 +18,10 @@ public interface IPluginDescriptor {
 	
 	public abstract IPluginLibrary getLibrary(String name);
 	
+	public abstract String getPreferences();
+	
+	public abstract String getResources();
+	
 	public interface IPluginLibrary {
 		
 		public abstract String getName();

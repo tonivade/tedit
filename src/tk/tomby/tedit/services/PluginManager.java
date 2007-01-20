@@ -101,6 +101,15 @@ public class PluginManager {
 
         try {
         	PluginClassLoader loader = new PluginClassLoader(descriptor, PluginManager.class.getClassLoader());
+        	
+        	if (descriptor.getPreferences() != null) {
+        		PreferenceManager.loadCategory(descriptor.getPluginName(), descriptor.getPreferences());
+        	}
+        	
+        	if (descriptor.getResources() != null) {
+        		ResourceManager.loadCategory(descriptor.getPluginName(), descriptor.getResources(), loader);
+        	}
+        	
             Class clazz = loader.loadClass(descriptor.getPluginClass());
             
             plugin = (IPlugin) clazz.newInstance();

@@ -74,8 +74,10 @@ public class PluginFactory implements ObjectCreationFactory {
         String name = attrs.getValue("name");
         String type = attrs.getValue("type");
         String clazz = attrs.getValue("class");
+        String preferences = attrs.getValue("preferences");
+        String resources = attrs.getValue("resources");
 
-        return new PluginDescriptorImpl(name, type, clazz);
+        return new PluginDescriptorImpl(name, type, clazz, preferences, resources);
     }
     
     public class PluginDescriptorImpl implements IPluginDescriptor {
@@ -83,15 +85,19 @@ public class PluginFactory implements ObjectCreationFactory {
     	private String name;
     	private String type;
     	private String clazz;
+    	private String preferences;
+    	private String resources;
     	
     	private String path;
     	
     	private Map<String, IPluginLibrary> libraries;
     	
-    	public PluginDescriptorImpl(String name, String type, String clazz) {
+    	public PluginDescriptorImpl(String name, String type, String clazz, String preferences, String resources) {
     		this.name = name;
     		this.type = type;
     		this.clazz = clazz;
+    		this.preferences = preferences;
+    		this.resources = resources;
     		this.libraries = new HashMap<String, IPluginLibrary>();
     	}
 		
@@ -117,6 +123,14 @@ public class PluginFactory implements ObjectCreationFactory {
 		
 		public String getPluginType() {
 			return type;
+		}
+		
+		public String getPreferences() {
+			return preferences;
+		}
+		
+		public String getResources() {
+			return resources;
 		}
     	
 		public void setPluginPath(String path) {

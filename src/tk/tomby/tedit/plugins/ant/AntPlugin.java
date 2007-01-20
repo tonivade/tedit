@@ -35,16 +35,10 @@ import tk.tomby.tedit.gui.ShortedTreeModel;
 import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
-import tk.tomby.tedit.services.ResourceManager;
 import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 public class AntPlugin extends AbstractDockablePlugin {
-	
-	static {
-		PreferenceManager.loadCategory("ant", "tk/tomby/tedit/plugins/ant");
-		ResourceManager.loadCategory("ant", "tk/tomby/tedit/plugins/ant", AntPlugin.class.getClassLoader());
-	}
 	
 	private static Log log = LogFactory.getLog(AntPlugin.class);
 	
