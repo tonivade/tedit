@@ -17,16 +17,16 @@ Version 0.0.2
     - Comment uncoment
     \ File Manager plugin
     X Goto line number
-	- Recent file list
-	- File backup
-	X Docking plugins
-	X Remember window size/position
-	X Remember divider location position
-	- Buffers menu
-	- Remember open files
-	X Replace tabs with spaces
-	X Tab length configuration
-	X Antialiasing
+    - Recent file list
+    - File backup
+    X Docking plugins
+    X Remember window size/position
+    X Remember divider location position
+    - Buffers menu
+    - Remember open files
+    X Replace tabs with spaces
+    X Tab length configuration
+    X Antialiasing
 
 Version 0.0.3
     - Delimiter highlight

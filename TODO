@@ -34,9 +34,9 @@
     - Edit mode selection support
     - Bookmarks
     - Print Support
-    - Autoident
-    \ Ident & unident
-    - Comment uncoment
+    - Autoindent
+    \ Indent & unindent
+    - Comment & uncoment
     X To lower case / To upper case
     X Capitalize
     - Toolbar customizable
