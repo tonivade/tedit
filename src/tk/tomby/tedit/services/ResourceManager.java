@@ -23,6 +23,7 @@ package tk.tomby.tedit.services;
 import java.net.URL;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -114,6 +115,12 @@ public class ResourceManager {
     public static void loadCategory(String categoryName,
                                     String resourceRoot) {
         categories.put(categoryName, new Category(resourceRoot));
+    }
+    
+    public static void loadCategory(String categoryName, 
+    		                        String resourceRoot, 
+    		                        ClassLoader loader) {
+    	categories.put(categoryName, new Category(resourceRoot, loader));
     }
 
     /**
@@ -231,6 +238,9 @@ public class ResourceManager {
 
         /** DOCUMENT ME! */
         private String resourceRoot = null;
+        
+        /** DOCUMENT ME! */
+        private ClassLoader loader = null;
 
         /**
          * Creates a new Category object.
@@ -238,8 +248,18 @@ public class ResourceManager {
          * @param resourceRoot DOCUMENT ME!
          */
         private Category(String resourceRoot) {
-            this.resourceRoot     = resourceRoot;
-            this.resources        = ResourceBundle.getBundle(this.resourceRoot + "/resources");
+            this(resourceRoot, ResourceManager.class.getClassLoader());
+        }
+        
+        /**
+         * Creates a new Category object.
+         *
+         * @param resourceRoot DOCUMENT ME!
+         */
+        private Category(String resourceRoot, ClassLoader loader) {
+        	this.loader = loader;
+            this.resourceRoot = resourceRoot;
+            this.resources = ResourceBundle.getBundle(this.resourceRoot + "/resources", Locale.getDefault(), loader);
         }
 
         /**
@@ -251,8 +271,6 @@ public class ResourceManager {
          */
         private Icon getIcon(String iconName) {
             Icon icon = null;
-
-            ClassLoader loader = ResourceManager.class.getClassLoader();
 
             String property = getProperty(iconName);
 

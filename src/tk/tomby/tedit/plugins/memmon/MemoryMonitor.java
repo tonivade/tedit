@@ -44,7 +44,7 @@ public class MemoryMonitor extends JLabel implements IPlugin {
     //~ Static fields/initializers *****************************************************************
 
     static {
-        ResourceManager.loadCategory("memmon", "tk/tomby/tedit/plugins/memmon");
+        ResourceManager.loadCategory("memmon", "tk/tomby/tedit/plugins/memmon", MemoryMonitor.class.getClassLoader());
     }
 
     //~ Instance fields ****************************************************************************

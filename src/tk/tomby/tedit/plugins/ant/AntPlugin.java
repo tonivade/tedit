@@ -42,8 +42,8 @@ import tk.tomby.tedit.services.WorkspaceManager;
 public class AntPlugin extends AbstractDockablePlugin {
 	
 	static {
-		ResourceManager.loadCategory("ant", "tk/tomby/tedit/plugins/ant");
 		PreferenceManager.loadCategory("ant", "tk/tomby/tedit/plugins/ant");
+		ResourceManager.loadCategory("ant", "tk/tomby/tedit/plugins/ant", AntPlugin.class.getClassLoader());
 	}
 	
 	private static Log log = LogFactory.getLog(AntPlugin.class);

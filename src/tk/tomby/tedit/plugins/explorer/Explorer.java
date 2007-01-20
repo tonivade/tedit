@@ -76,8 +76,8 @@ public class Explorer extends AbstractDockablePlugin {
 	private static Log log = LogFactory.getLog(Explorer.class);
 
 	static {
-		ResourceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
 		PreferenceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer");
+		ResourceManager.loadCategory("explorer", "tk/tomby/tedit/plugins/explorer", Explorer.class.getClassLoader());
 	}
 
 	// ~ Instance fields
