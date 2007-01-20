@@ -7,9 +7,14 @@ import java.net.URLStreamHandlerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import tk.tomby.tedit.plugins.IPluginDescriptor.IPluginLibrary;
 
 public class PluginClassLoader extends URLClassLoader {
+	
+	private static final Log log = LogFactory.getLog(PluginClassLoader.class);
 
 	public PluginClassLoader(IPluginDescriptor descriptor) {
 		super(getClasspath(descriptor));
@@ -32,7 +37,9 @@ public class PluginClassLoader extends URLClassLoader {
 			addURL(list, PluginLoader.getBaseDir() + "/", lib.getPath());
 		}
 		
-		System.out.println(list);
+		if (log.isDebugEnabled()) {
+			log.debug("classpath: " + list);
+		}
 		
 		URL[] urls = new URL[list.size()];
 		list.toArray(urls);
@@ -46,8 +53,7 @@ public class PluginClassLoader extends URLClassLoader {
 				list.add(url);
 			}
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.warn("invalid url", e);
 		}
 	}
 

@@ -25,8 +25,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
+import java.util.jar.Manifest;
 
 import org.apache.commons.digester.Digester;
 import org.apache.commons.digester.xmlrules.DigesterLoader;
@@ -88,7 +90,7 @@ public class PluginDriver {
     	
     	try {
     		JarFile jar = new JarFile(file);
-			JarEntry entry = jar.getJarEntry("META-INF/plugin.xml");
+    		JarEntry entry = getDescriptor(jar);
 			InputStream input = jar.getInputStream(entry);
 			
 			ClassLoader loader = PluginDriver.class.getClassLoader();
@@ -108,4 +110,20 @@ public class PluginDriver {
     	
     	return plugin;
     }
+
+	private static JarEntry getDescriptor(JarFile jar) throws IOException {
+		JarEntry entry = null;
+		
+		Manifest manifest = jar.getManifest();
+		Attributes attrs = manifest.getMainAttributes();
+		String pluginAttr = attrs.getValue("Plugin-Descriptor");
+		
+		if (pluginAttr != null) {
+			entry = jar.getJarEntry(pluginAttr);
+		} else {
+			entry = jar.getJarEntry("META-INF/plugin.xml");
+		}
+		
+		return entry;
+	}
 }
