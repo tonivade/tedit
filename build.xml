@@ -38,22 +38,71 @@
              <fileset dir="${classes}">
                 <exclude name="**/*Test.class"/>
              	<exclude name="**/plugins/ant/*"/>
+             	<exclude name="**/plugins/explorer/*"/>
+             	<exclude name="**/plugins/explorer/**/*"/>
+             	<exclude name="**/plugins/console/*"/>
+             	<exclude name="**/plugins/memmon/*"/>
              </fileset>
-        	
         </jar>
     	<jar jarfile="${build}/${ant.project.name}-plugin-ant-${version}.jar" compress="true">
              <fileset dir="${classes}">
                 <exclude name="**/*Test.class"/>
              	<include name="**/plugins/ant/*"/>
              </fileset>
+    		 <fileset dir="${resources}">
+    		 	<include name="**/plugins/ant/*"/>
+             </fileset>
     		 <manifest>
         		<attribute name="Plugin-Descriptor" value="META-INF/ant.xml"/>
         	 </manifest>
     		 <metainf file="${plugins}/ant.xml" />
         </jar>
+    	<jar jarfile="${build}/${ant.project.name}-plugin-console-${version}.jar" compress="true">
+             <fileset dir="${classes}">
+                <exclude name="**/*Test.class"/>
+             	<include name="**/plugins/console/*"/>
+             </fileset>
+    		 <fileset dir="${resources}">
+    		 	<include name="**/plugins/console/*"/>
+             </fileset>
+    		 <manifest>
+        		<attribute name="Plugin-Descriptor" value="META-INF/console.xml"/>
+        	 </manifest>
+    		 <metainf file="${plugins}/console.xml" />
+        </jar>
+    	<jar jarfile="${build}/${ant.project.name}-plugin-explorer-${version}.jar" compress="true">
+             <fileset dir="${classes}">
+                <exclude name="**/*Test.class"/>
+             	<include name="**/plugins/explorer/*"/>
+             	<include name="**/plugins/explorer/**/*"/>
+             </fileset>
+    	    	<fileset dir="${resources}">
+    		 	<include name="**/plugins/explorer/*"/>
+             </fileset>
+    		 <manifest>
+        		<attribute name="Plugin-Descriptor" value="META-INF/explorer.xml"/>
+        	 </manifest>
+    		 <metainf file="${plugins}/explorer.xml" />
+        </jar>
+    	<jar jarfile="${build}/${ant.project.name}-plugin-memmon-${version}.jar" compress="true">
+             <fileset dir="${classes}">
+                <exclude name="**/*Test.class"/>
+             	<include name="**/plugins/memmon/*"/>
+             </fileset>
+     		 <fileset dir="${resources}">
+    		 	<include name="**/plugins/memmon/*"/>
+             </fileset>
+    		 <manifest>
+        		<attribute name="Plugin-Descriptor" value="META-INF/memmon.xml"/>
+        	 </manifest>
+    		 <metainf file="${plugins}/memmon.xml" />
+        </jar>
         <jar jarfile="${build}/${ant.project.name}-resources-${version}.jar" compress="true">
              <fileset dir="${resources}">
-                <include name="**/*"/>
+             	<exclude name="**/plugins/ant/*"/>
+             	<exclude name="**/plugins/explorer/*"/>
+             	<exclude name="**/plugins/console/*"/>
+             	<exclude name="**/plugins/memmon/*"/>
              </fileset>
         </jar>
     	<jar jarfile="${build}/${ant.project.name}-scripts-${version}.jar" compress="true">
