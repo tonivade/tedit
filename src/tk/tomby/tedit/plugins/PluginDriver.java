@@ -97,6 +97,7 @@ public class PluginDriver {
             if (input != null) {
                 Digester digester = DigesterLoader.createDigester(rules);
                 IPluginDescriptor descriptor = (IPluginDescriptor) digester.parse(input);
+                descriptor.setPluginPath(file.getPath());
                 plugin = PluginManager.createPlugin(descriptor);
             }
 		} catch (SAXException e) {
