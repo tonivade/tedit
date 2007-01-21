@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -120,6 +121,7 @@ public class Workspace extends JPanel implements IWorkspace {
         		Workspace.this.receiveMessage(message);
         	}
         });
+        
         MessageManager.addMessageListener(MessageManager.PREFERENCE_GROUP_NAME, new IMessageListener<PreferenceMessage>() {
         	public void receiveMessage(PreferenceMessage message) {
         		Workspace.this.receiveMessage(message);
@@ -131,25 +133,13 @@ public class Workspace extends JPanel implements IWorkspace {
         bufferPane.setPreferredSize(new Dimension(800, 600));
         bufferPane.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        bottomPort = new DefaultDockingPort();
-        bottomPort.setPreferredSize(new Dimension(0, 80));
+        bottomPort = createDockingPort(0, 80);
+        rightPort = createDockingPort(80, 0);
+        leftPort = createDockingPort(80, 0);
 
-        rightPort = new DefaultDockingPort();
-        rightPort.setMinimumSize(new Dimension(0, 0));
-        rightPort.setPreferredSize(new Dimension(80, 0));
-
-        leftPort = new DefaultDockingPort();
-        leftPort.setMinimumSize(new Dimension(0, 0));
-        leftPort.setPreferredSize(new Dimension(80, 0));
-
-        splitPaneRight = new StrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, bufferPane, rightPort);
-        splitPaneRight.setOneTouchExpandable(true);
-        
-        splitPaneLeft = new StrippedSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPort, splitPaneRight);
-        splitPaneLeft.setOneTouchExpandable(true);
-
-        splitPaneBottom = new StrippedSplitPane(JSplitPane.VERTICAL_SPLIT, splitPaneLeft, bottomPort);
-        splitPaneBottom.setOneTouchExpandable(true);
+        splitPaneRight = createSplitPane(JSplitPane.HORIZONTAL_SPLIT, bufferPane, rightPort);
+        splitPaneLeft = createSplitPane(JSplitPane.HORIZONTAL_SPLIT, leftPort, splitPaneRight);
+        splitPaneBottom = createSplitPane(JSplitPane.VERTICAL_SPLIT, splitPaneLeft, bottomPort);
 
         bufferPane.addChangeListener(new ChangeListener() {
                 public void stateChanged(ChangeEvent evt) {
@@ -477,5 +467,20 @@ public class Workspace extends JPanel implements IWorkspace {
         PreferenceManager.putInt("main.workspace.bottom.divider", splitPaneBottom.getDividerLocation());
         PreferenceManager.putInt("main.workspace.left.divider", splitPaneLeft.getDividerLocation());
         PreferenceManager.putInt("main.workspace.right.divider", splitPaneRight.getDividerLocation());
+    }
+    
+    private DefaultDockingPort createDockingPort(int width, int heigth) {
+    	DefaultDockingPort port = new DefaultDockingPort();
+    	port.setMinimumSize(new Dimension(0, 0));
+        port.setPreferredSize(new Dimension(width, heigth));
+        return port;
+    }
+    
+    private JSplitPane createSplitPane(int orientation, Component left, Component right) {
+    	 JSplitPane split = new StrippedSplitPane(orientation, left, right);
+         split.setBorder(BorderFactory.createEmptyBorder());
+         split.setDividerSize(5);
+         split.setOneTouchExpandable(false);
+         return split;
     }
 }

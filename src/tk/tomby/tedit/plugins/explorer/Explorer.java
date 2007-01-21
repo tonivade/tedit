@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -200,6 +201,9 @@ public class Explorer extends AbstractDockablePlugin {
 		filesScroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);
 
 		splitPane = new StrippedSplitPane(JSplitPane.VERTICAL_SPLIT, directoryScroll, filesScroll);
+		splitPane.setBorder(BorderFactory.createEmptyBorder());
+		splitPane.setOneTouchExpandable(false);
+		splitPane.setDividerSize(5);
 		splitPane.setDividerLocation(PreferenceManager.getInt("explorer.divider", 0));
 
 		List<MutableTreeNode> dirs = openDirectory(rootDir);
