@@ -9,7 +9,9 @@ import javax.swing.SwingUtilities;
 
 public class JTextAreaOutputStream extends OutputStream {
 	
-	private ByteArrayOutputStream buffer = new ByteArrayOutputStream(1024);
+	private static final int BUFFER_SIZE = 2048;
+	
+	private ByteArrayOutputStream buffer = new ByteArrayOutputStream(BUFFER_SIZE);
 	
 	private JTextArea area = null;
 	
@@ -20,19 +22,21 @@ public class JTextAreaOutputStream extends OutputStream {
 	@Override
 	public void write(int b) throws IOException {
 		buffer.write(b);
-		if (b == '\n') {
+		if (b == '\n' || buffer.size() >= BUFFER_SIZE) {
 			flushBuffer();
 		}
 	}
 	
 	private void flushBuffer() {
+		final byte[] b = buffer.toByteArray();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				area.append(new String(buffer.toByteArray()));
+				area.append(new String(b));
 				area.setCaretPosition(area.getDocument().getLength());
-				buffer.reset();
+				
 			}
 		});
+		buffer.reset();
 	}
 
 }
