@@ -129,8 +129,16 @@ public class PluginFactory implements ObjectCreationFactory {
 			return preferences;
 		}
 		
+		public void setPreferences(String preferences) {
+			this.preferences = preferences;
+		}
+		
 		public String getResources() {
 			return resources;
+		}
+		
+		public void setResources(String resources) {
+			this.resources = resources;
 		}
     	
 		public void setPluginPath(String path) {

@@ -2,9 +2,9 @@
 
 <plugin name="ant" 
 		type="workspace" 
-		class="tk.tomby.tedit.plugins.ant.AntPlugin"
-		preferences="tk/tomby/tedit/plugins/ant"
-		resources="tk/tomby/tedit/plugins/ant">
+		class="tk.tomby.tedit.plugins.ant.AntPlugin">
+	<preferences>tk/tomby/tedit/plugins/ant</preferences>
+	<resources>tk/tomby/tedit/plugins/ant</resources>
 	<classpath>
 		<lib name="ant"          path="lib/ant-1.6.5.jar"/>
 		<lib name="ant-launcher" path="lib/ant-1.6.5-launcher.jar"/>

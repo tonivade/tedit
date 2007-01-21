@@ -2,6 +2,7 @@
 
 <plugin name="explorer" 
 		type="workspace" 
-		class="tk.tomby.tedit.plugins.explorer.Explorer"
-		preferences="tk/tomby/tedit/plugins/explorer"
-		resources="tk/tomby/tedit/plugins/explorer"/>
+		class="tk.tomby.tedit.plugins.explorer.Explorer">
+	<preferences>tk/tomby/tedit/plugins/explorer</preferences>
+	<resources>tk/tomby/tedit/plugins/explorer</resources>
+</plugin>
