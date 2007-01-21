@@ -24,6 +24,9 @@ import javax.swing.JComponent;
 import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * DOCUMENT ME!
@@ -32,6 +35,9 @@ import javax.swing.SwingUtilities;
  * @version $Revision: 1.1.1.1 $
  */
 public class ThreadSafeRepaintManager extends RepaintManager {
+	
+	private static final Log log = LogFactory.getLog(ThreadSafeRepaintManager.class);
+	
     //~ Methods ************************************************************************************
 
     /**
@@ -120,7 +126,7 @@ public class ThreadSafeRepaintManager extends RepaintManager {
                 return;
             }
 
-            throw new Error("Invalid thread access to display");
+            log.warn("display error", new Error("Invalid thread access to display"));
         }
     }
 }
