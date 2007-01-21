@@ -162,8 +162,7 @@ public class AntPlugin extends AbstractDockablePlugin {
 	}
 
 	public void init() {
-		System.setProperty("ant.home", "/home/tomby/programas/apache-ant-1.6.5");
-		System.setProperty("ant.library.dir", "/home/tomby/programas/apache-ant-1.6.5/lib");
+		// Nothing to do
 	}
 	
 	public void addBuildFile(String file) {
