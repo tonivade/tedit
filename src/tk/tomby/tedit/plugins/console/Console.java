@@ -115,6 +115,7 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
     
     private JScrollPane createConsole(JTextArea area) {
         JScrollPane scroll = new JScrollPane(area);
+        scroll.setAutoscrolls(true);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroll.getViewport().setScrollMode(JViewport.BLIT_SCROLL_MODE);        
