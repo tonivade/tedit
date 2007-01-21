@@ -43,6 +43,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.event.UndoableEditEvent;
@@ -67,6 +68,7 @@ import tk.tomby.tedit.services.EditorKitManager;
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
+import tk.tomby.tedit.services.TaskManager;
 import tk.tomby.tedit.services.WorkspaceManager;
 
 
@@ -591,17 +593,19 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
      * DOCUMENT ME!
      */
     public void save() {
-        try {
-            if (editor.isEditable()) {
-                FileWriter out = new FileWriter(this.fileName);
-
-                editor.write(out);
-
-                setModifiedState(false);
-            }
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
+    	if (editor.isEditable()) {
+    		TaskManager.execute(new Runnable() {
+    			public void run() {
+    				try {
+						FileWriter out = new FileWriter(fileName);
+						editor.write(out);
+						setModifiedState(false);
+					} catch (IOException e) {
+						log.error(e.getMessage(), e);
+					}
+    			}
+    		});
+    	}
     }
 
     /**
@@ -627,16 +631,24 @@ public class Buffer extends JPanel implements IBuffer, IMessageListener<Preferen
      *
      * @param file DOCUMENT ME!
      */
-    public void saveAs(File file) {
-        try {
-            FileWriter out = new FileWriter(file);
-
-            editor.write(out);
-
-            open(file);
-        } catch (IOException e) {
-            log.error(e.getMessage(), e);
-        }
+    public void saveAs(final File file) {
+        TaskManager.execute(new SwingWorker() {
+	        @Override
+	    	protected Object doInBackground() throws Exception {
+        		try {
+                    FileWriter out = new FileWriter(file);
+                    editor.write(out);
+                } catch (IOException e) {
+                    log.error(e.getMessage(), e);
+                }
+                return null;
+        	}
+	        
+	        @Override
+	        protected void done() {
+	        	open(file);
+	        }
+        });
     }
 
     /**
