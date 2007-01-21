@@ -85,9 +85,7 @@ public class PluginLoader {
 				log.debug("loading plugin: " + file.getName());
 			}
 
-			IPlugin plugin = PluginDriver.createPluginFromXML(file);
-
-			plugin.init();
+			PluginDriver.createPluginFromXML(file);
 		}
 	}
 	
@@ -106,9 +104,7 @@ public class PluginLoader {
     			log.debug("loading plugin: " + file.getName());
     		}
 
-    		IPlugin plugin = PluginDriver.createPluginFromJAR(file);
-
-    		plugin.init();
+    		PluginDriver.createPluginFromJAR(file);
     	}
 	}
 

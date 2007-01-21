@@ -36,7 +36,7 @@ import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.TaskManager;
-import tk.tomby.tedit.services.WorkspaceManager;
+
 
 public class AntPlugin extends AbstractDockablePlugin {
 	
@@ -162,8 +162,6 @@ public class AntPlugin extends AbstractDockablePlugin {
 	}
 
 	public void init() {
-		WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
-		
 		System.setProperty("ant.home", "/home/tomby/programas/apache-ant-1.6.5");
 		System.setProperty("ant.library.dir", "/home/tomby/programas/apache-ant-1.6.5/lib");
 	}

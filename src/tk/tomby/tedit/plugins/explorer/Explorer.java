@@ -227,7 +227,7 @@ public class Explorer extends AbstractDockablePlugin {
 	 * DOCUMENT ME!
 	 */
 	public void init() {
-		WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
+		// Nothing to do
 	}
 
 	/**

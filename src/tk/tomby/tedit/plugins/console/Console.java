@@ -41,7 +41,6 @@ import tk.tomby.tedit.plugins.AbstractDockablePlugin;
 
 import tk.tomby.tedit.services.MessageManager;
 import tk.tomby.tedit.services.PreferenceManager;
-import tk.tomby.tedit.services.WorkspaceManager;
 
 
 /**
@@ -131,8 +130,6 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
         
         oldErr = System.err;
         System.setErr(err);
-        
-        WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, this);
     }
     
     /**

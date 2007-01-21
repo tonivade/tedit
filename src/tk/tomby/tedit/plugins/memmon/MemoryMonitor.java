@@ -31,7 +31,6 @@ import javax.swing.Timer;
 import tk.tomby.tedit.plugins.IPlugin;
 import tk.tomby.tedit.services.ResourceManager;
 import tk.tomby.tedit.services.TaskManager;
-import tk.tomby.tedit.services.WorkspaceManager;
 
 
 /**
@@ -93,12 +92,13 @@ public class MemoryMonitor extends JLabel implements IPlugin {
      * DOCUMENT ME!
      */
     public void init() {
-        WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_STATUSBAR_POSITION, this);
+        // Nothing to do
     }
 
     /**
      * DOCUMENT ME!
      */
     public void save() {
+    	// Nothing to do
     }
 }

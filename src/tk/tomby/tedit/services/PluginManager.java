@@ -110,9 +110,14 @@ public class PluginManager {
         		ResourceManager.loadCategory(descriptor.getPluginName(), descriptor.getResources(), loader);
         	}
         	
-            Class clazz = loader.loadClass(descriptor.getPluginClass());
+            plugin = loadPlugin(descriptor, loader);
+            plugin.init();
             
-            plugin = (IPlugin) clazz.newInstance();
+            if (descriptor.getPluginType().equals(IPluginDescriptor.PLUGIN_WORKSPACE_TYPE)) {
+            	WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_WORKSPACE_POSITION, plugin);
+            } else if (descriptor.getPluginType().equals(IPluginDescriptor.PLUGIN_STATUS_TYPE)) {
+            	WorkspaceManager.addPlugin(WorkspaceManager.PLUGIN_STATUSBAR_POSITION, plugin);
+            }
 
             plugins.put(descriptor.getPluginName(), plugin);
             descriptors.put(descriptor.getPluginName(), descriptor);
@@ -127,6 +132,11 @@ public class PluginManager {
 
         return plugin;
     }
+
+	private static IPlugin loadPlugin(IPluginDescriptor descriptor, PluginClassLoader loader) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+		Class clazz = loader.loadClass(descriptor.getPluginClass());
+		return (IPlugin) clazz.newInstance();
+	}
 
     /**
      * DOCUMENT ME!
