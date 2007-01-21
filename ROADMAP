@@ -34,6 +34,6 @@ Version 0.0.3
     - Print support
     - Checkstyle plugin
     - Jalopy plugin
-    - Ant plugin
+    \ Ant plugin
     X Preferences component
     - Split Buffer Pane
