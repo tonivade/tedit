@@ -45,6 +45,9 @@
      		 <manifest>
         		<attribute name="Main-Class" value="Main"/>
         	 </manifest>
+    		<fileset dir="${config}">
+    		 	<include name="boot.*"/>
+             </fileset>
         </jar>
         <jar jarfile="${build}/${ant.project.name}-${version}.jar" compress="true">
              <fileset dir="${classes}">
@@ -58,7 +61,7 @@
              	<exclude name="**/plugins/looks/*"/>
              </fileset>
         	 <fileset dir="${config}">
-    		 	<include name="*"/>
+    		 	<include name="log4j.*"/>
              </fileset>
         </jar>
     	<jar jarfile="${build}/${ant.project.name}-plugin-ant-${version}.jar" compress="true">
