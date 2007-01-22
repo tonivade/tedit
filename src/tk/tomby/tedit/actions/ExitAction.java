@@ -22,9 +22,6 @@ package tk.tomby.tedit.actions;
 
 import java.awt.event.ActionEvent;
 
-import java.util.Iterator;
-import java.util.List;
-
 import javax.swing.AbstractAction;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -68,11 +65,7 @@ public class ExitAction extends AbstractAction {
      * @param evt DOCUMENT ME!
      */
     public void actionPerformed(ActionEvent evt) {
-        List<IBuffer> buffers = WorkspaceManager.getBufferList();
-
-        for (Iterator<IBuffer> iter = buffers.iterator(); iter.hasNext();) {
-            IBuffer buffer = iter.next();
-
+        for (IBuffer buffer : WorkspaceManager.getBufferList()) {
             if (buffer.isModified()) {
                 if (log.isDebugEnabled()) {
                     log.debug(buffer.getFileName() + "was modified");

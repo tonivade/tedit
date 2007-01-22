@@ -68,7 +68,7 @@ public class AboutDialog extends JDialog {
         text.append(" ");
         text.append(Main.VERSION);
         text.append("\n");
-        text.append("Aug, 2004\n");
+        text.append("Jan, 2007\n");
         text.append("\n");
         text.append("tEdit was written by Antonio G. Muñoz Conejo, amunoz AT tomby.homelinux.org.\n");
         text.append("\n");

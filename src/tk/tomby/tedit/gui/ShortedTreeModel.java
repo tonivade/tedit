@@ -22,7 +22,6 @@ package tk.tomby.tedit.gui;
 
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.Iterator;
 
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
@@ -81,8 +80,7 @@ public class ShortedTreeModel extends DefaultTreeModel {
      */
     public void insertAllInto(Collection<MutableTreeNode> c,
                               MutableTreeNode parent) {
-        for (Iterator<MutableTreeNode> iter = c.iterator(); iter.hasNext();) {
-            MutableTreeNode element = iter.next();
+        for (MutableTreeNode element : c) {
             insertNodeInto(element, parent);
         }
     }

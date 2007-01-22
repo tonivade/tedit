@@ -21,8 +21,6 @@
 package tk.tomby.tedit.syntax.catalog;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 
@@ -57,11 +55,7 @@ public class Catalog {
      * @param syntax DOCUMENT ME!
      */
     public void addSyntax(Syntax syntax) {
-        List<Extension> collection = syntax.getExtensions();
-
-        for (Iterator<Extension> iter = collection.iterator(); iter.hasNext();) {
-            Extension extension = iter.next();
-
+        for (Extension extension : syntax.getExtensions()) {
             extensionCatalog.put(extension.getValue(), syntax.getName());
         }
     }

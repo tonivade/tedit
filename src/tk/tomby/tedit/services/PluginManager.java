@@ -21,7 +21,6 @@
 package tk.tomby.tedit.services;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -142,8 +141,7 @@ public class PluginManager {
      * DOCUMENT ME!
      */
     public static void save() {
-        for (Iterator<IPlugin> iter = plugins.values().iterator(); iter.hasNext();) {
-        	IPlugin plugin = iter.next();
+        for (IPlugin plugin : plugins.values()) {
             plugin.save();
         }
     }

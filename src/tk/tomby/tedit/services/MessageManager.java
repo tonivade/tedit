@@ -23,7 +23,6 @@ package tk.tomby.tedit.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -177,9 +176,7 @@ public class MessageManager {
         public void sendMessage(T message) {
         	List<IMessageListener<T>> listenersCopy = new ArrayList<IMessageListener<T>>(listeners);
         	
-            for (Iterator<IMessageListener<T>> i = listenersCopy.iterator(); i.hasNext();) {
-                IMessageListener<T> listener = i.next();
-                
+            for (IMessageListener<T> listener : listenersCopy) {
                 listener.receiveMessage(message);
             }
         }

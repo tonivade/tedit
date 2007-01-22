@@ -11,7 +11,7 @@
 	<property name="scripts" value="scripts" />
 	<property name="plugins" value="plugins" />
 
-    <property name="version" value="0.1.1"/>
+    <property name="version" value="0.1.2"/>
 
     <property name="project" value="tEdit, a Simple Text Editor" />
     <property name="copyright" value="Antonio G. Muñoz Conejo Copyright 2004-2007" />
