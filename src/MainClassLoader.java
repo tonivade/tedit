@@ -65,7 +65,7 @@ public class MainClassLoader extends URLClassLoader {
 	private static void addFileURL(List<URL> urls, File file) {
 		if (file != null) {
 			try {
-				urls.add(new URL("file:/" + file.getPath()));
+				urls.add(new URL("file:" + file.getAbsolutePath()));
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
