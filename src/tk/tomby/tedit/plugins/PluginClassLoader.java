@@ -49,7 +49,7 @@ public class PluginClassLoader extends URLClassLoader {
 	private static void addURL(List<URL> list, String base, String path) {
 		try {
 			if (path != null) {
-				URL url = new URL("file://" + base + path);
+				URL url = new URL("file:/" + base + path);
 				list.add(url);
 			}
 		} catch (MalformedURLException e) {
