@@ -3,6 +3,7 @@
 <project name="tEdit" default="all" basedir=".">
     <property name="sources" value="src" />
     <property name="classes" value="classes" />
+	<property name="config" value="config" />
     <property name="build" value="build" />
     <property name="lib" value="lib" />
     <property name="log" value="log" />
@@ -37,8 +38,17 @@
 
     <target name="builddist" depends="build">
         <mkdir dir="${build}"/>
+    	<jar jarfile="${build}/boot.jar" compress="true">
+             <fileset dir="${classes}">
+                <include name="*.class"/>
+             </fileset>
+     		 <manifest>
+        		<attribute name="Main-Class" value="Main"/>
+        	 </manifest>
+        </jar>
         <jar jarfile="${build}/${ant.project.name}-${version}.jar" compress="true">
              <fileset dir="${classes}">
+             	<include name="**/*.class"/>
                 <exclude name="**/*Test.class"/>
              	<exclude name="**/plugins/ant/*"/>
              	<exclude name="**/plugins/explorer/*"/>
@@ -46,6 +56,9 @@
              	<exclude name="**/plugins/console/*"/>
              	<exclude name="**/plugins/memmon/*"/>
              	<exclude name="**/plugins/looks/*"/>
+             </fileset>
+        	 <fileset dir="${config}">
+    		 	<include name="*"/>
              </fileset>
         </jar>
     	<jar jarfile="${build}/${ant.project.name}-plugin-ant-${version}.jar" compress="true">
