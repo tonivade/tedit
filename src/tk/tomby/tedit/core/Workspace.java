@@ -114,7 +114,8 @@ public class Workspace extends JPanel implements IWorkspace {
     public Workspace() {
         super();
 
-        this.setLayout(new BorderLayout());
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
         MessageManager.addMessageListener(MessageManager.BUFFER_GROUP_NAME, new IMessageListener<BufferMessage>() {
         	public void receiveMessage(BufferMessage message) {

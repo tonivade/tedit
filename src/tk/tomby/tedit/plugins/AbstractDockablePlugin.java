@@ -21,12 +21,16 @@
 package tk.tomby.tedit.plugins;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Insets;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import javax.swing.border.AbstractBorder;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 
@@ -66,7 +70,7 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
         super();
         
         setLayout(new BorderLayout());
-        setBorder(BorderFactory.createEmptyBorder());
+        setBorder(new ShadowBorder());
         
         this.name = name;
 
@@ -156,6 +160,55 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
     public void save() {
     	PreferenceManager.putInt(name.toLowerCase() + ".location", location);
 		PreferenceManager.putString(name.toLowerCase() + ".region", region);
+    }
+    
+    private static class ShadowBorder extends AbstractBorder {
+
+        private static final Insets INSETS = new Insets(1, 1, 3, 3);
+
+        public Insets getBorderInsets(Component c) {
+        	return INSETS;
+        }
+
+        public void paintBorder(Component c, Graphics g, int x, int y, int w, int h) {
+                
+            Color shadow = UIManager.getColor("controlShadow");
+            
+            if (shadow == null) {
+                shadow = Color.GRAY;
+            }
+            
+            Color lightShadow   = new Color(shadow.getRed(), 
+                                            shadow.getGreen(), 
+                                            shadow.getBlue(), 
+                                            170);
+            
+            Color lighterShadow = new Color(shadow.getRed(),
+                                            shadow.getGreen(),
+                                            shadow.getBlue(),
+                                            70);
+            g.translate(x, y);
+            
+            g.setColor(shadow);
+            g.fillRect(0, 0, w - 3, 1);
+            g.fillRect(0, 0, 1, h - 3);
+            g.fillRect(w - 3, 1, 1, h - 3);
+            g.fillRect(1, h - 3, w - 3, 1);
+            // Shadow line 1
+            g.setColor(lightShadow);
+            g.fillRect(w - 3, 0, 1, 1);
+            g.fillRect(0, h - 3, 1, 1);
+            g.fillRect(w - 2, 1, 1, h - 3);
+            g.fillRect(1, h - 2, w - 3, 1);
+            // Shadow line2
+            g.setColor(lighterShadow);
+            g.fillRect(w - 2, 0, 1, 1);
+            g.fillRect(0, h - 2, 1, 1);
+            g.fillRect(w-2, h-2, 1, 1);
+            g.fillRect(w - 1, 1, 1, h - 2);
+            g.fillRect(1, h - 1, w - 2, 1);
+            g.translate(-x, -y);
+        }
     }
     
 }

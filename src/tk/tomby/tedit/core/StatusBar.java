@@ -22,6 +22,7 @@ package tk.tomby.tedit.core;
 
 import java.awt.Dimension;
 
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
@@ -67,7 +68,8 @@ public class StatusBar extends JPanel implements IStatusBar {
     public StatusBar() {
         super();
 
-        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
 
         MessageManager.addMessageListener(MessageManager.STATUS_GROUP_NAME, new IMessageListener<StatusMessage>() {
         	public void receiveMessage(StatusMessage message) {
