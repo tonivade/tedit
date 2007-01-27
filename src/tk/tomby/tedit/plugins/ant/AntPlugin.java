@@ -1,6 +1,5 @@
 package tk.tomby.tedit.plugins.ant;
 
-import java.awt.BorderLayout;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
