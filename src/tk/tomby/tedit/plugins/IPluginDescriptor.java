@@ -72,6 +72,12 @@ public interface IPluginDescriptor {
 	
 	/**
 	 * 
+	 * @return
+	 */
+	public abstract String getPreferencePage();
+	
+	/**
+	 * 
 	 * @author tomby
 	 */
 	public interface IPluginLibrary {

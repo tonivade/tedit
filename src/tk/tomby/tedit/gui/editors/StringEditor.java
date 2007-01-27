@@ -23,15 +23,8 @@ package tk.tomby.tedit.gui.editors;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import tk.tomby.tedit.core.preferences.IEditor;
-
-import tk.tomby.tedit.messages.PreferenceMessage;
-
-import tk.tomby.tedit.services.MessageManager;
-import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.ResourceManager;
 
 
@@ -41,7 +34,7 @@ import tk.tomby.tedit.services.ResourceManager;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class StringEditor extends JPanel implements IEditor {
+public class StringEditor extends AbstractEditor {
     //~ Instance fields ****************************************************************************
 
     /** DOCUMENT ME! */
@@ -49,12 +42,6 @@ public class StringEditor extends JPanel implements IEditor {
 
     /** DOCUMENT ME! */
     private JTextField field = null;
-
-    /** DOCUMENT ME! */
-    private String defaultValue = "";
-
-    /** DOCUMENT ME! */
-    private String key = null;
 
     //~ Constructors *******************************************************************************
 
@@ -75,70 +62,20 @@ public class StringEditor extends JPanel implements IEditor {
         add(label);
         add(field);
     }
-
+    
     //~ Methods ************************************************************************************
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @param def DOCUMENT ME!
-     */
-    public void setDefault(String def) {
-        this.defaultValue = def;
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param key DOCUMENT ME!
-     */
-    public void setKey(String key) {
-        this.key = key;
-
-        field.setText(PreferenceManager.getString(key, defaultValue));
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param label DOCUMENT ME!
-     */
     public void setLabel(String label) {
-        this.label.setText(ResourceManager.getProperty(label));
+    	this.label.setText(ResourceManager.getProperty(label));
     }
 
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    public boolean isModified() {
-        String newValue = field.getText();
-        String oldValue = PreferenceManager.getString(key, defaultValue);
-
-        return !newValue.equals(oldValue);
+    @Override
+    protected void setValue(String value) {
+    	field.setText(value);
     }
-
-    /**
-     * DOCUMENT ME!
-     */
-    public void commit() {
-        String newValue = field.getText();
-        String oldValue = PreferenceManager.getString(key, defaultValue);
-
-        if (!newValue.equals(oldValue)) {
-            PreferenceMessage message = new PreferenceMessage(this, key, newValue, oldValue);
-
-            PreferenceManager.putString(key, newValue);
-
-            MessageManager.sendMessage(message);
-        }
-    }
-
-    /**
-     * DOCUMENT ME!
-     */
-    public void restore() {
-        field.setText(PreferenceManager.getString(key, defaultValue));
+    
+    @Override
+    protected String getValue() {
+    	return field.getText();
     }
 }

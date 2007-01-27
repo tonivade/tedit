@@ -20,11 +20,6 @@
 
 package tk.tomby.tedit.gui.editors;
 
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.ObjectCreationFactory;
-
-import org.xml.sax.Attributes;
-
 import tk.tomby.tedit.core.preferences.IEditor;
 
 
@@ -34,52 +29,10 @@ import tk.tomby.tedit.core.preferences.IEditor;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class BooleanEditorFactory implements ObjectCreationFactory {
-    //~ Instance fields ****************************************************************************
+public class BooleanEditorFactory extends AbstractEditorFactory {
 
-    /** DOCUMENT ME! */
-    private Digester digester = null;
-
-    //~ Methods ************************************************************************************
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param digester DOCUMENT ME!
-     */
-    public void setDigester(Digester digester) {
-        this.digester = digester;
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    public Digester getDigester() {
-        return digester;
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param attrs DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @throws Exception DOCUMENT ME!
-     */
-    public Object createObject(Attributes attrs)
-                        throws Exception {
-        String label = attrs.getValue("label");
-        String def = attrs.getValue("default");
-        String key   = attrs.getValue("key");
-
-        IEditor editor = new BooleanEditor();
-        editor.setLabel(label);
-        editor.setDefault(def);
-        editor.setKey(key);
-
-        return editor;
-    }
+	@Override
+	public IEditor createEditor() {
+		return new BooleanEditor();
+	}
 }

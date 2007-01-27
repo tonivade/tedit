@@ -1,5 +1,5 @@
 /*
- * $Id: ColorEditorFactory.java,v 1.1.1.1 2004/09/18 17:16:19 amunoz Exp $
+ * $Id: FontEditorFactory.java,v 1.1.1.1 2004/09/18 17:16:19 amunoz Exp $
  *
  * Copyright (C) 2003 Antonio G. Muñoz Conejo <amunoz@tomby.homelinux.org>
  *
@@ -29,10 +29,10 @@ import tk.tomby.tedit.core.preferences.IEditor;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class ColorEditorFactory extends AbstractEditorFactory {
-  
+public class FileEditorFactory extends AbstractEditorFactory {
+    
 	@Override
-	public IEditor createEditor() {
-		return new ColorEditor();
-	}
+    public IEditor createEditor() {
+    	return new FileEditor();
+    }
 }

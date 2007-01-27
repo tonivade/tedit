@@ -87,6 +87,7 @@ public class PluginFactory implements ObjectCreationFactory {
     	private String clazz;
     	private String preferences;
     	private String resources;
+    	private String preferencePage;
     	
     	private String path;
     	
@@ -123,6 +124,14 @@ public class PluginFactory implements ObjectCreationFactory {
 		
 		public String getPluginType() {
 			return type;
+		}
+		
+		public String getPreferencePage() {
+			return preferencePage;
+		}
+		
+		public void setPreferencePage(String preferencePage) {
+			this.preferencePage = preferencePage;
 		}
 		
 		public String getPreferences() {

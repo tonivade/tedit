@@ -20,10 +20,7 @@
 
 package tk.tomby.tedit.gui.editors;
 
-import org.apache.commons.digester.Digester;
-import org.apache.commons.digester.ObjectCreationFactory;
-
-import org.xml.sax.Attributes;
+import tk.tomby.tedit.core.preferences.IEditor;
 
 
 /**
@@ -32,50 +29,10 @@ import org.xml.sax.Attributes;
  * @author $Author: amunoz $
  * @version $Revision: 1.1.1.1 $
  */
-public class HighlightEditorFactory implements ObjectCreationFactory {
-    //~ Instance fields ****************************************************************************
-
-    /** DOCUMENT ME! */
-    private Digester digester = null;
-
-    //~ Methods ************************************************************************************
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param digester DOCUMENT ME!
-     */
-    public void setDigester(Digester digester) {
-        this.digester = digester;
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     */
-    public Digester getDigester() {
-        return digester;
-    }
-
-    /**
-     * DOCUMENT ME!
-     *
-     * @param attrs DOCUMENT ME!
-     *
-     * @return DOCUMENT ME!
-     *
-     * @throws Exception DOCUMENT ME!
-     */
-    public Object createObject(Attributes attrs)
-                        throws Exception {
-        String label = attrs.getValue("label");
-        String key   = attrs.getValue("key");
-
-        HighlightEditor editor = new HighlightEditor();
-        editor.setLabel(label);
-        editor.setKey(key);
-
-        return editor;
-    }
+public class HighlightEditorFactory extends AbstractEditorFactory {
+    
+	@Override
+	public IEditor createEditor() {
+		return new HighlightEditor();
+	}
 }

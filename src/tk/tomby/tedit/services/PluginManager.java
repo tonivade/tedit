@@ -26,6 +26,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import tk.tomby.tedit.core.preferences.IPreferencePage;
+import tk.tomby.tedit.core.preferences.PreferencePageDriver;
 import tk.tomby.tedit.plugins.IPlugin;
 import tk.tomby.tedit.plugins.IPluginDescriptor;
 import tk.tomby.tedit.plugins.PluginClassLoader;
@@ -107,6 +109,13 @@ public class PluginManager {
         	
         	if (descriptor.getResources() != null) {
         		ResourceManager.loadCategory(descriptor.getPluginName(), descriptor.getResources(), loader);
+        	}
+        	
+        	if (descriptor.getPreferencePage() != null) {
+        		IPreferencePage pluginPage = 
+        			new PreferencePageDriver(descriptor.getPluginName(), descriptor.getPreferencePage()).create();
+        		
+        		WorkspaceManager.getPreferences().addPage(pluginPage);
         	}
         	
             plugin = loadPlugin(descriptor, loader);
