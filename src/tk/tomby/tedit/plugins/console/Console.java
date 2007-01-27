@@ -20,7 +20,6 @@
 
 package tk.tomby.tedit.plugins.console;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.PrintStream;
 
