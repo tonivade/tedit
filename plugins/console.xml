@@ -2,4 +2,6 @@
 
 <plugin name="console" 
 		type="workspace" 
-		class="tk.tomby.tedit.plugins.console.Console"/>
+		class="tk.tomby.tedit.plugins.console.Console">
+	<preferences>tk/tomby/tedit/plugins/console</preferences>
+</plugin>
