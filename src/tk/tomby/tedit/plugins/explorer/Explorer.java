@@ -47,11 +47,9 @@ import javax.swing.tree.TreeSelectionModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.flexdock.docking.DockingConstants;
 
 import tk.tomby.tedit.core.BufferFactory;
 import tk.tomby.tedit.core.IBuffer;
-import tk.tomby.tedit.core.IWorkspace;
 import tk.tomby.tedit.gui.ShortedListModel;
 import tk.tomby.tedit.gui.ShortedTreeModel;
 import tk.tomby.tedit.gui.StrippedSplitPane;
@@ -70,7 +68,7 @@ import tk.tomby.tedit.services.WorkspaceManager;
 public class Explorer extends AbstractDockablePlugin {
 
 	// ~ Static fields/initializers
-	// *****************************************************************
+	// ****************************************************************************
 
 	/** DOCUMENT ME! */
 	private static Log log = LogFactory.getLog(Explorer.class);
@@ -103,17 +101,9 @@ public class Explorer extends AbstractDockablePlugin {
 	 * Creates a new Explorer object.
 	 */
 	public Explorer() {
-		super();
-
-		setLayout(new BorderLayout());
-
-		title.setText("Explorer");
-		location = PreferenceManager.getInt("explorer.location", IWorkspace.PLUGIN_LEFT);
-		region = PreferenceManager.getString("explorer.region", DockingConstants.CENTER_REGION);
+		super("Explorer");
 
 		File rootDir = new File(PreferenceManager.getString("explorer.directory", System.getProperty("user.home")));
-
-		title.setText("Explorer");
 
 		JPanel internalPanel = new JPanel();
 		internalPanel.setLayout(new BorderLayout());
@@ -216,8 +206,7 @@ public class Explorer extends AbstractDockablePlugin {
 
 		internalPanel.add(splitPane, BorderLayout.CENTER);
 
-		add(title, BorderLayout.NORTH);
-		add(internalPanel, BorderLayout.CENTER);
+		setContent(internalPanel);
 	}
 
 	// ~ Methods
@@ -226,8 +215,20 @@ public class Explorer extends AbstractDockablePlugin {
 	/**
 	 * DOCUMENT ME!
 	 */
+	@Override
 	public void init() {
-		// Nothing to do
+		super.init();
+	}
+	
+	/**
+	 * DOCUMENT ME!
+	 */
+	@Override
+	public void save() {
+		super.save();
+		
+		PreferenceManager.putInt("explorer.divider", splitPane.getDividerLocation());
+		PreferenceManager.putString("explorer.directory", topPanel.getDirectory());
 	}
 
 	/**
@@ -239,16 +240,6 @@ public class Explorer extends AbstractDockablePlugin {
 		if (leadPath != null) {
 			TaskManager.execute(new RefreshWorker(leadPath, true));
 		}
-	}
-
-	/**
-	 * DOCUMENT ME!
-	 */
-	public void save() {
-		PreferenceManager.putInt("explorer.location", location);
-		PreferenceManager.putString("explorer.region", region);
-		PreferenceManager.putInt("explorer.divider", splitPane.getDividerLocation());
-		PreferenceManager.putString("explorer.directory", topPanel.getDirectory());
 	}
 
 	/**

@@ -28,13 +28,10 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Target;
-import org.flexdock.docking.DockingConstants;
 
-import tk.tomby.tedit.core.IWorkspace;
 import tk.tomby.tedit.gui.ShortedTreeModel;
 import tk.tomby.tedit.gui.ToStringComparator;
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
-import tk.tomby.tedit.services.PreferenceManager;
 import tk.tomby.tedit.services.TaskManager;
 
 
@@ -53,13 +50,7 @@ public class AntPlugin extends AbstractDockablePlugin {
 	private Map<String, Project> projects = new HashMap<String, Project>();
 	
 	public AntPlugin() {
-		super();
-		
-		setLayout(new BorderLayout());
-		
-		title.setText("Ant");
-		location = PreferenceManager.getInt("ant.location", IWorkspace.PLUGIN_LEFT);
-		region = PreferenceManager.getString("ant.region", DockingConstants.CENTER_REGION);
+		super("Ant");
 		
 		projectTreeModel = new ShortedTreeModel(projectRoot, new ToStringComparator());
 		projectTree = new JTree(projectTreeModel);
@@ -157,12 +148,7 @@ public class AntPlugin extends AbstractDockablePlugin {
 		
 		projectTree.expandRow(0);
 		
-		add(title, BorderLayout.NORTH);
-        add(projectScroll, BorderLayout.CENTER);
-	}
-
-	public void init() {
-		// Nothing to do
+        setContent(projectScroll);
 	}
 	
 	public void addBuildFile(String file) {
@@ -206,11 +192,6 @@ public class AntPlugin extends AbstractDockablePlugin {
 		};
 		
 		TaskManager.execute(worker);
-	}
-
-	public void save() {
-		PreferenceManager.putInt("ant.location", location);
-		PreferenceManager.putString("ant.region", region);
 	}
 
 }

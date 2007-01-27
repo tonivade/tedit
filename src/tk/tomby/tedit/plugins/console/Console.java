@@ -30,17 +30,10 @@ import javax.swing.JTextArea;
 import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
-import org.flexdock.docking.DockingConstants;
-
-import tk.tomby.tedit.core.IWorkspace;
-
 import tk.tomby.tedit.messages.IMessage;
 import tk.tomby.tedit.messages.IMessageListener;
-
 import tk.tomby.tedit.plugins.AbstractDockablePlugin;
-
 import tk.tomby.tedit.services.MessageManager;
-import tk.tomby.tedit.services.PreferenceManager;
 
 
 /**
@@ -71,20 +64,9 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
      * Creates a new Console object.
      */
     public Console() {
-        super();
-
-        setLayout(new BorderLayout());
-
-        PreferenceManager.loadCategory("console", "tk/tomby/tedit/plugins/console");
-
-        title.setText("Console");
-        location = PreferenceManager.getInt("console.location", IWorkspace.PLUGIN_BOTTOM);
-        region = PreferenceManager.getString("console.region", DockingConstants.CENTER_REGION);
+        super("Console");
         
         container = new JTabbedPane();
-        
-        add(title, BorderLayout.NORTH);
-        add(container, BorderLayout.CENTER);
         
         messages = createArea();
         console = createArea();
@@ -102,6 +84,8 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
         MessageManager.addMessageListener(MessageManager.STATUS_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.WORKSPACE_GROUP_NAME, this);
         MessageManager.addMessageListener(MessageManager.PREFERENCE_GROUP_NAME, this);
+        
+        setContent(container);
     }
 
     //~ Methods ************************************************************************************
@@ -126,6 +110,8 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
      * DOCUMENT ME!
      */
     public void init() {
+    	super.init();
+    	
         oldOut = System.out;
         System.setOut(out);
         
@@ -163,9 +149,8 @@ public class Console extends AbstractDockablePlugin implements IMessageListener<
      * DOCUMENT ME!
      */
     public void save() {
-        PreferenceManager.putInt("console.location", location);
-        PreferenceManager.putString("console.region", region);
-        
+    	super.save();
+    	
         System.setOut(oldOut);
         System.setErr(oldErr);
     }

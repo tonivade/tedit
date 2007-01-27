@@ -20,6 +20,7 @@
 
 package tk.tomby.tedit.plugins;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.BorderFactory;
@@ -32,6 +33,7 @@ import javax.swing.border.CompoundBorder;
 import org.flexdock.docking.DockingConstants;
 
 import tk.tomby.tedit.core.IWorkspace;
+import tk.tomby.tedit.services.PreferenceManager;
 
 
 /**
@@ -42,26 +44,38 @@ import tk.tomby.tedit.core.IWorkspace;
  */
 public abstract class AbstractDockablePlugin extends JPanel implements IDockablePlugin {
     //~ Instance fields ****************************************************************************
+	
+	/** DOCUMENT ME! */
+	private String name = null;
 
     /** DOCUMENT ME! */
-    protected JLabel title = null;
+    private JLabel title = null;
 
     /** DOCUMENT ME! */
-    protected int location = IWorkspace.PLUGIN_LEFT;
+    private int location = IWorkspace.PLUGIN_LEFT;
     
     /** DOCUMENT ME! */
-    protected String region = DockingConstants.CENTER_REGION;
+    private String region = DockingConstants.CENTER_REGION;
 
     //~ Constructors *******************************************************************************
 
     /**
      *
      */
-    public AbstractDockablePlugin() {
+    public AbstractDockablePlugin(String name) {
         super();
+        
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder());
+        
+        this.name = name;
 
-        title = new JLabel();
+        title = new JLabel(name);
         title.setBorder(createTitleBorder());
+        add(title, BorderLayout.NORTH);
+        
+        location = PreferenceManager.getInt(name.toLowerCase() + ".location", IWorkspace.PLUGIN_LEFT);
+		region = PreferenceManager.getString(name.toLowerCase() + ".region", DockingConstants.CENTER_REGION);
     }
 
 	private CompoundBorder createTitleBorder() {
@@ -123,7 +137,25 @@ public abstract class AbstractDockablePlugin extends JPanel implements IDockable
      * @return DOCUMENT ME!
      */
     public String getDockTitle() {
-    	return title.getText();
+    	return name;
+    }
+    
+    /**
+     * DOCUMENT ME!
+     * 
+     * @param content DOCUMENT ME!
+     */
+    protected void setContent(Component content) {
+    	add(content, BorderLayout.CENTER);
+    }
+    
+    public void init() {
+    	
+    }
+    
+    public void save() {
+    	PreferenceManager.putInt(name.toLowerCase() + ".location", location);
+		PreferenceManager.putString(name.toLowerCase() + ".region", region);
     }
     
 }
