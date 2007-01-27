@@ -17,12 +17,10 @@ public class MainClassLoader extends URLClassLoader {
 
 	public MainClassLoader(URL[] urls, ClassLoader parent) {
 		super(urls, parent);
-		// TODO Auto-generated constructor stub
 	}
 	
 	public MainClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
 		super(urls, parent, factory);
-		// TODO Auto-generated constructor stub
 	}
 	
 	private static URL[] getClasspath(File[] libs) {
@@ -67,7 +65,6 @@ public class MainClassLoader extends URLClassLoader {
 			try {
 				urls.add(new URL("file:" + file.getAbsolutePath()));
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
