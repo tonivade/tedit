@@ -35,6 +35,10 @@
 			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FontEditorFactory"/>
 			    <set-next-rule methodname="addEditor"/>
 			</pattern>
+			<pattern value="file">
+			    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FileEditorFactory"/>
+			    <set-next-rule methodname="addEditor"/>
+			</pattern>
 			<set-next-rule methodname="addPage"/>
 		</pattern>
 	</pattern>
@@ -67,6 +71,10 @@
 		</pattern>
 		<pattern value="font">
 		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FontEditorFactory"/>
+		    <set-next-rule methodname="addEditor"/>
+		</pattern>
+		<pattern value="file">
+		    <factory-create-rule classname="tk.tomby.tedit.gui.editors.FileEditorFactory"/>
 		    <set-next-rule methodname="addEditor"/>
 		</pattern>
 	</pattern>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<multitabPage label="ant.label">
+	<page label="ant.label">
+		<file label="ant.java.tools" key="ant.java.tools" />
+	</page>
+</multitabPage>

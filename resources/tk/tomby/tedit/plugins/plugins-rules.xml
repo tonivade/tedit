@@ -5,6 +5,7 @@
 	    <factory-create-rule classname="tk.tomby.tedit.plugins.PluginFactory"/>
 	    <bean-property-setter-rule pattern="preferences" />
 	    <bean-property-setter-rule pattern="resources" />
+	    <bean-property-setter-rule pattern="preferencePage" />
 	    <pattern value="classpath">
 	    	<pattern value="lib">
 	    		<factory-create-rule classname="tk.tomby.tedit.plugins.PluginLibraryFactory"/>
