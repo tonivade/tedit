@@ -54,12 +54,24 @@ public class PreferencePageDriver extends GenericDriver {
      */
     public PreferencePageDriver(String categoryName,
                                 String resourceRoot) {
-        super(RULES_FILE);
+        this(categoryName, resourceRoot, PreferencePageDriver.class.getClassLoader());
+    }
+    
+    /**
+     * DOCUMENT ME!
+     *
+     * @param categoryName DOCUMENT ME!
+     * @param resourceRoot DOCUMENT ME!
+     */
+    public PreferencePageDriver(String categoryName,
+                                String resourceRoot,
+                                ClassLoader loader) {
+        super(RULES_FILE, loader);
 
         this.resourceRoot = resourceRoot;
 
-        ResourceManager.loadCategory(categoryName, resourceRoot);
         PreferenceManager.loadCategory(categoryName, resourceRoot);
+        ResourceManager.loadCategory(categoryName, resourceRoot, loader);
     }
 
     //~ Methods ************************************************************************************

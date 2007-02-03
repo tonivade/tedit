@@ -49,9 +49,12 @@ public abstract class GenericDriver {
 
     /** DOCUMENT ME! */
     private String rulesFile = null;
+    
+    /** DOCUMENT ME! */
+    private ClassLoader loader = null;
 
     //~ Constructors *******************************************************************************
-
+    
     /**
      * Creates a new GenericDriver object.
      *
@@ -59,6 +62,18 @@ public abstract class GenericDriver {
      */
     public GenericDriver(String rulesFile) {
         this.rulesFile = rulesFile;
+        this.loader = GenericDriver.class.getClassLoader();
+    }
+
+    /**
+     * Creates a new GenericDriver object.
+     *
+     * @param rulesFile DOCUMENT ME!
+     * @param loader DOCUMENT ME!
+     */
+    public GenericDriver(String rulesFile, ClassLoader loader) {
+        this.rulesFile = rulesFile;
+        this.loader = loader;
     }
 
     //~ Methods ************************************************************************************
@@ -74,8 +89,6 @@ public abstract class GenericDriver {
         Object object = null;
 
         try {
-            ClassLoader loader = this.getClass().getClassLoader();
-
             URL rules         = loader.getResource(rulesFile);
             InputStream input = loader.getResourceAsStream(resourceFile);
 

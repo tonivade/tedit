@@ -16,6 +16,8 @@ import tk.tomby.tedit.plugins.IPluginDescriptor.IPluginLibrary;
 public class PluginClassLoader extends URLClassLoader {
 	
 	private static final Log log = LogFactory.getLog(PluginClassLoader.class);
+	
+	private ClassLoader other = null;
 
 	public PluginClassLoader(IPluginDescriptor descriptor) {
 		super(getClasspath(descriptor));
@@ -27,6 +29,32 @@ public class PluginClassLoader extends URLClassLoader {
 	
 	public PluginClassLoader(IPluginDescriptor descriptor, ClassLoader parent, URLStreamHandlerFactory factory) {
 		super(getClasspath(descriptor), parent, factory);
+	}
+	
+	public void setOther(ClassLoader other) {
+		this.other = other;
+	}
+	
+	@Override
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
+		Class clazz = null;
+		
+		try {
+			clazz = super.loadClass(name);
+		} catch (ClassNotFoundException e) {
+			if (other != null) {
+				log.debug("loading " + name + " from other");
+				clazz = other.loadClass(name);
+			} else {
+				throw e;
+			}
+		}
+		
+		if (clazz == null) {
+			throw new ClassNotFoundException(name);
+		}
+				
+		return clazz;
 	}
 	
 	private static URL[] getClasspath(IPluginDescriptor descriptor) {
