@@ -103,19 +103,19 @@ public class PluginManager {
         try {
         	PluginClassLoader loader = new PluginClassLoader(descriptor, PluginManager.class.getClassLoader());
         	
-        	if (descriptor.getPreferences() != null) {
-        		PreferenceManager.loadCategory(descriptor.getPluginName(), descriptor.getPreferences());
-        	}
-        	
-        	if (descriptor.getResources() != null) {
-        		ResourceManager.loadCategory(descriptor.getPluginName(), descriptor.getResources(), loader);
-        	}
-        	
         	if (descriptor.getPreferencePage() != null) {
         		IPreferencePage pluginPage = 
-        			new PreferencePageDriver(descriptor.getPluginName(), descriptor.getPreferencePage()).create();
+        			new PreferencePageDriver(descriptor.getPluginName(), descriptor.getPreferencePage(), loader).create();
         		
         		WorkspaceManager.getPreferences().addPage(pluginPage);
+        	} else {
+        		if (descriptor.getPreferences() != null) {
+            		PreferenceManager.loadCategory(descriptor.getPluginName(), descriptor.getPreferences());
+            	}
+            	
+            	if (descriptor.getResources() != null) {
+            		ResourceManager.loadCategory(descriptor.getPluginName(), descriptor.getResources(), loader);
+            	}
         	}
         	
             plugin = loadPlugin(descriptor, loader);
