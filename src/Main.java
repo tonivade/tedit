@@ -40,16 +40,16 @@ public class Main {
 	}
 
 	private static Method findMainMethod(Properties props, Class clazz) {
-		String mainClass = props.getProperty("method");
+		String mainMethod = props.getProperty("method");
 		
-		if (mainClass == null) {
+		if (mainMethod == null) {
 			System.out.println("main class property not found");
 			System.exit(0);
 		}
 		
 		Method method = null;
 		try {
-			method = clazz.getDeclaredMethod("main", new Class[] { String[].class });
+			method = clazz.getDeclaredMethod(mainMethod, new Class[] { String[].class });
 		} catch (SecurityException e) {
 			e.printStackTrace();
 			System.exit(0);
