@@ -15,7 +15,7 @@
 	<classpathentry exported="true" kind="lib" path="lib/log4j-1.2.13.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/groovy-all-1.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/groovy-engine.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jruby-0.9.8.jar"/>
+	<classpathentry kind="lib" path="lib/jruby-0.9.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jruby-engine.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/flexdock-0.5.0.jar"/>
 	<classpathentry kind="lib" path="plugins/lib/ant-1.6.5-launcher.jar"/>
