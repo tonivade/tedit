@@ -64,5 +64,5 @@
               acceleratorKey="menubar.edit.selectall.accelerator"
               iconKey="menubar.edit.selectall.icon">
     	<action name="select-all" class="tk.tomby.tedit.actions.SelectAllAction"/>
-    </menuitem>/>
+    </menuitem>
 </popupmenu>

@@ -192,6 +192,6 @@
                   acceleratorKey="menubar.help.about.accelerator"
                   iconKey="menubar.help.about.icon">
         	<action name="about" class="tk.tomby.tedit.actions.AboutAction"/>
-        </menuitem>/>
+        </menuitem>
     </menu>
 </menubar>
