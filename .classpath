@@ -20,6 +20,6 @@
 	<classpathentry exported="true" kind="lib" path="lib/flexdock-0.5.1.jar"/>
 	<classpathentry kind="lib" path="plugins/lib/ant-1.6.5-launcher.jar"/>
 	<classpathentry kind="lib" path="plugins/lib/ant-1.6.5.jar"/>
-	<classpathentry kind="lib" path="plugins/lib/looks-2.1.2.jar"/>
+	<classpathentry kind="lib" path="plugins/lib/looks-2.1.4.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>
